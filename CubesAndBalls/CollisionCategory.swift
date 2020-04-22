@@ -11,7 +11,7 @@ import Foundation
 struct CollisionCategory: OptionSet {
     let rawValue: Int
     
-    static let missileCategory = CollisionCategory(rawValue: 1 << 0)
-    static let targetCategory = CollisionCategory(rawValue: 1 << 1)
+    static let ballCategory = CollisionCategory(rawValue: 1 << 0)
+    static let boxCategory = CollisionCategory(rawValue: 1 << 1)
     static let otherCategory = CollisionCategory(rawValue: 1 << 2)
 }

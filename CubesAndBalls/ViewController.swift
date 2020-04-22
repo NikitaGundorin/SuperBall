@@ -22,11 +22,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    var nextColor: Color! {
+    var ballColor: Color! {
         didSet {
-            ballButton.backgroundColor = nextColor.value
+            ballButton.backgroundColor = ballColor.value
         }
     }
+    
+    var colors: [Color] = []
     
     let physicsContactDelegate = PhysicsContactDelegate()
     
@@ -34,7 +36,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         ballButton.layer.cornerRadius = ballButton.layer.frame.width / 2
-        nextColor = Color.random()
+        ballButton.isEnabled = false
         
         sceneView.delegate = self
         sceneView.scene.physicsWorld.contactDelegate = physicsContactDelegate
@@ -60,37 +62,52 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.session.pause()
     }
+    
     @IBAction func ballTouched(_ sender: Any) {
-        throwBall(withColor: nextColor)
-        nextColor = Color.random()
+        throwBall(withColor: ballColor)
+    }
+    
+    func setBallButton() {
+        if ballButton.isEnabled || colors.count == 0 {
+            return
+        }
+        var color: Color
+        repeat {
+            color = Color.random()
+        } while !self.colors.contains(color)
+        ballColor = color
+        ballButton.isEnabled = true
     }
     
     func endGame(message: String) {
         print(message)
     }
-
-    private func addTargetNodes(){
-        for _ in 1...100 {
-            let color = Color(rawValue: Int.random(in: 0...5))?.value
-            let box = SCNBox(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0)
-            box.firstMaterial?.diffuse.contents = color
+    
+    private func addTargetNodes() {
+        for _ in 1...10 {
+            let size = CGFloat(0.5)
+            let color = Color.random()
+            colors.append(color)
+            let box = SCNBox(width: size, height: size, length: size, chamferRadius: 0)
+            box.firstMaterial?.diffuse.contents = color.value
             let node = SCNNode(geometry: box)
             node.name = "box"
             
             node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
             node.physicsBody?.isAffectedByGravity = false
             
-            node.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: 10))
+            node.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: -2))
             
             let action: SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 1.0)
             let forever = SCNAction.repeatForever(action)
             node.runAction(forever)
             
-            node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-            node.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
+            node.physicsBody?.categoryBitMask = CollisionCategory.boxCategory.rawValue
+            node.physicsBody?.contactTestBitMask = CollisionCategory.ballCategory.rawValue
             
             sceneView.scene.rootNode.addChildNode(node)
         }
+        setBallButton()
     }
     
     private func throwBall(withColor color: Color) {
@@ -102,20 +119,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         node.physicsBody?.isAffectedByGravity = false
         
-        node.physicsBody?.categoryBitMask = CollisionCategory.missileCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        node.physicsBody?.categoryBitMask = CollisionCategory.ballCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.boxCategory.rawValue
         
         let (direction, position) = self.getUserVector()
         node.position = position
-        let nodeDirection = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
+        let nodeDirection = SCNVector3(direction.x*4, direction.y*4, direction.z*4)
         node.physicsBody?.applyForce(nodeDirection, at: SCNVector3(0.1,0,0), asImpulse: true)
-        node.physicsBody?.applyForce(nodeDirection , asImpulse: true)
+        node.physicsBody?.applyForce(nodeDirection, asImpulse: true)
         
         sceneView.scene.rootNode.addChildNode(node)
+        ballButton.isEnabled = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            node.removeFromParentNode()
+            self.setBallButton()
+        }
     }
     
     private func randomFloat(min: Float, max: Float) -> Float {
-        return Float.random(in: 0...1.0) * (max - min) + min
+        var result: Float = 0
+        while((-1...1).contains(result)) { //cube is not too close to the camera
+            result = Float.random(in: 0...1.0) * (max - min) + min
+        }
+        return result
     }
     
     private func getUserVector() -> (SCNVector3, SCNVector3) {
