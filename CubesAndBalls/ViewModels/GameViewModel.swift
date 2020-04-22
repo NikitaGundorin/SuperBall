@@ -40,11 +40,14 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     }
     
     func endGame(message: String) {
-        print(message)
+        let defaults = UserDefaults.standard
+        defaults.set(score, forKey: "record")
+        
+        vc?.dismiss(animated: true, completion: nil)
     }
     
     func addTargetNodes() {
-        for _ in 1...10 {
+        for _ in 1...100 {
             let size = CGFloat(0.5)
             let color = Color.random()
             colors.append(color)
