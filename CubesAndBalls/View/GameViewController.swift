@@ -33,6 +33,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         let lightNode = SCNNode()
         lightNode.light = light
         sceneView.pointOfView?.addChildNode(lightNode)
+        
         viewModel.addTargetNodes()
     }
     

@@ -10,12 +10,12 @@
         <!--Start View Controller-->
         <scene sceneID="RsS-IK-Faz">
             <objects>
-                <viewController id="KVw-mg-Mk8" customClass="StartViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="KVw-mg-Mk8" customClass="StartViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GtE-2h-GBR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your record: 1000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCI-rc-2HT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your record: 0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCI-rc-2HT">
                                 <rect key="frame" x="20" y="114.00000000000001" width="374" height="32.666666666666671"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="dr5-Qe-063"/>
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="118" translatesAutoresizingMaskIntoConstraints="NO" id="iJf-oE-xWN">
-                                <rect key="frame" x="20" y="313" width="374" height="270"/>
+                                <rect key="frame" x="20" y="270.66666666666669" width="374" height="355.00000000000006"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Cubes And Balls!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hl-QE-hov">
                                         <rect key="frame" x="38.333333333333343" y="0.0" width="297.33333333333326" height="87"/>
@@ -36,13 +36,13 @@
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwR-LZ-ANA">
-                                        <rect key="frame" x="131" y="205" width="112" height="65"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwR-LZ-ANA">
+                                        <rect key="frame" x="112" y="205" width="150" height="150"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="112" id="I0A-cR-FDv"/>
+                                            <constraint firstAttribute="height" constant="150" id="7eJ-PB-5EF"/>
+                                            <constraint firstAttribute="width" constant="150" id="fb6-e5-Nwd"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="48"/>
-                                        <state key="normal" title="PLAY">
+                                        <state key="normal" image="play">
                                             <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -64,6 +64,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nkK-vQ-Ug9"/>
                     </view>
+                    <navigationItem key="navigationItem" id="DwO-0X-uBz"/>
                     <connections>
                         <outlet property="scoreLabel" destination="jCI-rc-2HT" id="5yW-Fl-VO7"/>
                     </connections>
@@ -141,5 +142,6 @@
     </scenes>
     <resources>
         <image name="aim" width="1396" height="1396"/>
+        <image name="play" width="1000" height="1000"/>
     </resources>
 </document>

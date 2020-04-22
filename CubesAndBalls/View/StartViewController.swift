@@ -14,4 +14,10 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let record = UserDefaults.standard.value(forKey: "record") as? Int {
+            scoreLabel.text = "Your record: \(record)"
+        }
+    }
 }

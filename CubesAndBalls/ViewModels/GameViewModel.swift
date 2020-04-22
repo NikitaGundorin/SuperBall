@@ -41,7 +41,10 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     
     func endGame(message: String) {
         let defaults = UserDefaults.standard
-        defaults.set(score, forKey: "record")
+        let record = UserDefaults.standard.value(forKey: "record") as? Int
+        if score > record ?? 0 {
+            defaults.set(score, forKey: "record")
+        }
         
         vc?.dismiss(animated: true, completion: nil)
     }
