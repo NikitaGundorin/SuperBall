@@ -11,84 +11,68 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var ballButton: UIButton!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+    
+    var nextColor: Color! {
+        didSet {
+            ballButton.backgroundColor = nextColor.value
+        }
+    }
+    
+    let physicsContactDelegate = PhysicsContactDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
+        ballButton.layer.cornerRadius = ballButton.layer.frame.width / 2
+        nextColor = Color.random()
+        
         sceneView.delegate = self
+        sceneView.scene.physicsWorld.contactDelegate = physicsContactDelegate
+        physicsContactDelegate.viewController = self
         
         let light = SCNLight()
         light.type = .omni
         let lightNode = SCNNode()
         lightNode.light = light
         sceneView.pointOfView?.addChildNode(lightNode)
-        
         addTargetNodes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
         sceneView.session.pause()
     }
+    @IBAction func ballTouched(_ sender: Any) {
+        throwBall(withColor: nextColor)
+        nextColor = Color.random()
+    }
+    
+    func endGame(message: String) {
+        print(message)
+    }
 
-    // MARK: - ARSCNViewDelegate
-    
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
-    
-    func addTargetNodes(){
+    private func addTargetNodes(){
         for _ in 1...100 {
-//            var node = SCNNode()
-//
-//            if (index > 9) && (index % 10 == 0) {
-//                let scene = SCNScene(named: "art.scnassets/mouthshark.dae")
-//                node = (scene?.rootNode.childNode(withName: "shark", recursively: true)!)!
-//                node.scale = SCNVector3(0.3,0.3,0.3)
-//                node.name = "shark"
-//            }else{
-//                let scene = SCNScene(named: "art.scnassets/bath.dae")
-//                node = (scene?.rootNode.childNode(withName: "Cube_001", recursively: true)!)!
-//                node.scale = SCNVector3(0.02,0.02,0.02)
-//                node.name = "bath"
-//            }
-            let color = Colors(rawValue: Int.random(in: 0...5))?.value
-            let box = SCNGeometry.Box(width: 0.5, height: 0.5, length: 0.5)
+            let color = Color(rawValue: Int.random(in: 0...5))?.value
+            let box = SCNBox(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0)
             box.firstMaterial?.diffuse.contents = color
             let node = SCNNode(geometry: box)
             node.name = "box"
@@ -96,24 +80,52 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
             node.physicsBody?.isAffectedByGravity = false
             
-            //place randomly, within thresholds
             node.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: 10))
             
-            //rotate
-            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 1.0)
+            let action: SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 1.0)
             let forever = SCNAction.repeatForever(action)
             node.runAction(forever)
             
-            //for the collision detection
-//            node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-//            node.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
+            node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+            node.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
             
-            //add to scene
             sceneView.scene.rootNode.addChildNode(node)
         }
     }
     
-    func randomFloat(min: Float, max: Float) -> Float {
+    private func throwBall(withColor color: Color) {
+        let ball = SCNSphere(radius: 0.5)
+        ball.firstMaterial?.diffuse.contents = color.value
+        let node = SCNNode(geometry: ball)
+        node.name = "ball"
+        
+        node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        node.physicsBody?.isAffectedByGravity = false
+        
+        node.physicsBody?.categoryBitMask = CollisionCategory.missileCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        
+        let (direction, position) = self.getUserVector()
+        node.position = position
+        let nodeDirection = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
+        node.physicsBody?.applyForce(nodeDirection, at: SCNVector3(0.1,0,0), asImpulse: true)
+        node.physicsBody?.applyForce(nodeDirection , asImpulse: true)
+        
+        sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    private func randomFloat(min: Float, max: Float) -> Float {
         return Float.random(in: 0...1.0) * (max - min) + min
+    }
+    
+    private func getUserVector() -> (SCNVector3, SCNVector3) {
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform)
+            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33)
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43)
+            
+            return (dir, pos)
+        }
+        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
 }

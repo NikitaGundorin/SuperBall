@@ -13,8 +13,11 @@
 		7214FA99244F064700E60A42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7214FA97244F064700E60A42 /* Main.storyboard */; };
 		7214FA9B244F064900E60A42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7214FA9A244F064900E60A42 /* Assets.xcassets */; };
 		7214FA9E244F064900E60A42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7214FA9C244F064900E60A42 /* LaunchScreen.storyboard */; };
-		7214FAA6244F226400E60A42 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214FAA5244F226400E60A42 /* Colors.swift */; };
-		7214FAA8244F24BF00E60A42 /* SCNGeometryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214FAA7244F24BF00E60A42 /* SCNGeometryExtension.swift */; };
+		7214FAA6244F226400E60A42 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214FAA5244F226400E60A42 /* Color.swift */; };
+		728DC87B24503DB500BC7878 /* PhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DC87A24503DB500BC7878 /* PhysicsContactDelegate.swift */; };
+		728DC87D24503E4700BC7878 /* CollisionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DC87C24503E4700BC7878 /* CollisionCategory.swift */; };
+		728DC88724506DFA00BC7878 /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88524506DFA00BC7878 /* Explode.scnp */; };
+		728DC88824506DFA00BC7878 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88624506DFA00BC7878 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +29,11 @@
 		7214FA9A244F064900E60A42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7214FA9D244F064900E60A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7214FA9F244F064900E60A42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7214FAA5244F226400E60A42 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		7214FAA7244F24BF00E60A42 /* SCNGeometryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGeometryExtension.swift; sourceTree = "<group>"; };
+		7214FAA5244F226400E60A42 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		728DC87A24503DB500BC7878 /* PhysicsContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsContactDelegate.swift; sourceTree = "<group>"; };
+		728DC87C24503E4700BC7878 /* CollisionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCategory.swift; sourceTree = "<group>"; };
+		728DC88524506DFA00BC7878 /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
+		728DC88624506DFA00BC7878 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,7 @@
 		7214FA90244F064700E60A42 /* CubesAndBalls */ = {
 			isa = PBXGroup;
 			children = (
+				728DC88424506DD900BC7878 /* Particles */,
 				7214FA91244F064700E60A42 /* AppDelegate.swift */,
 				7214FA93244F064700E60A42 /* art.scnassets */,
 				7214FA95244F064700E60A42 /* ViewController.swift */,
@@ -67,10 +74,20 @@
 				7214FA9A244F064900E60A42 /* Assets.xcassets */,
 				7214FA9C244F064900E60A42 /* LaunchScreen.storyboard */,
 				7214FA9F244F064900E60A42 /* Info.plist */,
-				7214FAA5244F226400E60A42 /* Colors.swift */,
-				7214FAA7244F24BF00E60A42 /* SCNGeometryExtension.swift */,
+				7214FAA5244F226400E60A42 /* Color.swift */,
+				728DC87A24503DB500BC7878 /* PhysicsContactDelegate.swift */,
+				728DC87C24503E4700BC7878 /* CollisionCategory.swift */,
 			);
 			path = CubesAndBalls;
+			sourceTree = "<group>";
+		};
+		728DC88424506DD900BC7878 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				728DC88524506DFA00BC7878 /* Explode.scnp */,
+				728DC88624506DFA00BC7878 /* spark.png */,
+			);
+			path = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7214FA94244F064700E60A42 /* art.scnassets in Resources */,
+				728DC88824506DFA00BC7878 /* spark.png in Resources */,
+				728DC88724506DFA00BC7878 /* Explode.scnp in Resources */,
 				7214FA9E244F064900E60A42 /* LaunchScreen.storyboard in Resources */,
 				7214FA9B244F064900E60A42 /* Assets.xcassets in Resources */,
 				7214FA99244F064700E60A42 /* Main.storyboard in Resources */,
@@ -146,8 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7214FA96244F064700E60A42 /* ViewController.swift in Sources */,
-				7214FAA6244F226400E60A42 /* Colors.swift in Sources */,
-				7214FAA8244F24BF00E60A42 /* SCNGeometryExtension.swift in Sources */,
+				728DC87D24503E4700BC7878 /* CollisionCategory.swift in Sources */,
+				728DC87B24503DB500BC7878 /* PhysicsContactDelegate.swift in Sources */,
+				7214FAA6244F226400E60A42 /* Color.swift in Sources */,
 				7214FA92244F064700E60A42 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

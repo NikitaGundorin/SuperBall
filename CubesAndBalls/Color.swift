@@ -1,5 +1,5 @@
 //
-//  Colors.swift
+//  Color.swift
 //  CubesAndBalls
 //
 //  Created by Никита Гундорин on 21.04.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum Colors: Int {
+enum Color: Int {
     case red = 0
     case green = 1
     case blue = 2
@@ -32,5 +32,9 @@ enum Colors: Int {
         case .yellow:
             return UIColor.systemYellow
         }
+    }
+    
+    static func random() -> Color {
+        return Color(rawValue: Int.random(in: 0...5)) ?? Color.red
     }
 }
