@@ -17,6 +17,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var scoreLabel: UILabel!
     
     let viewModel = GameViewModel()
+    var statusText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         lightNode.light = light
         sceneView.pointOfView?.addChildNode(lightNode)
         
-        viewModel.addTargetNodes()
+        setUpNewGame()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,5 +53,16 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func ballTouched(_ sender: Any) {
         viewModel.throwBall()
+    }
+    
+    func setUpNewGame() {
+        viewModel.addTargetNodes()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? EndGameViewController else { return }
+        
+        vc.score = viewModel.score
+        vc.statusText = self.statusText
     }
 }

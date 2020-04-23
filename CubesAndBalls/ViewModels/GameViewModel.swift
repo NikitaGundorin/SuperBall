@@ -12,6 +12,7 @@ import ARKit
 
 class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     weak var vc: GameViewController?
+    var message: String = ""
     
     var score = 0 {
         didSet {
@@ -45,12 +46,14 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         if score > record ?? 0 {
             defaults.set(score, forKey: "record")
         }
-        
-        vc?.dismiss(animated: true, completion: nil)
+        vc?.statusText = message
+        vc?.performSegue(withIdentifier: "endGame", sender: nil)
     }
     
     func addTargetNodes() {
-        for _ in 1...100 {
+        score = 0
+        colors = []
+        for _ in 1...10 {
             let size = CGFloat(0.5)
             let color = Color.random()
             colors.append(color)
@@ -77,7 +80,7 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     }
     
     func throwBall() {
-        let ball = SCNSphere(radius: 0.5)
+        let ball = SCNSphere(radius: 0.2)
         ball.firstMaterial?.diffuse.contents = ballColor.value
         let node = SCNNode(geometry: ball)
         node.name = "ball"
@@ -100,6 +103,10 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             node.removeFromParentNode()
             self.setBallButton()
+            
+            if self.vc?.sceneView.scene.rootNode.childNodes.filter({ $0.name == "box" }).count == 0 {
+                self.endGame(message: "You won!")
+            }
         }
     }
     
@@ -135,8 +142,12 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
             let nodeBColor = contact.nodeB.geometry?.firstMaterial?.diffuse.contents as? UIColor,
             nodeAColor == nodeBColor
             else {
-                DispatchQueue.main.async {
-                    self.endGame(message: "wrong color")
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                    if (contact.nodeA.parent != nil && contact.nodeB.parent != nil) {
+                        self.endGame(message: "You lose!")
+                        contact.nodeA.removeFromParentNode()
+                        contact.nodeB.removeFromParentNode()
+                    }
                 }
                 return
         }
