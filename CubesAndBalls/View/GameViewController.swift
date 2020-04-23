@@ -15,6 +15,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var ballButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var popupView: UIView!
+    @IBOutlet weak var popupConstraint: NSLayoutConstraint!
+    @IBOutlet weak var popupBackground: UIVisualEffectView!
     
     let viewModel = GameViewModel()
     var statusText = ""
@@ -24,6 +27,10 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         
         ballButton.layer.cornerRadius = ballButton.layer.frame.width / 2
         ballButton.isEnabled = false
+        
+        popupView.layer.cornerRadius = 20
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.popupBackgroundTouched (_:)))
+        self.popupBackground.addGestureRecognizer(gesture)
         
         sceneView.delegate = self
         sceneView.scene.physicsWorld.contactDelegate = viewModel
@@ -49,14 +56,49 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         
         sceneView.session.pause()
+        hidePopup()
     }
     
     @IBAction func ballTouched(_ sender: Any) {
         viewModel.throwBall()
     }
     
+    @IBAction func restartGame(_ sender: Any) {
+        setUpNewGame()
+        hidePopup()
+    }
+    
+    @IBAction func resumeGame(_ sender: Any) {
+        hidePopup()
+    }
+    
     func setUpNewGame() {
         viewModel.addTargetNodes()
+    }
+    
+    @IBAction func pauseGame(_ sender: Any) {
+        showPopup()
+    }
+    
+    @objc private func popupBackgroundTouched(_ sender:UITapGestureRecognizer){
+       hidePopup()
+    }
+    
+    private func showPopup() {
+        popupConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            self.popupBackground.alpha = 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func hidePopup() {
+        popupConstraint.constant = 1000
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.popupBackground.alpha = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

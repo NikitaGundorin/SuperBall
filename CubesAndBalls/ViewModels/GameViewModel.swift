@@ -51,8 +51,13 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     }
     
     func addTargetNodes() {
+        guard let vc = vc else {
+            return
+        }
         score = 0
         colors = []
+        vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
+        
         for _ in 1...10 {
             let size = CGFloat(0.5)
             let color = Color.random()
@@ -74,7 +79,7 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
             node.physicsBody?.categoryBitMask = CollisionCategory.boxCategory.rawValue
             node.physicsBody?.contactTestBitMask = CollisionCategory.ballCategory.rawValue
             
-            vc?.sceneView.scene.rootNode.addChildNode(node)
+            vc.sceneView.scene.rootNode.addChildNode(node)
         }
         setBallButton()
     }
@@ -101,10 +106,10 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         vc?.ballButton.isEnabled = false
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            node.removeFromParentNode()
-            self.setBallButton()
-            
-            if self.vc?.sceneView.scene.rootNode.childNodes.filter({ $0.name == "box" }).count == 0 {
+            if node.parent != nil {
+                node.removeFromParentNode()
+                self.setBallButton()
+            } else if self.vc?.sceneView.scene.rootNode.childNodes.filter({ $0.name == "box" }).count == 0 {
                 self.endGame(message: "You won!")
             }
         }
