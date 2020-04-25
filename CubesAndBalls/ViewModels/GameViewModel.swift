@@ -28,15 +28,15 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     
     var colors: [Color] = []
     
-    func setBallButton() {
+    var targetsCount = 100
+    
+    func setBall() {
         if vc != nil && vc!.ballButton.isEnabled || colors.count == 0 {
             return
         }
-        var color: Color
-        repeat {
-            color = Color.random()
-        } while !self.colors.contains(color)
+        let color = getRandomColor()
         ballColor = color
+        
         vc?.ballButton.isEnabled = true
     }
     
@@ -51,76 +51,45 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     }
     
     func addTargetNodes() {
-        guard let vc = vc else {
-            return
-        }
+        guard let vc = vc else { return }
         score = 0
         colors = []
         vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
         
-        for _ in 1...10 {
-            let size = CGFloat(0.5)
+        for _ in 1...targetsCount {
             let color = Color.random()
             colors.append(color)
-            let box = SCNBox(width: size, height: size, length: size, chamferRadius: 0)
-            box.firstMaterial?.diffuse.contents = color.value
-            let node = SCNNode(geometry: box)
-            node.name = "box"
+            let box = Box(color: color)
             
-            node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-            node.physicsBody?.isAffectedByGravity = false
-            
-            node.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: -2))
-            
-            let action: SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 1.0)
-            let forever = SCNAction.repeatForever(action)
-            node.runAction(forever)
-            
-            node.physicsBody?.categoryBitMask = CollisionCategory.boxCategory.rawValue
-            node.physicsBody?.contactTestBitMask = CollisionCategory.ballCategory.rawValue
-            
-            vc.sceneView.scene.rootNode.addChildNode(node)
+            vc.sceneView.scene.rootNode.addChildNode(box)
         }
-        setBallButton()
+        setBall()
     }
     
     func throwBall() {
-        let ball = SCNSphere(radius: 0.2)
-        ball.firstMaterial?.diffuse.contents = ballColor.value
-        let node = SCNNode(geometry: ball)
-        node.name = "ball"
-        
-        node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        node.physicsBody?.isAffectedByGravity = false
-        
-        node.physicsBody?.categoryBitMask = CollisionCategory.ballCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.boxCategory.rawValue
-        
-        let (direction, position) = self.getUserVector()
-        node.position = position
-        let nodeDirection = SCNVector3(direction.x*4, direction.y*4, direction.z*4)
-        node.physicsBody?.applyForce(nodeDirection, at: SCNVector3(0.1,0,0), asImpulse: true)
-        node.physicsBody?.applyForce(nodeDirection, asImpulse: true)
-        
-        vc?.sceneView.scene.rootNode.addChildNode(node)
+        let (direction, position) = getUserVector()
+        let ball = Ball(color: ballColor, direction: direction, position: position)
+        vc?.sceneView.scene.rootNode.addChildNode(ball)
         vc?.ballButton.isEnabled = false
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if node.parent != nil {
-                node.removeFromParentNode()
-                self.setBallButton()
+            if ball.parent != nil {
+                ball.removeFromParentNode()
+                self.setBall()
             } else if self.vc?.sceneView.scene.rootNode.childNodes.filter({ $0.name == "box" }).count == 0 {
                 self.endGame(message: "You won!")
             }
         }
     }
     
-    private func randomFloat(min: Float, max: Float) -> Float {
-        var result: Float = 0
-        while((-1...1).contains(result)) { //cube is not too close to the camera
-            result = Float.random(in: 0...1.0) * (max - min) + min
-        }
-        return result
+    
+    private func getRandomColor() -> Color {
+        var color: Color
+        repeat {
+            color = Color.random()
+        } while !self.colors.contains(color)
+        
+        return color
     }
     
     private func getUserVector() -> (SCNVector3, SCNVector3) {
@@ -164,7 +133,7 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
             if let color = Color.value(ofUIColor: nodeAColor),
                 let index = self.colors.lastIndex(of: color) {
                 self.colors.remove(at: index)
-                self.setBallButton()
+                self.setBall()
             }
         }
         
