@@ -30,6 +30,16 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     
     var targetsCount = 100
     
+    static let totalSeconds = 10
+    
+    var seconds = totalSeconds {
+        didSet {
+            vc?.timerLabel.text = "\(seconds)"
+        }
+    }
+    
+    var timer = Timer()
+    
     func setBall() {
         if vc != nil && vc!.ballButton.isEnabled || colors.count == 0 {
             return
@@ -38,6 +48,18 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         ballColor = color
         
         vc?.ballButton.isEnabled = true
+    }
+    
+    func startGame() {
+        guard let vc = vc else { return }
+        stopTimer()
+        score = 0
+        colors = []
+        seconds = GameViewModel.totalSeconds
+        vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
+        addTargetNodes()
+        setBall()
+        runTimer()
     }
     
     func endGame(message: String) {
@@ -51,19 +73,13 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     }
     
     func addTargetNodes() {
-        guard let vc = vc else { return }
-        score = 0
-        colors = []
-        vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
-        
         for _ in 1...targetsCount {
             let color = Color.random()
             colors.append(color)
             let box = Box(color: color)
             
-            vc.sceneView.scene.rootNode.addChildNode(box)
+            vc?.sceneView.scene.rootNode.addChildNode(box)
         }
-        setBall()
     }
     
     func throwBall() {
@@ -82,6 +98,27 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         }
     }
     
+    func runTimer() {
+        vc?.timerLabel.text = "\(seconds)"
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                                     selector: (#selector(self.updateTimer)),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    func stopTimer() {
+        timer.invalidate()
+    }
+    
+    @objc func updateTimer() {
+        if seconds == 0 {
+            stopTimer()
+            endGame(message: "Time is over!")
+            return
+        }
+        
+        seconds -= 1
+    }
     
     private func getRandomColor() -> Color {
         var color: Color

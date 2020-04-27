@@ -25,7 +25,7 @@ class EndGameViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? GameViewController else { return }
         
-        vc.setUpNewGame()
+        vc.viewModel.startGame()
     }
     
 }

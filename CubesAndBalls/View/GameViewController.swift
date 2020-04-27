@@ -18,6 +18,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var popupConstraint: NSLayoutConstraint!
     @IBOutlet weak var popupBackground: UIVisualEffectView!
+    @IBOutlet weak var timerLabel: UILabel!
     
     let viewModel = GameViewModel()
     var statusText = ""
@@ -42,7 +43,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         lightNode.light = light
         sceneView.pointOfView?.addChildNode(lightNode)
         
-        setUpNewGame()
+        viewModel.startGame()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,24 +65,22 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        setUpNewGame()
+        viewModel.startGame()
         hidePopup()
     }
     
     @IBAction func resumeGame(_ sender: Any) {
         hidePopup()
-    }
-    
-    func setUpNewGame() {
-        viewModel.addTargetNodes()
+        viewModel.runTimer()
     }
     
     @IBAction func pauseGame(_ sender: Any) {
+        viewModel.stopTimer()
         showPopup()
     }
     
     @objc private func popupBackgroundTouched(_ sender:UITapGestureRecognizer){
-       hidePopup()
+       resumeGame(self)
     }
     
     private func showPopup() {
