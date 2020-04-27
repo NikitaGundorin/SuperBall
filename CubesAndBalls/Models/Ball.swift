@@ -28,8 +28,7 @@ class Ball: SCNNode {
         
         self.position = position
         
-        let nodeDirection = SCNVector3(direction.x*4, direction.y*4, direction.z*4)
-        self.physicsBody?.applyForce(nodeDirection, at: SCNVector3(0.1,0,0), asImpulse: true)
+        let nodeDirection = SCNVector3(direction.x * 15, direction.y * 15, direction.z * 15)
         self.physicsBody?.applyForce(nodeDirection, asImpulse: true)
     }
         
