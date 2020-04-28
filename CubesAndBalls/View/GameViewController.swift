@@ -15,10 +15,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var ballButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var popupView: UIView!
-    @IBOutlet weak var popupConstraint: NSLayoutConstraint!
-    @IBOutlet weak var popupBackground: UIVisualEffectView!
     @IBOutlet weak var timerLabel: UILabel!
+    var popup: PopupView!
+    var pauseMenu: PauseMenu!
     
     let viewModel = GameViewModel()
     var statusText = ""
@@ -29,10 +28,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         ballButton.layer.cornerRadius = ballButton.layer.frame.width / 2
         ballButton.isEnabled = false
         
-        popupView.layer.cornerRadius = 20
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.popupBackgroundTouched (_:)))
-        self.popupBackground.addGestureRecognizer(gesture)
-        
         sceneView.delegate = self
         sceneView.scene.physicsWorld.contactDelegate = viewModel
         viewModel.vc = self
@@ -42,6 +37,13 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         let lightNode = SCNNode()
         lightNode.light = light
         sceneView.pointOfView?.addChildNode(lightNode)
+        
+        popup = Bundle.main.loadNibNamed("PopupView", owner: self, options: nil)?.first as? PopupView
+        popup.delegate = self
+        view.addSubview(popup)
+        
+        pauseMenu = Bundle.main.loadNibNamed("PauseMenu", owner: self, options: nil)?.first as? PauseMenu
+        pauseMenu.delegate = self
         
         viewModel.startGame()
     }
@@ -57,47 +59,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         
         sceneView.session.pause()
-        hidePopup()
     }
     
     @IBAction func ballTouched(_ sender: Any) {
         viewModel.throwBall()
     }
     
-    @IBAction func restartGame(_ sender: Any) {
-        viewModel.startGame()
-        hidePopup()
-    }
-    
-    @IBAction func resumeGame(_ sender: Any) {
-        hidePopup()
-        viewModel.runTimer()
-    }
-    
     @IBAction func pauseGame(_ sender: Any) {
         viewModel.stopTimer()
-        showPopup()
-    }
-    
-    @objc private func popupBackgroundTouched(_ sender:UITapGestureRecognizer){
-       resumeGame(self)
-    }
-    
-    private func showPopup() {
-        popupConstraint.constant = 0
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-            self.popupBackground.alpha = 1
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    private func hidePopup() {
-        popupConstraint.constant = 1000
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.popupBackground.alpha = 0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        popup.show(withContent: pauseMenu)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,5 +75,28 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         
         vc.score = viewModel.score
         vc.statusText = self.statusText
+    }
+}
+
+extension GameViewController: PopupViewDelegate {
+    func popupHid() {
+        if (!viewModel.timer.isValid) {
+            viewModel.runTimer()
+        }
+    }
+}
+
+extension GameViewController: PauseMenuDelegate {
+    func resumeGame() {
+        popup.hide()
+    }
+    
+    func restartGame() {
+        viewModel.startGame()
+        popup.hide()
+    }
+    
+    func quitGame() {
+        dismiss(animated: true, completion: nil)
     }
 }

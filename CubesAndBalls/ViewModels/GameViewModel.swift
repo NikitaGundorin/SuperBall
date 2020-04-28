@@ -63,6 +63,7 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
     }
     
     func endGame(message: String) {
+        stopTimer()
         let defaults = UserDefaults.standard
         let record = UserDefaults.standard.value(forKey: "record") as? Int
         if score > record ?? 0 {
