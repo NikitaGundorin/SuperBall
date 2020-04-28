@@ -121,6 +121,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="He5-gz-0o0"/>
                                     <constraint firstAttribute="width" constant="40" id="Q0R-3R-xY7"/>
+                                    <constraint firstAttribute="width" secondItem="Lbc-BN-oA8" secondAttribute="height" multiplier="1:1" id="faY-AE-j9h"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="pause"/>
                                 <connections>
@@ -141,8 +142,8 @@
                             <constraint firstItem="1xX-Mc-GRC" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="Z8p-xY-aBu"/>
                             <constraint firstItem="w6p-7V-DYl" firstAttribute="leading" relation="lessThanOrEqual" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="294" id="agq-yw-Bre"/>
                             <constraint firstItem="1xX-Mc-GRC" firstAttribute="centerY" secondItem="U0K-SW-4ec" secondAttribute="centerY" id="bE1-0C-V81"/>
+                            <constraint firstItem="Lbc-BN-oA8" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="g9c-hJ-s9C"/>
                             <constraint firstItem="Lbc-BN-oA8" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" constant="20" id="iWP-Qj-cRl"/>
-                            <constraint firstItem="Lbc-BN-oA8" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" constant="44" id="qdE-Ib-TtH"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                             <constraint firstItem="K77-6J-hkD" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="160" id="rSE-52-Oaa"/>
                             <constraint firstItem="Mkr-3A-zz7" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="tux-xu-6My"/>
@@ -155,90 +156,13 @@
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="scoreLabel" destination="w6p-7V-DYl" id="Dpd-Qu-iCv"/>
                         <outlet property="timerLabel" destination="Mkr-3A-zz7" id="ZG8-sc-aCe"/>
-                        <segue destination="XbR-zs-BZY" kind="show" identifier="endGame" id="f1R-Nq-Jgx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="134.59821428571428"/>
         </scene>
-        <!--End Game View Controller-->
-        <scene sceneID="pMx-eo-1Qm">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="XbR-zs-BZY" customClass="EndGameViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EUw-a0-uBs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iIu-HT-Mek">
-                                <rect key="frame" x="130" y="510.33333333333326" width="154" height="116"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZX-ac-d91">
-                                        <rect key="frame" x="2.6666666666666572" y="0.0" width="149" height="51"/>
-                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="35"/>
-                                        <state key="normal" title="Play again">
-                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playAgain:" destination="sDT-Af-6ao" eventType="touchUpInside" id="I3m-oi-IFU"/>
-                                            <action selector="startNewGame:" destination="sDT-Af-6ao" eventType="touchUpInside" id="e68-LO-0Mg"/>
-                                            <segue destination="BV1-FR-VrT" kind="show" id="oib-54-gPU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Egk-qq-MHA">
-                                        <rect key="frame" x="50.666666666666657" y="71.000000000000057" width="53" height="45"/>
-                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
-                                        <state key="normal" title="Quit">
-                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="KVw-mg-Mk8" kind="show" id="bVp-QE-4tU"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You won!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpL-CX-9U4">
-                                <rect key="frame" x="117.66666666666667" y="421" width="178.66666666666663" height="54.333333333333314"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="50"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRe-GN-63w">
-                                <rect key="frame" x="120" y="312.66666666666669" width="174" height="38.333333333333314"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="35"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="iIu-HT-Mek" firstAttribute="leading" secondItem="0he-rI-Ql8" secondAttribute="leading" constant="130" id="2HA-nd-IgB"/>
-                            <constraint firstItem="0he-rI-Ql8" firstAttribute="trailing" secondItem="iIu-HT-Mek" secondAttribute="trailing" constant="130" id="8Xa-gX-Lzx"/>
-                            <constraint firstItem="iIu-HT-Mek" firstAttribute="top" secondItem="KpL-CX-9U4" secondAttribute="bottom" constant="35" id="9ZV-OW-Tp2"/>
-                            <constraint firstItem="0he-rI-Ql8" firstAttribute="trailing" secondItem="zRe-GN-63w" secondAttribute="trailing" constant="120" id="9lI-M0-5C1"/>
-                            <constraint firstItem="KpL-CX-9U4" firstAttribute="centerY" secondItem="EUw-a0-uBs" secondAttribute="centerY" id="QBb-7Y-WvC"/>
-                            <constraint firstItem="KpL-CX-9U4" firstAttribute="centerX" secondItem="EUw-a0-uBs" secondAttribute="centerX" id="d5j-p2-5sZ"/>
-                            <constraint firstItem="KpL-CX-9U4" firstAttribute="top" secondItem="zRe-GN-63w" secondAttribute="bottom" constant="70" id="dlP-cu-f2O"/>
-                            <constraint firstItem="zRe-GN-63w" firstAttribute="leading" secondItem="0he-rI-Ql8" secondAttribute="leading" constant="120" id="qpL-vB-Mxw"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="0he-rI-Ql8"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ZEG-0s-7JO"/>
-                    <connections>
-                        <outlet property="scoreLabel" destination="zRe-GN-63w" id="ZTH-DE-Y2Y"/>
-                        <outlet property="statusLabel" destination="KpL-CX-9U4" id="rhT-cl-nZS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CFY-CM-LZ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="sDT-Af-6ao" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="928" y="135"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="f1R-Nq-Jgx"/>
-        <segue reference="oib-54-gPU"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="aim" width="1396" height="1396"/>
         <image name="pause" width="1000" height="1000"/>

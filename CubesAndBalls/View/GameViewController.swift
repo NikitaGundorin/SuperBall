@@ -18,6 +18,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var timerLabel: UILabel!
     var popup: PopupView!
     var pauseMenu: PauseMenu!
+    var endGameMenu: EndGameMenu!
     
     let viewModel = GameViewModel()
     var statusText = ""
@@ -39,11 +40,13 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         sceneView.pointOfView?.addChildNode(lightNode)
         
         popup = Bundle.main.loadNibNamed("PopupView", owner: self, options: nil)?.first as? PopupView
-        popup.delegate = self
         view.addSubview(popup)
         
         pauseMenu = Bundle.main.loadNibNamed("PauseMenu", owner: self, options: nil)?.first as? PauseMenu
         pauseMenu.delegate = self
+        
+        endGameMenu = Bundle.main.loadNibNamed("EndGameMenu", owner: self, options: nil)?.first as? EndGameMenu
+        endGameMenu.delegete = self
         
         viewModel.startGame()
     }
@@ -70,25 +73,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         popup.show(withContent: pauseMenu)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let vc = segue.destination as? EndGameViewController else { return }
-        
-        vc.score = viewModel.score
-        vc.statusText = self.statusText
+    func endGame(message: String) {
+        endGameMenu.messageLabel.text = message
+        endGameMenu.score = viewModel.score
+        popup.show(withContent: endGameMenu)
     }
 }
 
-extension GameViewController: PopupViewDelegate {
-    func popupHid() {
-        if (!viewModel.timer.isValid) {
-            viewModel.runTimer()
-        }
-    }
-}
-
-extension GameViewController: PauseMenuDelegate {
+extension GameViewController: PauseMenuDelegate, EndGameMenuDelegate {
     func resumeGame() {
         popup.hide()
+        viewModel.runTimer()
     }
     
     func restartGame() {

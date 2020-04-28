@@ -69,8 +69,8 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         if score > record ?? 0 {
             defaults.set(score, forKey: "record")
         }
-        vc?.statusText = message
-        vc?.performSegue(withIdentifier: "endGame", sender: nil)
+        
+        vc?.endGame(message: message)
     }
     
     func addTargetNodes() {
