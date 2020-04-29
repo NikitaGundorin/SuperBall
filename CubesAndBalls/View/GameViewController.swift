@@ -83,6 +83,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func endGame(message: String) {
+        if popup.isShown { return }
         endGameMenu.messageLabel.text = message
         endGameMenu.score = viewModel.score
         popup.show(withContent: endGameMenu)

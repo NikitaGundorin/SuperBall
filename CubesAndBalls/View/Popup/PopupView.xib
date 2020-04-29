@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -25,8 +25,21 @@
                     <rect key="frame" x="30" y="298" width="354" height="300"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="300" id="K3Z-zi-www"/>
+                        <constraint firstAttribute="width" secondItem="8op-0B-7MR" secondAttribute="height" multiplier="63:64" id="48p-lk-G2l"/>
+                        <constraint firstAttribute="height" constant="300" id="K3Z-zi-www">
+                            <variation key="widthClass=regular" constant="320"/>
+                        </constraint>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="48p-lk-G2l"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="48p-lk-G2l"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <constraints>
@@ -36,10 +49,20 @@
                 <constraint firstAttribute="trailing" secondItem="rsa-iT-Aeg" secondAttribute="trailing" id="bVX-aG-C8X"/>
                 <constraint firstItem="8op-0B-7MR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cVu-kz-F5Q"/>
                 <constraint firstItem="rsa-iT-Aeg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jx3-fG-ka3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8op-0B-7MR" secondAttribute="trailing" constant="30" id="nTC-WD-5UX"/>
-                <constraint firstItem="8op-0B-7MR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="vBr-nt-zbu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8op-0B-7MR" secondAttribute="trailing" constant="30" id="nTC-WD-5UX">
+                    <variation key="widthClass=regular" constant="230"/>
+                </constraint>
+                <constraint firstItem="8op-0B-7MR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="vBr-nt-zbu">
+                    <variation key="widthClass=regular" constant="230"/>
+                </constraint>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="nTC-WD-5UX"/>
+                    <exclude reference="vBr-nt-zbu"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="background" destination="rsa-iT-Aeg" id="SQB-Ae-gDM"/>
                 <outlet property="constraint" destination="Osw-QQ-071" id="R7m-36-UUK"/>

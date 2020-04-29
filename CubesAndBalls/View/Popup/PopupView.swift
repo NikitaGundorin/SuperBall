@@ -14,6 +14,7 @@ class PopupView: UIView {
     @IBOutlet weak var constraint: NSLayoutConstraint!
     
     var content: UIView?
+    var isShown = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +25,8 @@ class PopupView: UIView {
     }
     
     func show(withContent view: UIView) {
+        if isShown { return }
+        self.isShown = true
         self.popup.addSubview(view)
         view.frame = popup.bounds
         self.content = view
@@ -38,6 +41,8 @@ class PopupView: UIView {
     }
     
     func hide() {
+        if !isShown { return }
+        self.isShown = false
         constraint.constant = 1000
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.background.alpha = 0
