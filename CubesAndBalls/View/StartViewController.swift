@@ -11,10 +11,6 @@ import UIKit
 class StartViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let record = UserDefaults.standard.value(forKey: "record") as? Int {

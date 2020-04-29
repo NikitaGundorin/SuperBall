@@ -11,42 +11,23 @@ import SceneKit
 import ARKit
 
 class GameViewController: UIViewController, ARSCNViewDelegate {
-    
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var ballButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
-    var popup: PopupView!
-    var pauseMenu: PauseMenu!
-    var endGameMenu: EndGameMenu!
+    private var popup: PopupView!
+    private var pauseMenu: PauseMenu!
+    private var endGameMenu: EndGameMenu!
     
-    let viewModel = GameViewModel()
-    var statusText = ""
+    private let viewModel = GameViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ballButton.layer.cornerRadius = ballButton.layer.frame.width / 2
-        ballButton.isEnabled = false
-        
-        sceneView.delegate = self
-        sceneView.scene.physicsWorld.contactDelegate = viewModel
+        view.layoutIfNeeded()
         viewModel.vc = self
-        
-        let light = SCNLight()
-        light.type = .omni
-        let lightNode = SCNNode()
-        lightNode.light = light
-        sceneView.pointOfView?.addChildNode(lightNode)
-        
-        popup = Bundle.main.loadNibNamed("PopupView", owner: self, options: nil)?.first as? PopupView
-        view.addSubview(popup)
-        
-        pauseMenu = Bundle.main.loadNibNamed("PauseMenu", owner: self, options: nil)?.first as? PauseMenu
-        pauseMenu.delegate = self
-        
-        endGameMenu = Bundle.main.loadNibNamed("EndGameMenu", owner: self, options: nil)?.first as? EndGameMenu
-        endGameMenu.delegete = self
+        setupBallButton()
+        setupScene()
+        setupPopup()
         
         viewModel.startGame()
     }
@@ -71,6 +52,34 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func pauseGame(_ sender: Any) {
         viewModel.stopTimer()
         popup.show(withContent: pauseMenu)
+    }
+    
+    private func setupBallButton() {
+        ballButton.layer.cornerRadius = ballButton.frame.width / 2
+        ballButton.isEnabled = false
+    }
+    
+    private func setupScene() {
+        sceneView.delegate = self
+        sceneView.scene.physicsWorld.contactDelegate = viewModel
+        
+        let light = SCNLight()
+        light.type = .omni
+        let lightNode = SCNNode()
+        lightNode.light = light
+        sceneView.pointOfView?.addChildNode(lightNode)
+    }
+    
+    private func setupPopup() {
+        popup = Bundle.main.loadNibNamed("PopupView", owner: self, options: nil)?.first as? PopupView
+        popup.frame = view.frame
+        view.addSubview(popup)
+        
+        pauseMenu = Bundle.main.loadNibNamed("PauseMenu", owner: self, options: nil)?.first as? PauseMenu
+        pauseMenu.delegate = self
+        
+        endGameMenu = Bundle.main.loadNibNamed("EndGameMenu", owner: self, options: nil)?.first as? EndGameMenu
+        endGameMenu.delegete = self
     }
     
     func endGame(message: String) {

@@ -10,7 +10,7 @@ import Foundation
 import SceneKit
 import ARKit
 
-class GameViewModel: NSObject, SCNPhysicsContactDelegate {
+class GameViewModel: NSObject {
     weak var vc: GameViewController?
     var message: String = ""
     
@@ -140,7 +140,9 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
-    
+}
+
+extension GameViewModel: SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         guard let nodeAPhysicsBody = contact.nodeA.physicsBody,
             let nodeBPhysicsBody = contact.nodeB.physicsBody,
@@ -154,7 +156,7 @@ class GameViewModel: NSObject, SCNPhysicsContactDelegate {
             let nodeBColor = contact.nodeB.geometry?.firstMaterial?.diffuse.contents as? UIColor,
             nodeAColor == nodeBColor
             else {
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     if (contact.nodeA.parent != nil && contact.nodeB.parent != nil) {
                         self.endGame(message: "You lose!")
                         contact.nodeA.removeFromParentNode()
