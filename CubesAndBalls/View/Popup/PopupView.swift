@@ -26,6 +26,7 @@ class PopupView: UIView {
     
     func show(withContent view: UIView) {
         if isShown { return }
+        layoutIfNeeded()
         self.isShown = true
         self.popup.addSubview(view)
         view.frame = popup.bounds
@@ -40,7 +41,7 @@ class PopupView: UIView {
         }, completion: nil)
     }
     
-    func hide() {
+    func hide(withCompletion completion: (() -> ())? = nil) {
         if !isShown { return }
         self.isShown = false
         constraint.constant = 1000
@@ -50,6 +51,8 @@ class PopupView: UIView {
         }, completion: { _ in
             self.alpha = 0
             self.content?.removeFromSuperview()
+            guard let completion = completion else { return }
+            completion()
         })
     }
 }

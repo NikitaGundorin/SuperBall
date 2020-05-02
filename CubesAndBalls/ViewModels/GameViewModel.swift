@@ -12,12 +12,21 @@ import ARKit
 
 class GameViewModel: NSObject {
     weak var vc: GameViewController?
-    var currentLevel: Level
+    var currentLevel: Level = {
+        do {
+            return try LevelsDataProvider.shared.getCurrentLevel()
+        } catch {
+            print(error.localizedDescription)
+            return Level()
+        }
+    }()
+    
     var score = 0 {
         didSet {
             vc?.scoreLabel.text = "Score: \(score)"
         }
     }
+    var status: GameStatus?
     private var colors: [Color] = []
     private var timer = Timer()
     private var isBallThrown = false {
@@ -37,19 +46,7 @@ class GameViewModel: NSObject {
             vc?.timerLabel.text = "\(seconds)"
         }
     }
-    
-    override init() {
-        do {
-            self.currentLevel =  try LevelsDataProvider.shared.getCurrentLevel()
-        } catch {
-            currentLevel = Level()
-            print(error.localizedDescription)
-            vc?.quitGame()
-        }
-        
-        super.init()
-    }
-    
+
     func throwBall() {
         let (direction, position) = getUserVector()
         let ball = Ball(color: ballColor, direction: direction, position: position)
@@ -90,6 +87,7 @@ class GameViewModel: NSObject {
     
     private func endGame(status: GameStatus) {
         stopTimer()
+        self.status = status
         if status == .win {
             LevelsDataProvider.shared.levelUp()
             do {
