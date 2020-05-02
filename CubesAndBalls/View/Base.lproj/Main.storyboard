@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your record: 0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCI-rc-2HT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCI-rc-2HT">
                                 <rect key="frame" x="72" y="114.00000000000001" width="270" height="32.666666666666671"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="dr5-Qe-063"/>
@@ -24,20 +24,20 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="118" translatesAutoresizingMaskIntoConstraints="NO" id="iJf-oE-xWN">
-                                <rect key="frame" x="20" y="248.66666666666663" width="374" height="399"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="iJf-oE-xWN">
+                                <rect key="frame" x="20" y="293.33333333333337" width="374" height="309.33333333333337"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Throw balls into cubes of the same color!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Hl-QE-hov">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="87"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Throw balls into cubes of the same color!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Hl-QE-hov">
+                                        <rect key="frame" x="5" y="0.0" width="364" height="65.333333333333329"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="cIF-Yj-PVL"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwR-LZ-ANA">
-                                        <rect key="frame" x="90" y="205" width="194" height="194"/>
+                                        <rect key="frame" x="90" y="115.33333333333337" width="194" height="194"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="Dp5-Ck-SgK"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="IoF-nL-szg"/>
@@ -59,6 +59,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="4Hl-QE-hov" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jCI-rc-2HT" secondAttribute="bottom" constant="20" id="4gy-Uy-37c"/>
                             <constraint firstItem="jCI-rc-2HT" firstAttribute="top" secondItem="nkK-vQ-Ug9" secondAttribute="top" constant="70" id="KnV-bB-ztS"/>
                             <constraint firstItem="iJf-oE-xWN" firstAttribute="centerY" secondItem="GtE-2h-GBR" secondAttribute="centerY" id="WgH-hA-B1b"/>
                             <constraint firstItem="jCI-rc-2HT" firstAttribute="centerX" secondItem="GtE-2h-GBR" secondAttribute="centerX" id="aqD-eg-eot"/>
@@ -72,7 +73,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="DwO-0X-uBz"/>
                     <connections>
-                        <outlet property="scoreLabel" destination="jCI-rc-2HT" id="5yW-Fl-VO7"/>
+                        <outlet property="levelDescriptionLabel" destination="4Hl-QE-hov" id="LcX-3c-R0E"/>
+                        <outlet property="levelLabel" destination="jCI-rc-2HT" id="5yW-Fl-VO7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y03-WN-9j5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

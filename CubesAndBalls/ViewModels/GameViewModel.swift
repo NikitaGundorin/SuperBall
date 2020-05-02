@@ -12,89 +12,54 @@ import ARKit
 
 class GameViewModel: NSObject {
     weak var vc: GameViewController?
-    var message: String = ""
-    
+    var currentLevel: Level
     var score = 0 {
         didSet {
             vc?.scoreLabel.text = "Score: \(score)"
         }
     }
+    private var colors: [Color] = []
+    private var timer = Timer()
+    private var isBallThrown = false {
+        didSet {
+            vc?.ballButton.isEnabled = isBallThrown ? false : true
+        }
+    }
     
-    var ballColor: Color! {
+    private var ballColor: Color! {
         didSet {
             vc?.ballButton.backgroundColor = ballColor.value
         }
     }
     
-    var colors: [Color] = []
-    
-    var targetsCount = 100
-    
-    static let totalSeconds = 10
-    
-    var seconds = totalSeconds {
+    private var seconds: Int = 0 {
         didSet {
             vc?.timerLabel.text = "\(seconds)"
         }
     }
     
-    var timer = Timer()
-    
-    func setBall() {
-        if vc != nil && vc!.ballButton.isEnabled || colors.count == 0 {
-            return
-        }
-        let color = getRandomColor()
-        ballColor = color
-        
-        vc?.ballButton.isEnabled = true
-    }
-    
-    func startGame() {
-        guard let vc = vc else { return }
-        stopTimer()
-        score = 0
-        colors = []
-        seconds = GameViewModel.totalSeconds
-        vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
-        addTargetNodes()
-        setBall()
-        runTimer()
-    }
-    
-    func endGame(message: String) {
-        stopTimer()
-        let defaults = UserDefaults.standard
-        let record = UserDefaults.standard.value(forKey: "record") as? Int
-        if score > record ?? 0 {
-            defaults.set(score, forKey: "record")
+    override init() {
+        do {
+            self.currentLevel =  try LevelsDataProvider.shared.getCurrentLevel()
+        } catch {
+            currentLevel = Level()
+            print(error.localizedDescription)
+            vc?.quitGame()
         }
         
-        vc?.endGame(message: message)
-    }
-    
-    func addTargetNodes() {
-        for _ in 1...targetsCount {
-            let color = Color.random()
-            colors.append(color)
-            let box = Box(color: color)
-            
-            vc?.sceneView.scene.rootNode.addChildNode(box)
-        }
+        super.init()
     }
     
     func throwBall() {
         let (direction, position) = getUserVector()
         let ball = Ball(color: ballColor, direction: direction, position: position)
         vc?.sceneView.scene.rootNode.addChildNode(ball)
-        vc?.ballButton.isEnabled = false
+        isBallThrown = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if ball.parent != nil {
                 ball.removeFromParentNode()
                 self.setBall()
-            } else if self.vc?.sceneView.scene.rootNode.childNodes.filter({ $0.name == "box" }).count == 0 {
-                self.endGame(message: "You won!")
             }
         }
     }
@@ -111,10 +76,60 @@ class GameViewModel: NSObject {
         timer.invalidate()
     }
     
-    @objc func updateTimer() {
+    func startGame() {
+        guard let vc = vc else { return }
+        stopTimer()
+        score = 0
+        colors = []
+        seconds = Int(currentLevel.timeLimit)
+        vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
+        addTargetNodes()
+        setBall()
+        runTimer()
+    }
+    
+    private func endGame(status: GameStatus) {
+        stopTimer()
+        if status == .win {
+            LevelsDataProvider.shared.levelUp()
+            do {
+                self.currentLevel = try LevelsDataProvider.shared.getCurrentLevel()
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        vc?.endGame(status: status)
+    }
+    
+    private func setBall() {
+        if colors.count == 0 {
+            endGame(status: .win)
+            return
+        }
+        let color = getRandomColor()
+        ballColor = color
+        
+        isBallThrown = false
+    }
+    
+    private func addTargetNodes() {
+        for _ in 1...currentLevel.cubesCount {
+            let color = Color.random()
+            colors.append(color)
+            
+            let range = getPositionRange(numberOfBoxes: currentLevel.cubesCount)
+            let box = Box(color: color, positionRange: range)
+            
+            vc?.sceneView.scene.rootNode.addChildNode(box)
+        }
+    }
+    
+    @objc private func updateTimer() {
         if seconds == 0 {
             stopTimer()
-            endGame(message: "Time is over!")
+            endGame(status: .timesUp)
             return
         }
         
@@ -140,6 +155,20 @@ class GameViewModel: NSObject {
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
+    
+    private func getPositionRange(numberOfBoxes: Int16) -> BoxPositionRange {
+        var max = 0.08 * Float(numberOfBoxes) + 1.6
+        switch max {
+        case ...2:
+            max = 2
+        case 10...:
+            max = 10
+        default:
+            break
+        }
+        
+        return BoxPositionRange(x: (-max, max), y: (-max, max), z: (-10, -2))
+    }
 }
 
 extension GameViewModel: SCNPhysicsContactDelegate {
@@ -156,9 +185,9 @@ extension GameViewModel: SCNPhysicsContactDelegate {
             let nodeBColor = contact.nodeB.geometry?.firstMaterial?.diffuse.contents as? UIColor,
             nodeAColor == nodeBColor
             else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     if (contact.nodeA.parent != nil && contact.nodeB.parent != nil) {
-                        self.endGame(message: "You lose!")
+                        self.endGame(status: .wrongColor)
                         contact.nodeA.removeFromParentNode()
                         contact.nodeB.removeFromParentNode()
                     }

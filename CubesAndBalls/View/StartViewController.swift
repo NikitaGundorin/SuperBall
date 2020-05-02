@@ -9,12 +9,13 @@
 import UIKit
 
 class StartViewController: UIViewController {
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var levelDescriptionLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let record = UserDefaults.standard.value(forKey: "record") as? Int {
-            scoreLabel.text = "Your record: \(record)"
-        }
+        guard let currentLevel = try? LevelsDataProvider.shared.getCurrentLevel() else { return }
+        levelLabel.text = "Level \(currentLevel.number)"
+        levelDescriptionLabel.text = currentLevel.goalDescription
     }
 }

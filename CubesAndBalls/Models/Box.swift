@@ -10,7 +10,7 @@ import Foundation
 import ARKit
 
 class Box: SCNNode {
-    init(color: Color) {
+    init(color: Color, positionRange: BoxPositionRange) {
         super.init()
         let size = CGFloat(0.5)
         let box = SCNBox(width: size, height: size, length: size, chamferRadius: 0)
@@ -21,7 +21,9 @@ class Box: SCNNode {
         self.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         self.physicsBody?.isAffectedByGravity = false
         
-        self.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: -2))
+        self.position = SCNVector3(randomFloat(positionRange.x),
+                                   randomFloat(positionRange.y),
+                                   randomFloat(positionRange.z))
         
         let action: SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 1.0)
         let forever = SCNAction.repeatForever(action)
@@ -35,11 +37,17 @@ class Box: SCNNode {
         super.init(coder: coder)
     }
     
-    private func randomFloat(min: Float, max: Float) -> Float {
+    private func randomFloat(_ range: (min: Float, max: Float)) -> Float {
         var result: Float = 0
         while((-1...1).contains(result)) { //cube is not too close to the camera
-            result = Float.random(in: 0...1.0) * (max - min) + min
+            result = Float.random(in: 0...1.0) * (range.max - range.min) + range.min
         }
         return result
     }
+}
+
+struct BoxPositionRange {
+    let x: (min: Float, max: Float)
+    let y: (min: Float, max: Float)
+    let z: (min: Float, max: Float)
 }

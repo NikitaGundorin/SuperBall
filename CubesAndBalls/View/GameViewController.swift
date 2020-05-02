@@ -56,7 +56,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     private func setupBallButton() {
         ballButton.layer.cornerRadius = ballButton.frame.width / 2
-        ballButton.isEnabled = false
     }
     
     private func setupScene() {
@@ -82,10 +81,12 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         endGameMenu.delegete = self
     }
     
-    func endGame(message: String) {
+    func endGame(status: GameStatus) {
         if popup.isShown { return }
-        endGameMenu.messageLabel.text = message
+        endGameMenu.messageLabel.text = status.message
         endGameMenu.score = viewModel.score
+        let playAgainText = status == .win ? "Next level" : "Play again"
+        endGameMenu.playAgainButton.setTitle(playAgainText, for: .normal)
         popup.show(withContent: endGameMenu)
     }
 }

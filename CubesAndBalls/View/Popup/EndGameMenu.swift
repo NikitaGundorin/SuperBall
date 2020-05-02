@@ -11,6 +11,7 @@ import UIKit
 class EndGameMenu: UIView {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var playAgainButton: UIButton!
     weak var delegete: EndGameMenuDelegate?
     var score: Int = 0 {
         didSet {
