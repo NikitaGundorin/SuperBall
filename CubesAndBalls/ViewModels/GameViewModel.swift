@@ -202,6 +202,7 @@ extension GameViewModel: SCNPhysicsContactDelegate {
                 self.colors.remove(at: index)
                 self.setBall()
             }
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
         
         let explosion = SCNParticleSystem(named: "Explode", inDirectory: nil)

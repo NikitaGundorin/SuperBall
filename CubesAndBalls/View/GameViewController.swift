@@ -83,6 +83,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     func endGame(status: GameStatus) {
         if popup.isShown { return }
+        if (status != .win) {
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
+        }
         endGameMenu.messageLabel.text = status.message
         endGameMenu.score = viewModel.score
         let playAgainText = status == .win ? "Next level" : "Play again"
