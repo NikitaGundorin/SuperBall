@@ -23,7 +23,7 @@ class GameViewModel: NSObject {
     
     var score = 0 {
         didSet {
-            vc?.scoreLabel.text = "Score: \(score)"
+            vc?.cubesCountLabel.text = "\(score)"
         }
     }
     var status: GameStatus?
@@ -43,7 +43,7 @@ class GameViewModel: NSObject {
     
     private var seconds: Int = 0 {
         didSet {
-            vc?.timerLabel.text = "\(seconds)"
+            vc?.roundLabel.text = "\(seconds)"
         }
     }
 
@@ -62,7 +62,7 @@ class GameViewModel: NSObject {
     }
     
     func runTimer() {
-        vc?.timerLabel.text = "\(seconds)"
+        vc?.roundLabel.text = "\(seconds)"
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,
                                      selector: (#selector(self.updateTimer)),
                                      userInfo: nil,

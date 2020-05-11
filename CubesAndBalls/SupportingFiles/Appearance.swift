@@ -25,6 +25,7 @@ class Appearance {
     static let font25 = UIFont(name: fontName, size: 30)
     static let fontBold50 = UIFont(name: boldFontName, size: 50)
     static let fontBold40 = UIFont(name: boldFontName, size: 40)
+    static let fontBold25 = UIFont(name: boldFontName, size: 25)
     static let fontBold20 = UIFont(name: boldFontName, size: 20)
     
     static func addDash(toLabel label: UILabel) {

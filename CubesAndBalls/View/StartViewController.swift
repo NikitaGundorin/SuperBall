@@ -28,7 +28,7 @@ class StartViewController: UIViewController {
     }()
     
     private let rateButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("RATE APP", for: .normal)
         button.titleLabel?.font = Appearance.fontBold20
         button.setTitleColor(Appearance.red, for: .normal)
@@ -40,7 +40,10 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
     
     private func setupLayout() {
@@ -69,8 +72,8 @@ class StartViewController: UIViewController {
     }
     
     @objc private func startGame() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GameViewController")
+        let vc = GameViewController()
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     
