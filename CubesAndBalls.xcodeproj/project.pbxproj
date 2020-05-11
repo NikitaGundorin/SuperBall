@@ -32,6 +32,7 @@
 		728DC88724506DFA00BC7878 /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88524506DFA00BC7878 /* Explode.scnp */; };
 		728DC88824506DFA00BC7878 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88624506DFA00BC7878 /* spark.png */; };
 		728DC8912450B7FA00BC7878 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DC8902450B7FA00BC7878 /* StartViewController.swift */; };
+		72FBE41B2469B8820081608F /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41A2469B8820081608F /* Appearance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		728DC88524506DFA00BC7878 /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
 		728DC88624506DFA00BC7878 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		728DC8902450B7FA00BC7878 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		72FBE41A2469B8820081608F /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				7214FA9F244F064900E60A42 /* Info.plist */,
 				7200430A245C15E900E8530D /* CubesAndBalls.xcdatamodeld */,
 				727A5E40245C8D020060E758 /* DefaultLevels.plist */,
+				72FBE41A2469B8820081608F /* Appearance.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				7200430C245C15E900E8530D /* CubesAndBalls.xcdatamodeld in Sources */,
 				721757422458937B0032E389 /* EndGameMenu.swift in Sources */,
 				728DC87B24503DB500BC7878 /* GameViewModel.swift in Sources */,
+				72FBE41B2469B8820081608F /* Appearance.swift in Sources */,
 				7214FAA6244F226400E60A42 /* Color.swift in Sources */,
 				727A5E3F245C82CC0060E758 /* DataProviderError.swift in Sources */,
 				7214FA92244F064700E60A42 /* AppDelegate.swift in Sources */,

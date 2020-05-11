@@ -14,23 +14,20 @@ enum Color: Int {
     case green = 1
     case blue = 2
     case yellow = 3
-    case orange = 4
-    case purple = 5
+    case purple = 4
     
     var value: UIColor {
         switch self {
         case .blue:
-            return UIColor.systemBlue
+            return Appearance.blue
         case .green:
-            return UIColor.systemGreen
-        case .orange:
-            return UIColor.systemOrange
+            return Appearance.green
         case .purple:
-            return UIColor.systemPurple
+            return Appearance.purple
         case .red:
-            return UIColor.systemRed
+            return Appearance.red
         case .yellow:
-            return UIColor.systemYellow
+            return Appearance.yellow
         }
     }
     
@@ -40,17 +37,15 @@ enum Color: Int {
     
     static func value(ofUIColor color: UIColor) -> Color? {
         switch color {
-        case .systemBlue:
+        case Appearance.blue:
             return .blue
-        case .systemGreen:
+        case Appearance.green:
             return .green
-        case .systemOrange:
-            return .orange
-        case .systemPurple:
+        case Appearance.purple:
             return .purple
-        case .systemRed:
+        case Appearance.red:
             return .red
-        case .systemYellow:
+        case Appearance.yellow:
             return .yellow
         default:
             return nil

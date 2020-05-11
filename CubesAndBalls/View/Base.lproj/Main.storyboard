@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KVw-mg-Mk8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ImV-xE-okE">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -8,83 +8,24 @@
     </dependencies>
     <scenes>
         <!--Start View Controller-->
-        <scene sceneID="RsS-IK-Faz">
+        <scene sceneID="Nte-cU-vRS">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="KVw-mg-Mk8" customClass="StartViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GtE-2h-GBR">
+                <viewController id="ImV-xE-okE" customClass="StartViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tie-7X-3Y0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCI-rc-2HT">
-                                <rect key="frame" x="72" y="114.00000000000001" width="270" height="32.666666666666671"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="dr5-Qe-063"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="iJf-oE-xWN">
-                                <rect key="frame" x="20" y="293.33333333333337" width="374" height="309.33333333333337"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Throw balls into cubes of the same color!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Hl-QE-hov">
-                                        <rect key="frame" x="5" y="0.0" width="364" height="65.333333333333329"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="cIF-Yj-PVL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
-                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwR-LZ-ANA">
-                                        <rect key="frame" x="90" y="115.33333333333337" width="194" height="194"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="Dp5-Ck-SgK"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="IoF-nL-szg"/>
-                                            <constraint firstAttribute="width" secondItem="mwR-LZ-ANA" secondAttribute="height" multiplier="1:1" id="tKN-xC-WCx"/>
-                                        </constraints>
-                                        <state key="normal" image="play">
-                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="BV1-FR-VrT" kind="show" id="AGz-ZR-JQs"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mwR-LZ-ANA" secondAttribute="trailing" constant="90" id="0Zn-kh-SYz"/>
-                                    <constraint firstItem="mwR-LZ-ANA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iJf-oE-xWN" secondAttribute="leading" constant="90" id="2hd-xq-ZZj"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="4Hl-QE-hov" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jCI-rc-2HT" secondAttribute="bottom" constant="20" id="4gy-Uy-37c"/>
-                            <constraint firstItem="jCI-rc-2HT" firstAttribute="top" secondItem="nkK-vQ-Ug9" secondAttribute="top" constant="70" id="KnV-bB-ztS"/>
-                            <constraint firstItem="iJf-oE-xWN" firstAttribute="centerY" secondItem="GtE-2h-GBR" secondAttribute="centerY" id="WgH-hA-B1b"/>
-                            <constraint firstItem="jCI-rc-2HT" firstAttribute="centerX" secondItem="GtE-2h-GBR" secondAttribute="centerX" id="aqD-eg-eot"/>
-                            <constraint firstItem="nkK-vQ-Ug9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jCI-rc-2HT" secondAttribute="trailing" constant="20" id="f0B-v3-X8g"/>
-                            <constraint firstItem="iJf-oE-xWN" firstAttribute="leading" secondItem="GtE-2h-GBR" secondAttribute="leading" constant="20" id="fdw-lM-xLL"/>
-                            <constraint firstAttribute="trailing" secondItem="iJf-oE-xWN" secondAttribute="trailing" constant="20" id="jNV-pQ-54c"/>
-                            <constraint firstItem="iJf-oE-xWN" firstAttribute="centerX" secondItem="GtE-2h-GBR" secondAttribute="centerX" id="op3-0P-AhR"/>
-                            <constraint firstItem="jCI-rc-2HT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nkK-vQ-Ug9" secondAttribute="leading" constant="20" id="qyP-de-mWA"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="nkK-vQ-Ug9"/>
+                        <viewLayoutGuide key="safeArea" id="ny5-9C-reO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="DwO-0X-uBz"/>
-                    <connections>
-                        <outlet property="levelDescriptionLabel" destination="4Hl-QE-hov" id="LcX-3c-R0E"/>
-                        <outlet property="levelLabel" destination="jCI-rc-2HT" id="5yW-Fl-VO7"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y03-WN-9j5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E3Z-ow-FO3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-652.17391304347836" y="134.59821428571428"/>
+            <point key="canvasLocation" x="-1004" y="134"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="BV1-FR-VrT" customClass="GameViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" modalPresentationStyle="fullScreen" id="BV1-FR-VrT" customClass="GameViewController" customModule="CubesAndBalls" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -210,6 +151,5 @@
     <resources>
         <image name="aim" width="1396" height="1396"/>
         <image name="pause" width="1000" height="1000"/>
-        <image name="play" width="1000" height="1000"/>
     </resources>
 </document>

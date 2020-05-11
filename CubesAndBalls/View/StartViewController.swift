@@ -7,15 +7,74 @@
 //
 
 import UIKit
+import StoreKit
 
 class StartViewController: UIViewController {
-    @IBOutlet weak var levelLabel: UILabel!
-    @IBOutlet weak var levelDescriptionLabel: UILabel!
+    private let superBallLabel: UILabel = {
+        let label = UILabel()
+        label.text = "SuperBall"
+        label.font = Appearance.fontBold50
+        label.textColor = Appearance.red
+        
+        return label
+    }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        guard let currentLevel = try? LevelsDataProvider.shared.getCurrentLevel() else { return }
-        levelLabel.text = "Level \(currentLevel.number)"
-        levelDescriptionLabel.text = currentLevel.goalDescription
+    private let playButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "play"), for: .normal)
+        button.addTarget(self, action: #selector(startGame), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private let rateButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("RATE APP", for: .normal)
+        button.titleLabel?.font = Appearance.fontBold20
+        button.setTitleColor(Appearance.red, for: .normal)
+        button.addTarget(self, action: #selector(rateApp), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLayout()
+        
+    }
+    
+    private func setupLayout() {
+        view.backgroundColor = UIColor.black
+        view.addSubview(superBallLabel)
+        view.addSubview(playButton)
+        view.addSubview(rateButton)
+        
+        superBallLabel.translatesAutoresizingMaskIntoConstraints = false
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        rateButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            superBallLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            superBallLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 95),
+            playButton.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -95),
+            playButton.widthAnchor.constraint(equalTo: playButton.heightAnchor),
+            rateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            rateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35)
+        ])
+        
+        Appearance.addDash(toLabel: superBallLabel)
+    }
+    
+    @objc private func startGame() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GameViewController")
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc private func rateApp() {
+        SKStoreReviewController.requestReview()
     }
 }
