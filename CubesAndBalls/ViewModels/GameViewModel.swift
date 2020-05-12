@@ -6,7 +6,6 @@
 //  Copyright © 2020 Nikita Gundorin. All rights reserved.
 //
 
-import Foundation
 import SceneKit
 import ARKit
 
@@ -76,13 +75,14 @@ class GameViewModel: NSObject {
     func startGame() {
         guard let vc = vc else { return }
         stopTimer()
-        score = 0
+        score = Int(currentLevel.cubesCount)
         colors = []
         seconds = Int(currentLevel.timeLimit)
         vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
         addTargetNodes()
         setBall()
         runTimer()
+        status = nil
     }
     
     private func endGame(status: GameStatus) {
@@ -196,7 +196,7 @@ extension GameViewModel: SCNPhysicsContactDelegate {
         DispatchQueue.main.async {
             contact.nodeA.removeFromParentNode()
             contact.nodeB.removeFromParentNode()
-            self.score += 1
+            self.score -= 1
             if let color = Color.value(ofUIColor: nodeAColor),
                 let index = self.colors.lastIndex(of: color) {
                 self.colors.remove(at: index)

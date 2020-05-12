@@ -21,6 +21,7 @@ extension PopupMenu {
 }
 
 protocol PopupMenuDelegate: class {
+    func startGame()
     func resumeGame()
     func restartGame()
     func quitGame()

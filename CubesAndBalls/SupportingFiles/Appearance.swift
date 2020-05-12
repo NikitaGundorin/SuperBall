@@ -18,7 +18,7 @@ class Appearance {
     static let green = UIColor(red: 33/255.0, green: 255/255.0, blue: 162/255.0, alpha: 1)
     static let purple = UIColor(red: 172/255.0, green: 121/255.0, blue: 255/255.0, alpha: 1)
     
-    static let font100 = UIFont(name: fontName, size: 100)
+    static let font100 = UIFont(name: lightFontName, size: 100)
     static let font50 = UIFont(name: fontName, size: 50)
     static let font40 = UIFont(name: fontName, size: 40)
     static let font30 = UIFont(name: fontName, size: 30)

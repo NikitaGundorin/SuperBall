@@ -50,8 +50,24 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private var compactConstraints: [NSLayoutConstraint] = []
     
     private var popup: PopupView!
-    private var pauseMenu: PopupMenu!
-    private var endGameMenu: PopupMenu!
+    private lazy var pauseMenu: PopupMenu = {
+        let pauseMenu = PauseMenu(frame: CGRect.zero)
+        pauseMenu.delegate = self
+        return pauseMenu
+    }()
+    
+    private lazy var endGameMenu: PopupMenu = {
+        let endGameMenu = EndGameMenu(frame: CGRect.zero)
+        endGameMenu.delegate = self
+        return endGameMenu
+    }()
+    
+    private lazy var startLevelMenu: PopupMenu = {
+        let startLevelMenu = StartLevelMenu(frame: CGRect.zero)
+        startLevelMenu.delegate = self
+        startLevelMenu.level = viewModel.currentLevel
+        return startLevelMenu
+    }()
     
     private let viewModel = GameViewModel()
     
@@ -63,7 +79,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         setupBallButton()
         setupStatusView()
         setupPopup()
-        viewModel.startGame()
+        showStartLevelPopup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,12 +167,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private func setupPopup() {
         popup = PopupView(frame: view.bounds)
         view.addSubview(popup)
-        
-        pauseMenu = PauseMenu(frame: CGRect.zero)
-        pauseMenu.delegate = self
-        
-        endGameMenu = EndGameMenu(frame: CGRect.zero)
-        endGameMenu.delegate = self
     }
     
     func endGame(status: GameStatus) {
@@ -177,57 +187,18 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         popup.show(withContent: pauseMenu)
     }
     
-    private func showLevelGoalDescription() {
-        let popup = UIView()
+    private func showStartLevelPopup() {
+        let startLevelMenu = self.startLevelMenu as! StartLevelMenu
+        startLevelMenu.level = viewModel.currentLevel
         
-        let numberLabel = UILabel()
-        numberLabel.text = "Level \(viewModel.currentLevel.number)"
-        numberLabel.textColor = UIColor.systemRed
-        numberLabel.font = UIFont(name: "MarkerFelt-Thin", size: 35)
-        numberLabel.textAlignment = .center
-        
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = viewModel.currentLevel.goalDescription
-        descriptionLabel.textColor = UIColor.systemRed
-        descriptionLabel.font = UIFont(name: "MarkerFelt-Thin", size: 25)
-        descriptionLabel.adjustsFontSizeToFitWidth = true
-        descriptionLabel.numberOfLines = 4
-        descriptionLabel.textAlignment = .center
-        
-        let okButton = UIButton()
-        okButton.setTitle("Go", for: .normal)
-        okButton.setTitleColor(UIColor.systemRed, for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "MarkerFelt-Thin", size: 35)
-        okButton.addTarget(self, action: #selector(startGame), for: .touchUpInside)
-        
-        popup.addSubview(numberLabel)
-        popup.addSubview(descriptionLabel)
-        popup.addSubview(okButton)
-        
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.topAnchor.constraint(equalTo: popup.topAnchor, constant: 20).isActive = true
-        numberLabel.leadingAnchor.constraint(equalTo: popup.leadingAnchor, constant: 10).isActive = true
-        numberLabel.trailingAnchor.constraint(equalTo: popup.trailingAnchor, constant: -10).isActive = true
-        
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.topAnchor.constraint(greaterThanOrEqualTo: numberLabel.bottomAnchor, constant: 20).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: popup.leadingAnchor, constant: 10).isActive = true
-        descriptionLabel.trailingAnchor.constraint(equalTo: popup.trailingAnchor, constant: -10).isActive = true
-        descriptionLabel.centerYAnchor.constraint(equalTo: popup.centerYAnchor).isActive = true
-        
-        okButton.translatesAutoresizingMaskIntoConstraints = false
-        okButton.centerXAnchor.constraint(equalTo: popup.centerXAnchor).isActive = true
-        okButton.topAnchor.constraint(greaterThanOrEqualTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
-        okButton.bottomAnchor.constraint(equalTo: popup.bottomAnchor, constant: -20).isActive = true
-        
-        if self.popup.isShown {
-            self.popup.hide(withCompletion: { self.popup.show(withContent: popup as! PopupMenu) })
+        if popup.isShown {
+            popup.hide(withCompletion: { self.popup.show(withContent: startLevelMenu) })
         } else {
-            self.popup.show(withContent: popup as! PopupMenu)
+            popup.show(withContent: startLevelMenu)
         }
     }
     
-    @objc private func startGame() {
+    func startGame() {
         viewModel.startGame()
         popup.hide()
     }
@@ -275,15 +246,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
 
 extension GameViewController: PopupMenuDelegate {
     func resumeGame() {
+        if viewModel.status == .win {
+            showStartLevelPopup()
+            return
+        }
         popup.hide()
         viewModel.runTimer()
     }
     
     func restartGame() {
-        if viewModel.status == .win {
-            showLevelGoalDescription()
-            return
-        }
         viewModel.startGame()
         popup.hide()
     }
