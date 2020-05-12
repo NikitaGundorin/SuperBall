@@ -50,15 +50,14 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private var compactConstraints: [NSLayoutConstraint] = []
     
     private var popup: PopupView!
-    private var pauseMenu: PauseMenu!
-    private var endGameMenu: EndGameMenu!
+    private var pauseMenu: PopupMenu!
+    private var endGameMenu: PopupMenu!
     
     private let viewModel = GameViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.layoutIfNeeded()
         viewModel.vc = self
         setupScene()
         setupBallButton()
@@ -102,15 +101,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
             }
             NSLayoutConstraint.activate(regularConstraints)
         }
-    }
-    
-    @objc private func ballTouched(_ sender: Any) {
-        viewModel.throwBall()
-    }
-    
-    @objc private func pauseGame() {
-        viewModel.stopTimer()
-        popup.show(withContent: pauseMenu)
     }
     
     private func setupBallButton() {
@@ -159,15 +149,14 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
     
     private func setupPopup() {
-        popup = Bundle.main.loadNibNamed("PopupView", owner: self, options: nil)?.first as? PopupView
-        popup.frame = view.frame
+        popup = PopupView(frame: view.bounds)
         view.addSubview(popup)
         
-        pauseMenu = Bundle.main.loadNibNamed("PauseMenu", owner: self, options: nil)?.first as? PauseMenu
+        pauseMenu = PauseMenu(frame: CGRect.zero)
         pauseMenu.delegate = self
         
-        endGameMenu = Bundle.main.loadNibNamed("EndGameMenu", owner: self, options: nil)?.first as? EndGameMenu
-        endGameMenu.delegete = self
+        endGameMenu = EndGameMenu(frame: CGRect.zero)
+        endGameMenu.delegate = self
     }
     
     func endGame(status: GameStatus) {
@@ -175,11 +164,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         if (status != .win) {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-        endGameMenu.messageLabel.text = status.message
-        endGameMenu.score = viewModel.score
-        let playAgainText = status == .win ? "Next level" : "Play again"
-        endGameMenu.playAgainButton.setTitle(playAgainText, for: .normal)
+        endGameMenu.updateStatus(withStatus: status)
         popup.show(withContent: endGameMenu)
+    }
+    
+    @objc private func ballTouched(_ sender: Any) {
+        viewModel.throwBall()
+    }
+    
+    @objc private func pauseGame() {
+        viewModel.stopTimer()
+        popup.show(withContent: pauseMenu)
     }
     
     private func showLevelGoalDescription() {
@@ -226,9 +221,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         okButton.bottomAnchor.constraint(equalTo: popup.bottomAnchor, constant: -20).isActive = true
         
         if self.popup.isShown {
-            self.popup.hide(withCompletion: { self.popup.show(withContent: popup) })
+            self.popup.hide(withCompletion: { self.popup.show(withContent: popup as! PopupMenu) })
         } else {
-            self.popup.show(withContent: popup)
+            self.popup.show(withContent: popup as! PopupMenu)
         }
     }
     
@@ -278,7 +273,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
 }
 
-extension GameViewController: PauseMenuDelegate, EndGameMenuDelegate {
+extension GameViewController: PopupMenuDelegate {
     func resumeGame() {
         popup.hide()
         viewModel.runTimer()

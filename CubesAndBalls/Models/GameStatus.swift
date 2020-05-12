@@ -11,16 +11,22 @@ import Foundation
 enum GameStatus {
     case win
     case wrongColor
-    case timesUp
+    case timeUp
+    case ballsOver
+    case none
     
-    var message: String {
+    var titles: (title: String, button: String) {
         switch self {
-        case .win:
-            return "You won!"
         case .wrongColor:
-            return "Ooops! Wrong color!"
-        case .timesUp:
-            return "Time's up!"
+            return ("WRONG COLOR", "EXTRA LIFE")
+        case .timeUp:
+            return ("TIME'S UP", "+30 SECS")
+        case .ballsOver:
+            return ("BALLS'RE OVER", "+10 BALLS")
+        case .win:
+            return ("YOU WON", "NEXT LEVEL")
+        case .none:
+            return ("", "")
         }
     }
 }

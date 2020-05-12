@@ -9,29 +9,69 @@
 import UIKit
 
 class PopupView: UIView {
-    @IBOutlet weak var background: UIVisualEffectView!
-    @IBOutlet weak var popup: UIView!
-    @IBOutlet weak var constraint: NSLayoutConstraint!
+    var background: UIVisualEffectView = {
+        let effect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: effect)
+        
+        return view
+    }()
     
+    var popup: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.layer.cornerRadius = 20
+
+        return view
+    }()
+    
+    var constraint: NSLayoutConstraint!
     var content: UIView?
     var isShown = false
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         alpha = 0
-        constraint.constant = 1000
-        popup.layer.cornerRadius = 20
+        setupSubviews()
     }
     
-    func show(withContent view: UIView) {
-        if isShown { return }
-        layoutIfNeeded()
-        self.isShown = true
-        self.popup.addSubview(view)
-        view.frame = popup.bounds
-        self.content = view
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func setupSubviews() {
+        background.translatesAutoresizingMaskIntoConstraints = false
+        popup.translatesAutoresizingMaskIntoConstraints = false
         
+        addSubview(background)
+        addSubview(popup)
+        
+        constraint = popup.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 1000)
+        NSLayoutConstraint.activate([
+            background.topAnchor.constraint(equalTo: topAnchor),
+            background.trailingAnchor.constraint(equalTo: trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: bottomAnchor),
+            background.leadingAnchor.constraint(equalTo: leadingAnchor),
+            popup.centerXAnchor.constraint(equalTo: centerXAnchor),
+            popup.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            popup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            popup.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            constraint
+        ])
+    }
+    
+    func show(withContent view: PopupMenu) {
+        if isShown { return }
+        isShown = true
+        popup.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: popup.topAnchor),
+            view.trailingAnchor.constraint(equalTo: popup.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: popup.bottomAnchor),
+            view.leadingAnchor.constraint(equalTo: popup.leadingAnchor)
+        ])
+        Appearance.addDash(toLabel: view.titleLabel)
+        content = view
         alpha = 1
         constraint.constant = 0
         

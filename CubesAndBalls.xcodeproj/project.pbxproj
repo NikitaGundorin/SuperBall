@@ -16,11 +16,8 @@
 		7214FAA6244F226400E60A42 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214FAA5244F226400E60A42 /* Color.swift */; };
 		721757032454617C0032E389 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721757022454617C0032E389 /* Ball.swift */; };
 		7217570524546C290032E389 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217570424546C290032E389 /* Box.swift */; };
-		72175737245878260032E389 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72175736245878260032E389 /* PopupView.xib */; };
 		72175739245878410032E389 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72175738245878410032E389 /* PopupView.swift */; };
-		7217573B245882360032E389 /* PauseMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217573A245882360032E389 /* PauseMenu.xib */; };
 		7217573D245882FB0032E389 /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217573C245882FB0032E389 /* PauseMenu.swift */; };
-		72175740245892DD0032E389 /* EndGameMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217573F245892DD0032E389 /* EndGameMenu.xib */; };
 		721757422458937B0032E389 /* EndGameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721757412458937B0032E389 /* EndGameMenu.swift */; };
 		727A5E3D245C7BCE0060E758 /* LevelsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727A5E3C245C7BCE0060E758 /* LevelsDataProvider.swift */; };
 		727A5E3F245C82CC0060E758 /* DataProviderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727A5E3E245C82CC0060E758 /* DataProviderError.swift */; };
@@ -32,6 +29,7 @@
 		728DC88824506DFA00BC7878 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88624506DFA00BC7878 /* spark.png */; };
 		728DC8912450B7FA00BC7878 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DC8902450B7FA00BC7878 /* StartViewController.swift */; };
 		72FBE41B2469B8820081608F /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41A2469B8820081608F /* Appearance.swift */; };
+		72FBE41D246ABF3B0081608F /* PopupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41C246ABF3B0081608F /* PopupMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,11 +44,8 @@
 		7214FAA5244F226400E60A42 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		721757022454617C0032E389 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		7217570424546C290032E389 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
-		72175736245878260032E389 /* PopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
 		72175738245878410032E389 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
-		7217573A245882360032E389 /* PauseMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PauseMenu.xib; sourceTree = "<group>"; };
 		7217573C245882FB0032E389 /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
-		7217573F245892DD0032E389 /* EndGameMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EndGameMenu.xib; sourceTree = "<group>"; };
 		721757412458937B0032E389 /* EndGameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameMenu.swift; sourceTree = "<group>"; };
 		727A5E3C245C7BCE0060E758 /* LevelsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsDataProvider.swift; sourceTree = "<group>"; };
 		727A5E3E245C82CC0060E758 /* DataProviderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderError.swift; sourceTree = "<group>"; };
@@ -62,6 +57,7 @@
 		728DC88624506DFA00BC7878 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		728DC8902450B7FA00BC7878 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		72FBE41A2469B8820081608F /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		72FBE41C246ABF3B0081608F /* PopupMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,12 +105,10 @@
 		7217573E24588F900032E389 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				72175736245878260032E389 /* PopupView.xib */,
 				72175738245878410032E389 /* PopupView.swift */,
-				7217573A245882360032E389 /* PauseMenu.xib */,
 				7217573C245882FB0032E389 /* PauseMenu.swift */,
-				7217573F245892DD0032E389 /* EndGameMenu.xib */,
 				721757412458937B0032E389 /* EndGameMenu.swift */,
+				72FBE41C246ABF3B0081608F /* PopupMenu.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -239,14 +233,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7214FA94244F064700E60A42 /* art.scnassets in Resources */,
-				7217573B245882360032E389 /* PauseMenu.xib in Resources */,
 				728DC88824506DFA00BC7878 /* spark.png in Resources */,
 				728DC88724506DFA00BC7878 /* Explode.scnp in Resources */,
 				7214FA9E244F064900E60A42 /* LaunchScreen.storyboard in Resources */,
-				72175737245878260032E389 /* PopupView.xib in Resources */,
 				7214FA9B244F064900E60A42 /* Assets.xcassets in Resources */,
 				727A5E41245C8D020060E758 /* DefaultLevels.plist in Resources */,
-				72175740245892DD0032E389 /* EndGameMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7217570524546C290032E389 /* Box.swift in Sources */,
+				72FBE41D246ABF3B0081608F /* PopupMenu.swift in Sources */,
 				727A5E3D245C7BCE0060E758 /* LevelsDataProvider.swift in Sources */,
 				721757032454617C0032E389 /* Ball.swift in Sources */,
 				7214FA96244F064700E60A42 /* GameViewController.swift in Sources */,

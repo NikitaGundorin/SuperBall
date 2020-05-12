@@ -127,7 +127,7 @@ class GameViewModel: NSObject {
     @objc private func updateTimer() {
         if seconds == 0 {
             stopTimer()
-            endGame(status: .timesUp)
+            endGame(status: .timeUp)
             return
         }
         
