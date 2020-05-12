@@ -58,12 +58,25 @@ class EndGameMenu: UIView, PopupMenu {
         self.status = status
         titleLabel.text = status.titles.title
         resumeButton.setTitle(status.titles.button, for: .normal)
+        
+        if status == .win {
+            restartButton.removeFromSuperview()
+            quitButton.removeFromSuperview()
+        } else if restartButton.superview == nil && quitButton.superview == nil {
+            addSubview(restartButton)
+            addSubview(quitButton)
+            NSLayoutConstraint.activate([
+                restartButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                restartButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+                quitButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                quitButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 20),
+                quitButton.bottomAnchor.constraint(equalTo: resumeButton.topAnchor, constant: -40),
+            ])
+        }
     }
     
     private func setupSubviews() {
         addSubview(titleLabel)
-        addSubview(restartButton)
-        addSubview(quitButton)
         addSubview(resumeButton)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -74,13 +87,8 @@ class EndGameMenu: UIView, PopupMenu {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            restartButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            restartButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
-            quitButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            quitButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 20),
             resumeButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resumeButton.topAnchor.constraint(equalTo: quitButton.bottomAnchor, constant: 40),
-            resumeButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25),
+            resumeButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
         ])
     }
     

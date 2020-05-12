@@ -18,7 +18,7 @@ class LevelsDataProvider {
         UserDefaults.standard.value(forKey: "currentLevel") as? Int16
     }
     
-    init() {
+    private init() {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         context = appDelegate.persistentContainer.viewContext
     }
@@ -35,8 +35,7 @@ class LevelsDataProvider {
                 let level = NSManagedObject(entity: entity, insertInto: context) as? Level,
                 let levelsDict = dictionary as? NSDictionary,
                 let ballsCount = levelsDict["ballsCount"] as? Int16,
-                let cubesCount = levelsDict["cubesCount"] as? Int16,
-                let goalDescription = levelsDict["goalDescription"] as? String,
+                let cubesCount = levelsDict["cubesCount"] as? Int16, 
                 let number = levelsDict["number"] as? Int16,
                 let timeLimit = levelsDict["timeLimit"] as? Int16
                 else {
@@ -46,7 +45,6 @@ class LevelsDataProvider {
             
             level.ballsCount = ballsCount
             level.cubesCount = cubesCount
-            level.goalDescription = goalDescription
             level.number = number
             level.timeLimit = timeLimit
         }

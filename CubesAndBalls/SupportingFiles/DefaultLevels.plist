@@ -6,11 +6,19 @@
 		<key>ballsCount</key>
 		<integer>0</integer>
 		<key>cubesCount</key>
-		<integer>5</integer>
-		<key>goalDescription</key>
-		<string>Knock out 5 cubes in 30 seconds. The color of the ball should match the color of the cube.</string>
+		<integer>2</integer>
 		<key>number</key>
 		<integer>1</integer>
+		<key>timeLimit</key>
+		<integer>30</integer>
+	</dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>0</integer>
+		<key>cubesCount</key>
+		<integer>5</integer>
+		<key>number</key>
+		<integer>2</integer>
 		<key>timeLimit</key>
 		<integer>30</integer>
 	</dict>
@@ -19,32 +27,16 @@
 		<integer>5</integer>
 		<key>cubesCount</key>
 		<integer>5</integer>
-		<key>goalDescription</key>
-		<string>Knock out 10 cubes in 30 seconds. The color of the ball should match the color of the cube.</string>
-		<key>number</key>
-		<integer>2</integer>
-		<key>timeLimit</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>ballsCount</key>
-		<integer>0</integer>
-		<key>cubesCount</key>
-		<integer>20</integer>
-		<key>goalDescription</key>
-		<string>Knock out 20 cubes in 60 seconds. The color of the ball should match the color of the cube.</string>
 		<key>number</key>
 		<integer>3</integer>
 		<key>timeLimit</key>
-		<integer>60</integer>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ballsCount</key>
 		<integer>0</integer>
 		<key>cubesCount</key>
-		<integer>25</integer>
-		<key>goalDescription</key>
-		<string>Knock out 25 cubes in 60 seconds. The color of the ball should match the color of the cube.</string>
+		<integer>15</integer>
 		<key>number</key>
 		<integer>4</integer>
 		<key>timeLimit</key>

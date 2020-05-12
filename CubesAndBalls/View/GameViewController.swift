@@ -65,16 +65,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private lazy var startLevelMenu: PopupMenu = {
         let startLevelMenu = StartLevelMenu(frame: CGRect.zero)
         startLevelMenu.delegate = self
-        startLevelMenu.level = viewModel.currentLevel
+        startLevelMenu.level = engine.currentLevel
         return startLevelMenu
     }()
     
-    private let viewModel = GameViewModel()
+    private var engine: GameEngine!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.vc = self
+        setupEngine()
+        engine.vc = self
         setupScene()
         setupBallButton()
         setupStatusView()
@@ -103,6 +104,35 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         super.traitCollectionDidChange(previousTraitCollection)
         
         layoutTrait(traitCollection: traitCollection)
+    }
+    
+    private func setupEngine() {
+        func setup(_ engine: GameEngine) {
+            engine.vc = self
+            sceneView.scene.physicsWorld.contactDelegate = engine
+            self.engine = engine
+        }
+        
+        var level: Level
+        do {
+            level = try LevelsDataProvider.shared.getCurrentLevel()
+        }
+        catch {
+            print(error.localizedDescription)
+            setup(GameEngine())
+            return
+        }
+        if level.timeLimit != 0 {
+            setup(TimeGameEngine())
+            return
+        }
+        
+        if level.ballsCount != 0 {
+            setup(BallGameEngine())
+            return
+        }
+        
+        setup(GameEngine())
     }
     
     private func layoutTrait(traitCollection: UITraitCollection) {
@@ -143,7 +173,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         view.addSubview(sceneView)
         
         sceneView.delegate = self
-        sceneView.scene.physicsWorld.contactDelegate = viewModel
+        sceneView.scene.physicsWorld.contactDelegate = engine
         
         let light = SCNLight()
         light.type = .omni
@@ -179,17 +209,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc private func ballTouched(_ sender: Any) {
-        viewModel.throwBall()
+        engine.throwBall()
     }
     
     @objc private func pauseGame() {
-        viewModel.stopTimer()
+        engine.pauseGame()
         popup.show(withContent: pauseMenu)
     }
     
     private func showStartLevelPopup() {
         let startLevelMenu = self.startLevelMenu as! StartLevelMenu
-        startLevelMenu.level = viewModel.currentLevel
+        startLevelMenu.level = engine.currentLevel
         
         if popup.isShown {
             popup.hide(withCompletion: { self.popup.show(withContent: startLevelMenu) })
@@ -199,7 +229,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func startGame() {
-        viewModel.startGame()
+        engine.startGame()
         popup.hide()
     }
     
@@ -246,16 +276,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
 
 extension GameViewController: PopupMenuDelegate {
     func resumeGame() {
-        if viewModel.status == .win {
+        if engine.status == .win {
+            setupEngine()
             showStartLevelPopup()
             return
         }
         popup.hide()
-        viewModel.runTimer()
+        engine.resumeGame()
     }
     
     func restartGame() {
-        viewModel.startGame()
+        engine.startGame()
         popup.hide()
     }
     

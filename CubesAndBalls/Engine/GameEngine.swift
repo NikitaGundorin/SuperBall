@@ -1,15 +1,15 @@
 //
-//  PhysicsContactDelegate.swift
+//  GameEngine.swift
 //  CubesAndBalls
 //
-//  Created by Никита Гундорин on 22.04.2020.
+//  Created by Никита Гундорин on 12.05.2020.
 //  Copyright © 2020 Nikita Gundorin. All rights reserved.
 //
 
 import SceneKit
 import ARKit
 
-class GameViewModel: NSObject {
+class GameEngine: NSObject {
     weak var vc: GameViewController?
     var currentLevel: Level = {
         do {
@@ -20,14 +20,14 @@ class GameViewModel: NSObject {
         }
     }()
     
-    var score = 0 {
+    var cubesCount = 0 {
         didSet {
-            vc?.cubesCountLabel.text = "\(score)"
+            vc?.cubesCountLabel.text = "\(cubesCount)"
         }
     }
     var status: GameStatus?
     private var colors: [Color] = []
-    private var timer = Timer()
+
     private var isBallThrown = false {
         didSet {
             vc?.ballButton.isEnabled = isBallThrown ? false : true
@@ -37,12 +37,6 @@ class GameViewModel: NSObject {
     private var ballColor: Color! {
         didSet {
             vc?.ballButton.backgroundColor = ballColor.value
-        }
-    }
-    
-    private var seconds: Int = 0 {
-        didSet {
-            vc?.roundLabel.text = "\(seconds)"
         }
     }
 
@@ -60,33 +54,19 @@ class GameViewModel: NSObject {
         }
     }
     
-    func runTimer() {
-        vc?.roundLabel.text = "\(seconds)"
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,
-                                     selector: (#selector(self.updateTimer)),
-                                     userInfo: nil,
-                                     repeats: true)
-    }
-    
-    func stopTimer() {
-        timer.invalidate()
-    }
-    
     func startGame() {
         guard let vc = vc else { return }
-        stopTimer()
-        score = Int(currentLevel.cubesCount)
+        cubesCount = Int(currentLevel.cubesCount)
         colors = []
-        seconds = Int(currentLevel.timeLimit)
         vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
         addTargetNodes()
         setBall()
-        runTimer()
+        prepareNewGame()
         status = nil
     }
     
-    private func endGame(status: GameStatus) {
-        stopTimer()
+    func endGame(status: GameStatus) {
+        prepareEndGame()
         self.status = status
         if status == .win {
             LevelsDataProvider.shared.levelUp()
@@ -106,6 +86,7 @@ class GameViewModel: NSObject {
             endGame(status: .win)
             return
         }
+        countBall()
         let color = getRandomColor()
         ballColor = color
         
@@ -122,16 +103,6 @@ class GameViewModel: NSObject {
             
             vc?.sceneView.scene.rootNode.addChildNode(box)
         }
-    }
-    
-    @objc private func updateTimer() {
-        if seconds == 0 {
-            stopTimer()
-            endGame(status: .timeUp)
-            return
-        }
-        
-        seconds -= 1
     }
     
     private func getRandomColor() -> Color {
@@ -167,9 +138,19 @@ class GameViewModel: NSObject {
         
         return BoxPositionRange(x: (-max, max), y: (-max, max), z: (-10, -2))
     }
+    
+    func countScore() {
+        cubesCount -= 1
+    }
+    
+    func pauseGame() {}
+    func resumeGame() {}
+    func prepareNewGame() {}
+    func prepareEndGame() {}
+    func countBall() {}
 }
 
-extension GameViewModel: SCNPhysicsContactDelegate {
+extension GameEngine: SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         guard let nodeAPhysicsBody = contact.nodeA.physicsBody,
             let nodeBPhysicsBody = contact.nodeB.physicsBody,
@@ -196,7 +177,7 @@ extension GameViewModel: SCNPhysicsContactDelegate {
         DispatchQueue.main.async {
             contact.nodeA.removeFromParentNode()
             contact.nodeB.removeFromParentNode()
-            self.score -= 1
+            self.countScore()
             if let color = Color.value(ofUIColor: nodeAColor),
                 let index = self.colors.lastIndex(of: color) {
                 self.colors.remove(at: index)
