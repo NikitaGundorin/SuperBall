@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StartLevelMenu: UIView, PopupMenu {
+class StartLevelMenu: UIView, PopupContent {
     var level: Level! {
         didSet {
             setupLabels()
@@ -37,7 +37,7 @@ class StartLevelMenu: UIView, PopupMenu {
     let ballIcon = UIImageView(image: UIImage(named: "ballIcon"))
     let ballsLabel = UILabel()
     
-    var delegate: PopupMenuDelegate?
+    var delegate: PopupContentDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

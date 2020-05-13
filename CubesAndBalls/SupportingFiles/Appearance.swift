@@ -29,6 +29,8 @@ class Appearance {
     static let fontBold20 = UIFont(name: boldFontName, size: 20)
     
     static func addDash(toLabel label: UILabel) {
+        label.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        
         label.superview?.layoutSubviews()
         
         let topShapeLayer = CAShapeLayer()
@@ -50,7 +52,7 @@ class Appearance {
         
         let bottomPath = CGMutablePath()
         bottomPath.addLines(between: [CGPoint(x: -15, y: label.bounds.height + 10),
-                                CGPoint(x: label.bounds.width + 15, y: label.bounds.height + 10)])
+                                      CGPoint(x: label.bounds.width + 15, y: label.bounds.height + 10)])
         bottomShapeLayer.path = bottomPath
         
         label.layer.addSublayer(topShapeLayer)

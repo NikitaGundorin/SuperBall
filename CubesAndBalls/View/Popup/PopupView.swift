@@ -59,9 +59,13 @@ class PopupView: UIView {
         ])
     }
     
-    func show(withContent view: PopupMenu) {
+    func show(withContent view: PopupContent, status: GameStatus? = nil, hasExtra: Bool = false) {
         if isShown { return }
         isShown = true
+        if let status = status {
+            view.updateStatus(withStatus: status, hasExtra: hasExtra)
+        }
+        
         popup.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

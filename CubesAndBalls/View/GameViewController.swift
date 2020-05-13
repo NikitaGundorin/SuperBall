@@ -50,19 +50,14 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private var compactConstraints: [NSLayoutConstraint] = []
     
     private var popup: PopupView!
-    private lazy var pauseMenu: PopupMenu = {
-        let pauseMenu = PauseMenu(frame: CGRect.zero)
-        pauseMenu.delegate = self
-        return pauseMenu
+    
+    private lazy var popupMenu: PopupContent = {
+        let popupMenu = PopupMenu(frame: CGRect.zero)
+        popupMenu.delegate = self
+        return popupMenu
     }()
     
-    private lazy var endGameMenu: PopupMenu = {
-        let endGameMenu = EndGameMenu(frame: CGRect.zero)
-        endGameMenu.delegate = self
-        return endGameMenu
-    }()
-    
-    private lazy var startLevelMenu: PopupMenu = {
+    private lazy var startLevelMenu: PopupContent = {
         let startLevelMenu = StartLevelMenu(frame: CGRect.zero)
         startLevelMenu.delegate = self
         startLevelMenu.level = engine.currentLevel
@@ -204,8 +199,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         if (status != .win) {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-        endGameMenu.updateStatus(withStatus: status, hasExtra: engine.hasExtra)
-        popup.show(withContent: endGameMenu)
+        popup.show(withContent: popupMenu, status: status, hasExtra: engine.hasExtra)
     }
     
     @objc private func ballTouched(_ sender: Any) {
@@ -214,7 +208,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     @objc private func pauseGame() {
         engine.pauseGame()
-        popup.show(withContent: pauseMenu)
+        popup.show(withContent: popupMenu, status: .pause, hasExtra: engine.hasExtra)
     }
     
     private func showStartLevelPopup() {
@@ -274,7 +268,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
 }
 
-extension GameViewController: PopupMenuDelegate {
+extension GameViewController: PopupContentDelegate {
     func resumeGame() {
         switch engine.status {
         case .ballsOver, .timeUp:
