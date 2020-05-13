@@ -28,10 +28,18 @@ class TimeGameEngine: GameEngine {
     
     override func pauseGame() {
         stopTimer()
+        status = .pause
     }
     
     override func resumeGame() {
         runTimer()
+    }
+    
+    override func addExtra() {
+        seconds += 30
+        hasExtra = true
+        vc?.ballButton.isEnabled = true
+        resumeGame()
     }
     
     func runTimer() {

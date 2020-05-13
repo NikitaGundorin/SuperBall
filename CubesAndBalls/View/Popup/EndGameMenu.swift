@@ -11,6 +11,7 @@ import UIKit
 class EndGameMenu: UIView, PopupMenu {
     weak var delegate: PopupMenuDelegate?
     var status: GameStatus!
+    var hasExtra = false
     var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "PAUSE"
@@ -45,6 +46,13 @@ class EndGameMenu: UIView, PopupMenu {
         return button
     }()
     
+    var buttonsStackView: UIStackView  = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -54,42 +62,52 @@ class EndGameMenu: UIView, PopupMenu {
         super.init(coder: coder)
     }
     
-    func updateStatus(withStatus status: GameStatus) {
+    func updateStatus(withStatus status: GameStatus, hasExtra: Bool) {
         self.status = status
+        self.hasExtra = hasExtra
         titleLabel.text = status.titles.title
         resumeButton.setTitle(status.titles.button, for: .normal)
         
         if status == .win {
-            restartButton.removeFromSuperview()
-            quitButton.removeFromSuperview()
-        } else if restartButton.superview == nil && quitButton.superview == nil {
-            addSubview(restartButton)
-            addSubview(quitButton)
-            NSLayoutConstraint.activate([
-                restartButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-                restartButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
-                quitButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-                quitButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 20),
-                quitButton.bottomAnchor.constraint(equalTo: resumeButton.topAnchor, constant: -40),
-            ])
+            addButtons(buttons: [resumeButton])
+            return
+        }
+        
+        if hasExtra {
+            addButtons(buttons: [restartButton, quitButton])
+        } else {
+            addButtons(buttons: [restartButton, quitButton, resumeButton])
         }
     }
     
     private func setupSubviews() {
         addSubview(titleLabel)
-        addSubview(resumeButton)
+        addSubview(buttonsStackView)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        restartButton.translatesAutoresizingMaskIntoConstraints = false
-        quitButton.translatesAutoresizingMaskIntoConstraints = false
-        resumeButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resumeButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resumeButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
+            buttonsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
         ])
+    }
+    
+    func addButtons(buttons: [UIButton]) {
+        removeButtons()
+        
+        for button in buttons {
+            buttonsStackView.addArrangedSubview(button)
+        }
+    }
+    
+    func removeButtons() {
+        for view in buttonsStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
     }
     
     @objc func restartGame() {

@@ -26,6 +26,7 @@ class GameEngine: NSObject {
         }
     }
     var status: GameStatus?
+    var hasExtra = false
     private var colors: [Color] = []
 
     private var isBallThrown = false {
@@ -63,6 +64,7 @@ class GameEngine: NSObject {
         setBall()
         prepareNewGame()
         status = nil
+        hasExtra = false
     }
     
     func endGame(status: GameStatus) {
@@ -142,8 +144,15 @@ class GameEngine: NSObject {
     func countScore() {
         cubesCount -= 1
     }
+    func addExtraLife() {
+        hasExtra = true
+        resumeGame()
+    }
+    func pauseGame() {
+        status = .pause
+    }
     
-    func pauseGame() {}
+    func addExtra() {}
     func resumeGame() {}
     func prepareNewGame() {}
     func prepareEndGame() {}
@@ -167,8 +176,9 @@ extension GameEngine: SCNPhysicsContactDelegate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     if (contact.nodeA.parent != nil && contact.nodeB.parent != nil) {
                         self.endGame(status: .wrongColor)
-                        contact.nodeA.removeFromParentNode()
-                        contact.nodeB.removeFromParentNode()
+                        let ball = nodeAPhysicsBody.categoryBitMask == CollisionCategory.ballCategory.rawValue ? contact.nodeA : contact.nodeB
+                        ball.removeFromParentNode()
+                        self.setBall()
                     }
                 }
                 return

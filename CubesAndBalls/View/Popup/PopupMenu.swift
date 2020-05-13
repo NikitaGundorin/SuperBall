@@ -13,11 +13,11 @@ protocol PopupMenu: UIView {
     var restartButton: UIButton { get }
     var delegate: PopupMenuDelegate? { get set }
     
-    func updateStatus(withStatus status: GameStatus)
+    func updateStatus(withStatus status: GameStatus, hasExtra: Bool)
 }
 
 extension PopupMenu {
-    func updateStatus(withStatus status: GameStatus) {}
+    func updateStatus(withStatus status: GameStatus, hasExtra: Bool) {}
 }
 
 protocol PopupMenuDelegate: class {

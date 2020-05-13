@@ -204,7 +204,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         if (status != .win) {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-        endGameMenu.updateStatus(withStatus: status)
+        endGameMenu.updateStatus(withStatus: status, hasExtra: engine.hasExtra)
         popup.show(withContent: endGameMenu)
     }
     
@@ -276,13 +276,20 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
 
 extension GameViewController: PopupMenuDelegate {
     func resumeGame() {
-        if engine.status == .win {
+        switch engine.status {
+        case .ballsOver, .timeUp:
+            engine.addExtra()
+            popup.hide()
+        case .wrongColor:
+            engine.addExtraLife()
+            popup.hide()
+        case .win:
             setupEngine()
             showStartLevelPopup()
-            return
+        default:
+            popup.hide()
+            engine.resumeGame()
         }
-        popup.hide()
-        engine.resumeGame()
     }
     
     func restartGame() {

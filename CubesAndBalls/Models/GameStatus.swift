@@ -13,6 +13,7 @@ enum GameStatus {
     case wrongColor
     case timeUp
     case ballsOver
+    case pause
     case none
     
     var titles: (title: String, button: String) {
@@ -25,6 +26,8 @@ enum GameStatus {
             return ("BALLS'RE OVER", "+10 BALLS")
         case .win:
             return ("YOU WON", "NEXT LEVEL")
+        case .pause:
+            return ("PAUSE", "RESUME")
         case .none:
             return ("", "")
         }
