@@ -52,9 +52,9 @@ class PopupView: UIView {
             background.bottomAnchor.constraint(equalTo: bottomAnchor),
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             popup.centerXAnchor.constraint(equalTo: centerXAnchor),
-            popup.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            popup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            popup.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            popup.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
+            popup.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
+            popup.widthAnchor.constraint(equalToConstant: 335),
             constraint
         ])
     }

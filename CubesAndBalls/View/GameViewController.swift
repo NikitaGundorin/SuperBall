@@ -148,6 +148,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private func setupScene() {
         view.addSubview(sceneView)
         
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            sceneView.topAnchor.constraint(equalTo: view.topAnchor),
+            sceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            sceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+        
         sceneView.delegate = self
         sceneView.scene.physicsWorld.contactDelegate = engine
         
@@ -171,8 +180,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     }
     
     private func setupPopup() {
-        popup = PopupView(frame: view.bounds)
+        popup = PopupView(frame: CGRect.zero)
         view.addSubview(popup)
+        popup.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            popup.topAnchor.constraint(equalTo: view.topAnchor),
+            popup.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            popup.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            popup.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
     }
     
     func endGame(status: GameStatus) {

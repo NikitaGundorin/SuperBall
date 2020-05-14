@@ -41,7 +41,7 @@
 /* Begin PBXFileReference section */
 		7200430B245C15E900E8530D /* CubesAndBalls.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CubesAndBalls.xcdatamodel; sourceTree = "<group>"; };
 		72116C40246B1BB80034B402 /* BallGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallGameEngine.swift; sourceTree = "<group>"; };
-		7214FA8E244F064700E60A42 /* CubesAndBalls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubesAndBalls.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7214FA8E244F064700E60A42 /* SuperBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7214FA91244F064700E60A42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7214FA93244F064700E60A42 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		7214FA95244F064700E60A42 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		7214FA8F244F064700E60A42 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7214FA8E244F064700E60A42 /* CubesAndBalls.app */,
+				7214FA8E244F064700E60A42 /* SuperBall.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 			);
 			name = CubesAndBalls;
 			productName = CubesAndBalls;
-			productReference = 7214FA8E244F064700E60A42 /* CubesAndBalls.app */;
+			productReference = 7214FA8E244F064700E60A42 /* SuperBall.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -435,12 +435,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T6696YN386;
 				INFOPLIST_FILE = CubesAndBalls/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nikitagundorin.CubesAndBalls;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SuperBall;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -453,12 +454,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T6696YN386;
 				INFOPLIST_FILE = CubesAndBalls/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nikitagundorin.CubesAndBalls;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SuperBall;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
