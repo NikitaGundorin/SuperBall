@@ -10,19 +10,27 @@ import UIKit
 
 class PopupMenu: UIView, PopupContent {
     weak var delegate: PopupContentDelegate?
-    var status: GameStatus!
-    var hasExtra = false
     var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "PAUSE"
+        label.text = ""
         label.textColor = Appearance.red
         label.font = Appearance.fontBold40
         return label
     }()
     
+    var scoreLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textColor = Appearance.red
+        label.font = Appearance.font40
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        return label
+    }()
+    
     var restartButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("PLAY AGAIN", for: .normal)
         button.setTitleColor(Appearance.red, for: .normal)
         button.titleLabel?.font = Appearance.font40
         button.addTarget(self, action: #selector(restartGame), for: .touchUpInside)
@@ -46,7 +54,7 @@ class PopupMenu: UIView, PopupContent {
         return button
     }()
     
-    var buttonsStackView: UIStackView  = {
+    var itemsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -62,51 +70,31 @@ class PopupMenu: UIView, PopupContent {
         super.init(coder: coder)
     }
     
-    func updateStatus(withStatus status: GameStatus, hasExtra: Bool) {
-        self.status = status
-        self.hasExtra = hasExtra
-        titleLabel.text = status.titles.title
-        resumeButton.setTitle(status.titles.button, for: .normal)
+    func updateItems(viewModel: PopupMenuViewModel) {
+        let items = viewModel.setTitlesForItems(title: titleLabel,
+                                                scoreLabel: scoreLabel,
+                                                restartButton: restartButton,
+                                                quitButton: quitButton,
+                                                resumeButton: resumeButton)
         
-        if status == .pause {
-            addButtons(buttons: [restartButton, quitButton, resumeButton])
-            restartButton.setTitle("RESTART", for: .normal)
-            return
-        }
-        
-        restartButton.setTitle("PLAY AGAIN", for: .normal)
-        
-        if status == .win {
-            addButtons(buttons: [resumeButton])
-            return
-        }
-        
-        if hasExtra {
-            addButtons(buttons: [restartButton, quitButton])
-        } else {
-            addButtons(buttons: [restartButton, quitButton, resumeButton])
-        }
+        itemsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        items.forEach { itemsStackView.addArrangedSubview($0) }
     }
     
     private func setupSubviews() {
         addSubview(titleLabel)
-        addSubview(buttonsStackView)
+        addSubview(itemsStackView)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        itemsStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
+            itemsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            itemsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            itemsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
         ])
-    }
-    
-    private func addButtons(buttons: [UIButton]) {
-        buttonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        buttons.forEach { buttonsStackView.addArrangedSubview($0) }
     }
     
     @objc func restartGame() {

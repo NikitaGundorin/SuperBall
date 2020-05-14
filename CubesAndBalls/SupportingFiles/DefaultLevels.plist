@@ -6,6 +6,16 @@
 		<key>ballsCount</key>
 		<integer>0</integer>
 		<key>cubesCount</key>
+		<integer>0</integer>
+		<key>number</key>
+		<integer>0</integer>
+		<key>timeLimit</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>0</integer>
+		<key>cubesCount</key>
 		<integer>2</integer>
 		<key>number</key>
 		<integer>1</integer>

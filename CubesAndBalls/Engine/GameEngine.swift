@@ -11,7 +11,7 @@ import ARKit
 
 class GameEngine: NSObject {
     weak var vc: GameViewController?
-    var currentLevel: Level = {
+    lazy var currentLevel: Level = {
         do {
             return try LevelsDataProvider.shared.getCurrentLevel()
         } catch {
@@ -27,8 +27,8 @@ class GameEngine: NSObject {
     }
     var status: GameStatus?
     var hasExtra = false
-    private var colors: [Color] = []
-
+    var colors: [Color] = []
+    
     private var isBallThrown = false {
         didSet {
             vc?.ballButton.isEnabled = isBallThrown ? false : true
@@ -40,7 +40,50 @@ class GameEngine: NSObject {
             vc?.ballButton.backgroundColor = ballColor.value
         }
     }
-
+    
+    var popupMenuViewModel: PopupMenuViewModel {
+        PopupMenuViewModel(titleLabelText: titleLabelText,
+                           scoreLabelText: scoreLabelText,
+                           quitButtonTitle: quitButtonTitle,
+                           restartButtonTitle: restartButtonTitle,
+                           resumeButtonTitle: resumeButtonTitle)
+    }
+    
+    private var titleLabelText: String? {
+        status?.titles.title
+    }
+    private var quitButtonTitle: String? {
+        if status == .win {
+            return nil
+        }
+        return "QUIT"
+    }
+    var scoreLabelText: String? { return nil }
+    private var restartButtonTitle: String? {
+        if status == .win {
+            return nil
+        }
+        if status == .pause {
+            return "RESTART"
+        }
+        return "PLAY AGAIN"
+    }
+    private var resumeButtonTitle: String? {
+        if status == .pause {
+            return "RESUME"
+        }
+        
+        if status == .win {
+            return status?.titles.button
+        }
+        
+        if hasExtra == true {
+            return nil
+        }
+        
+        return status?.titles.button
+    }
+    
     func throwBall() {
         let (direction, position) = getUserVector()
         let ball = Ball(color: ballColor, direction: direction, position: position)
@@ -61,15 +104,15 @@ class GameEngine: NSObject {
         colors = []
         vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
         addTargetNodes()
-        setBall()
         prepareNewGame()
+        ballColor = getRandomColor()
         status = nil
         hasExtra = false
     }
     
     func endGame(status: GameStatus) {
-        prepareEndGame()
         self.status = status
+        prepareEndGame()
         if status == .win {
             LevelsDataProvider.shared.levelUp()
             do {
@@ -80,12 +123,13 @@ class GameEngine: NSObject {
             }
         }
         
-        vc?.endGame(status: status)
+        vc?.endGame(status: self.status ?? status)
     }
     
     private func setBall() {
         if colors.count == 0 {
             endGame(status: .win)
+            isBallThrown = false
             return
         }
         countBall()
@@ -95,12 +139,17 @@ class GameEngine: NSObject {
         isBallThrown = false
     }
     
-    private func addTargetNodes() {
-        for _ in 1...currentLevel.cubesCount {
+    func addTargetNodes(count: Int16? = nil) {
+        let cubesCount = count ?? currentLevel.cubesCount
+        guard cubesCount > 0 else {
+            return
+        }
+        
+        for _ in 1...cubesCount {
             let color = Color.random()
             colors.append(color)
             
-            let range = getPositionRange(numberOfBoxes: currentLevel.cubesCount)
+            let range = getPositionRange(numberOfBoxes: cubesCount)
             let box = Box(color: color, positionRange: range)
             
             vc?.sceneView.scene.rootNode.addChildNode(box)
@@ -127,7 +176,7 @@ class GameEngine: NSObject {
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
     
-    private func getPositionRange(numberOfBoxes: Int16) -> BoxPositionRange {
+    func getPositionRange(numberOfBoxes: Int16) -> BoxPositionRange {
         var max = 0.08 * Float(numberOfBoxes) + 1.6
         switch max {
         case ...2:
@@ -144,10 +193,12 @@ class GameEngine: NSObject {
     func countScore() {
         cubesCount -= 1
     }
+    
     func addExtraLife() {
         hasExtra = true
         resumeGame()
     }
+    
     func pauseGame() {
         status = .pause
     }

@@ -11,6 +11,14 @@ import SceneKit
 import ARKit
 
 class GameViewController: UIViewController, ARSCNViewDelegate {
+    var engine: GameEngine!
+    var levelViewModel: LevelViewModel! {
+        didSet {
+            engine = levelViewModel.engine
+            engine.vc = self
+            sceneView.scene.physicsWorld.contactDelegate = engine
+        }
+    }
     var sceneView: ARSCNView = ARSCNView(frame: UIScreen.main.bounds)
     var ballButton: UIButton = {
         let button = UIButton(type: .system)
@@ -28,6 +36,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         label.textColor = Appearance.red
         label.font = Appearance.font30
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.baselineAdjustment = .alignCenters
         return label
     }()
     
@@ -36,6 +47,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         label.textColor = Appearance.red
         label.font = Appearance.font30
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.baselineAdjustment = .alignCenters
         return label
     }()
     
@@ -60,17 +74,13 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     private lazy var startLevelMenu: PopupContent = {
         let startLevelMenu = StartLevelMenu(frame: CGRect.zero)
         startLevelMenu.delegate = self
-        startLevelMenu.level = engine.currentLevel
+        startLevelMenu.levelViewModel = levelViewModel
         return startLevelMenu
     }()
     
-    private var engine: GameEngine!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupEngine()
-        engine.vc = self
+
         setupScene()
         setupBallButton()
         setupStatusView()
@@ -99,35 +109,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         super.traitCollectionDidChange(previousTraitCollection)
         
         layoutTrait(traitCollection: traitCollection)
-    }
-    
-    private func setupEngine() {
-        func setup(_ engine: GameEngine) {
-            engine.vc = self
-            sceneView.scene.physicsWorld.contactDelegate = engine
-            self.engine = engine
-        }
-        
-        var level: Level
-        do {
-            level = try LevelsDataProvider.shared.getCurrentLevel()
-        }
-        catch {
-            print(error.localizedDescription)
-            setup(GameEngine())
-            return
-        }
-        if level.timeLimit != 0 {
-            setup(TimeGameEngine())
-            return
-        }
-        
-        if level.ballsCount != 0 {
-            setup(BallGameEngine())
-            return
-        }
-        
-        setup(GameEngine())
     }
     
     private func layoutTrait(traitCollection: UITraitCollection) {
@@ -199,7 +180,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         if (status != .win) {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-        popup.show(withContent: popupMenu, status: status, hasExtra: engine.hasExtra)
+        popupMenu.updateItems(viewModel: engine.popupMenuViewModel)
+        popup.show(withContent: popupMenu)
     }
     
     @objc private func ballTouched(_ sender: Any) {
@@ -208,12 +190,13 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     @objc private func pauseGame() {
         engine.pauseGame()
-        popup.show(withContent: popupMenu, status: .pause, hasExtra: engine.hasExtra)
+        popupMenu.updateItems(viewModel: engine.popupMenuViewModel)
+        popup.show(withContent: popupMenu)
     }
     
     private func showStartLevelPopup() {
         let startLevelMenu = self.startLevelMenu as! StartLevelMenu
-        startLevelMenu.level = engine.currentLevel
+        startLevelMenu.levelViewModel = levelViewModel
         
         if popup.isShown {
             popup.hide(withCompletion: { self.popup.show(withContent: startLevelMenu) })
@@ -250,8 +233,20 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         statusView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         topSafeAreaBG.translatesAutoresizingMaskIntoConstraints = false
+        roundLabel.translatesAutoresizingMaskIntoConstraints = false
+        cubesCountLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            roundLabel.topAnchor.constraint(equalTo: roundView.topAnchor),
+            roundLabel.trailingAnchor.constraint(equalTo: roundView.trailingAnchor, constant: -5),
+            roundLabel.bottomAnchor.constraint(equalTo: roundView.bottomAnchor),
+            roundLabel.leadingAnchor.constraint(equalTo: roundView.leadingAnchor, constant: 5),
+            roundLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 40),
+            cubesCountLabel.topAnchor.constraint(equalTo: cubeView.topAnchor),
+            cubesCountLabel.trailingAnchor.constraint(equalTo: cubeView.trailingAnchor, constant: -5),
+            cubesCountLabel.bottomAnchor.constraint(equalTo: cubeView.bottomAnchor),
+            cubesCountLabel.leadingAnchor.constraint(equalTo: cubeView.leadingAnchor, constant: 5),
+            cubesCountLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 40),
             topSafeAreaBG.topAnchor.constraint(equalTo: view.topAnchor),
             topSafeAreaBG.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topSafeAreaBG.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -274,11 +269,11 @@ extension GameViewController: PopupContentDelegate {
         case .ballsOver, .timeUp:
             engine.addExtra()
             popup.hide()
-        case .wrongColor:
+        case .wrongColor, .newRecord:
             engine.addExtraLife()
             popup.hide()
         case .win:
-            setupEngine()
+            levelViewModel = LevelViewModel(level: try! LevelsDataProvider.shared.getCurrentLevel())
             showStartLevelPopup()
         default:
             popup.hide()

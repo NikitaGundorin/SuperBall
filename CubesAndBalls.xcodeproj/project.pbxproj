@@ -19,6 +19,7 @@
 		7217570524546C290032E389 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217570424546C290032E389 /* Box.swift */; };
 		72175739245878410032E389 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72175738245878410032E389 /* PopupView.swift */; };
 		721757422458937B0032E389 /* PopupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721757412458937B0032E389 /* PopupMenu.swift */; };
+		721C6B88246C776A00263903 /* LevelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C6B87246C776A00263903 /* LevelType.swift */; };
 		727A5E3D245C7BCE0060E758 /* LevelsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727A5E3C245C7BCE0060E758 /* LevelsDataProvider.swift */; };
 		727A5E3F245C82CC0060E758 /* DataProviderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727A5E3E245C82CC0060E758 /* DataProviderError.swift */; };
 		727A5E41245C8D020060E758 /* DefaultLevels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 727A5E40245C8D020060E758 /* DefaultLevels.plist */; };
@@ -27,6 +28,9 @@
 		728DC88724506DFA00BC7878 /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88524506DFA00BC7878 /* Explode.scnp */; };
 		728DC88824506DFA00BC7878 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DC88624506DFA00BC7878 /* spark.png */; };
 		728DC8912450B7FA00BC7878 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DC8902450B7FA00BC7878 /* StartViewController.swift */; };
+		72BF9DC3246C2950001822E4 /* InfinityGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF9DC2246C2950001822E4 /* InfinityGameEngine.swift */; };
+		72BF9DC5246C5C92001822E4 /* LevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF9DC4246C5C92001822E4 /* LevelViewModel.swift */; };
+		72BF9DC7246C65E6001822E4 /* PopupMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF9DC6246C65E6001822E4 /* PopupMenuViewModel.swift */; };
 		72C19586246ACF8700C71541 /* StartLevelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C19585246ACF8700C71541 /* StartLevelMenu.swift */; };
 		72C19588246B0ED900C71541 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C19587246B0ED900C71541 /* GameEngine.swift */; };
 		72C1958B246B145300C71541 /* TimeGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C1958A246B145300C71541 /* TimeGameEngine.swift */; };
@@ -49,6 +53,7 @@
 		7217570424546C290032E389 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		72175738245878410032E389 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		721757412458937B0032E389 /* PopupMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMenu.swift; sourceTree = "<group>"; };
+		721C6B87246C776A00263903 /* LevelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelType.swift; sourceTree = "<group>"; };
 		727A5E3C245C7BCE0060E758 /* LevelsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsDataProvider.swift; sourceTree = "<group>"; };
 		727A5E3E245C82CC0060E758 /* DataProviderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderError.swift; sourceTree = "<group>"; };
 		727A5E40245C8D020060E758 /* DefaultLevels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultLevels.plist; sourceTree = "<group>"; };
@@ -57,6 +62,9 @@
 		728DC88524506DFA00BC7878 /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
 		728DC88624506DFA00BC7878 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		728DC8902450B7FA00BC7878 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		72BF9DC2246C2950001822E4 /* InfinityGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityGameEngine.swift; sourceTree = "<group>"; };
+		72BF9DC4246C5C92001822E4 /* LevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewModel.swift; sourceTree = "<group>"; };
+		72BF9DC6246C65E6001822E4 /* PopupMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMenuViewModel.swift; sourceTree = "<group>"; };
 		72C19585246ACF8700C71541 /* StartLevelMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartLevelMenu.swift; sourceTree = "<group>"; };
 		72C19587246B0ED900C71541 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		72C1958A246B145300C71541 /* TimeGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGameEngine.swift; sourceTree = "<group>"; };
@@ -97,6 +105,7 @@
 				72C19589246B133800C71541 /* Engine */,
 				727A5E3B245C7BC00060E758 /* DataProviders */,
 				728DC88C2450ADAF00BC7878 /* View */,
+				721C6B86246C76BA00263903 /* ViewModels */,
 				728DC88B2450AD7200BC7878 /* SupportingFiles */,
 				728DC8892450AD5000BC7878 /* Models */,
 				728DC88424506DD900BC7878 /* Particles */,
@@ -115,6 +124,15 @@
 				72C19585246ACF8700C71541 /* StartLevelMenu.swift */,
 			);
 			path = Popup;
+			sourceTree = "<group>";
+		};
+		721C6B86246C76BA00263903 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				72BF9DC4246C5C92001822E4 /* LevelViewModel.swift */,
+				72BF9DC6246C65E6001822E4 /* PopupMenuViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		727A5E3B245C7BC00060E758 /* DataProviders */ = {
@@ -143,6 +161,7 @@
 				721757022454617C0032E389 /* Ball.swift */,
 				7217570424546C290032E389 /* Box.swift */,
 				7281E1D2245DAF9E004A5167 /* GameStatus.swift */,
+				721C6B87246C776A00263903 /* LevelType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -176,6 +195,7 @@
 				72C19587246B0ED900C71541 /* GameEngine.swift */,
 				72C1958A246B145300C71541 /* TimeGameEngine.swift */,
 				72116C40246B1BB80034B402 /* BallGameEngine.swift */,
+				72BF9DC2246C2950001822E4 /* InfinityGameEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -259,18 +279,22 @@
 				727A5E3D245C7BCE0060E758 /* LevelsDataProvider.swift in Sources */,
 				721757032454617C0032E389 /* Ball.swift in Sources */,
 				7214FA96244F064700E60A42 /* GameViewController.swift in Sources */,
+				72BF9DC3246C2950001822E4 /* InfinityGameEngine.swift in Sources */,
+				721C6B88246C776A00263903 /* LevelType.swift in Sources */,
 				72C1958B246B145300C71541 /* TimeGameEngine.swift in Sources */,
 				72C19586246ACF8700C71541 /* StartLevelMenu.swift in Sources */,
 				72175739245878410032E389 /* PopupView.swift in Sources */,
 				728DC87D24503E4700BC7878 /* CollisionCategory.swift in Sources */,
 				7281E1D3245DAF9E004A5167 /* GameStatus.swift in Sources */,
 				72C19588246B0ED900C71541 /* GameEngine.swift in Sources */,
+				72BF9DC7246C65E6001822E4 /* PopupMenuViewModel.swift in Sources */,
 				7200430C245C15E900E8530D /* CubesAndBalls.xcdatamodeld in Sources */,
 				721757422458937B0032E389 /* PopupMenu.swift in Sources */,
 				72FBE41B2469B8820081608F /* Appearance.swift in Sources */,
 				7214FAA6244F226400E60A42 /* Color.swift in Sources */,
 				727A5E3F245C82CC0060E758 /* DataProviderError.swift in Sources */,
 				7214FA92244F064700E60A42 /* AppDelegate.swift in Sources */,
+				72BF9DC5246C5C92001822E4 /* LevelViewModel.swift in Sources */,
 				72116C41246B1BB80034B402 /* BallGameEngine.swift in Sources */,
 				728DC8912450B7FA00BC7878 /* StartViewController.swift in Sources */,
 			);

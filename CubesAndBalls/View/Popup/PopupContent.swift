@@ -11,11 +11,11 @@ import UIKit
 protocol PopupContent: UIView {
     var titleLabel: UILabel { get }
     
-    func updateStatus(withStatus status: GameStatus, hasExtra: Bool)
+    func updateItems(viewModel: PopupMenuViewModel)
 }
 
 extension PopupContent {
-    func updateStatus(withStatus status: GameStatus, hasExtra: Bool) {}
+    func updateItems(viewModel: PopupMenuViewModel) {}
 }
 
 protocol PopupContentDelegate: class {

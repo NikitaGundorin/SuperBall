@@ -9,7 +9,7 @@
 import UIKit
 
 class StartLevelMenu: UIView, PopupContent {
-    var level: Level! {
+    var levelViewModel: LevelViewModel! {
         didSet {
             setupLabels()
         }
@@ -18,6 +18,7 @@ class StartLevelMenu: UIView, PopupContent {
         let label = UILabel()
         label.textColor = Appearance.red
         label.font = Appearance.fontBold50
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -76,6 +77,8 @@ class StartLevelMenu: UIView, PopupContent {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
             mainStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 35),
             restartButton.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -85,7 +88,7 @@ class StartLevelMenu: UIView, PopupContent {
     }
     
     private func setupLabels() {
-        titleLabel.text = "LEVEL \(level.number)"
+        titleLabel.text = levelViewModel.name
         
         for label in [timeLabel, cubesLabel, ballsLabel] {
             label.textColor = Appearance.red
@@ -93,22 +96,22 @@ class StartLevelMenu: UIView, PopupContent {
             label.textAlignment = .center
         }
         
-        if level.timeLimit == 0 {
+        if levelViewModel.timeLimit == 0 {
             setInfinity(forLabel: timeLabel)
         } else {
-            timeLabel.text = "\(level.timeLimit)"
+            timeLabel.text = "\(levelViewModel.timeLimit)"
         }
         
-        if level.cubesCount == 0 {
+        if levelViewModel.cubesCount == 0 {
             setInfinity(forLabel: cubesLabel)
         } else {
-            cubesLabel.text = "\(level.cubesCount)"
+            cubesLabel.text = "\(levelViewModel.cubesCount)"
         }
         
-        if level.ballsCount == 0 {
+        if levelViewModel.ballsCount == 0 {
             setInfinity(forLabel: ballsLabel)
         } else {
-            ballsLabel.text = "\(level.ballsCount)"
+            ballsLabel.text = "\(levelViewModel.ballsCount)"
         }
     }
     

@@ -40,8 +40,8 @@ class Appearance {
         topShapeLayer.lineCap = CAShapeLayerLineCap.round
         
         let path = CGMutablePath()
-        path.addLines(between: [CGPoint(x: -15, y: -10),
-                                CGPoint(x: label.bounds.width + 15, y: -10)])
+        path.addLines(between: [CGPoint(x: 0, y: -10),
+                                CGPoint(x: label.bounds.width, y: -10)])
         topShapeLayer.path = path
         
         let bottomShapeLayer = CAShapeLayer()
@@ -51,8 +51,8 @@ class Appearance {
         bottomShapeLayer.lineCap = CAShapeLayerLineCap.round
         
         let bottomPath = CGMutablePath()
-        bottomPath.addLines(between: [CGPoint(x: -15, y: label.bounds.height + 10),
-                                      CGPoint(x: label.bounds.width + 15, y: label.bounds.height + 10)])
+        bottomPath.addLines(between: [CGPoint(x: 0, y: label.bounds.height + 10),
+                                      CGPoint(x: label.bounds.width, y: label.bounds.height + 10)])
         bottomShapeLayer.path = bottomPath
         
         label.layer.addSublayer(topShapeLayer)
