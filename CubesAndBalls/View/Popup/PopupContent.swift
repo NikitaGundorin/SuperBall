@@ -10,12 +10,6 @@ import UIKit
 
 protocol PopupContent: UIView {
     var titleLabel: UILabel { get }
-    
-    func updateItems(viewModel: PopupMenuViewModel)
-}
-
-extension PopupContent {
-    func updateItems(viewModel: PopupMenuViewModel) {}
 }
 
 protocol PopupContentDelegate: class {

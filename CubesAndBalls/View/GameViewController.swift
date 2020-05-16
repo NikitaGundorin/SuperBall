@@ -65,12 +65,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     private var popup: PopupView!
     
-    private lazy var popupMenu: PopupContent = {
-        let popupMenu = PopupMenu(frame: CGRect.zero)
-        popupMenu.delegate = self
-        return popupMenu
-    }()
-    
     private lazy var startLevelMenu: PopupContent = {
         let startLevelMenu = StartLevelMenu(frame: CGRect.zero)
         startLevelMenu.delegate = self
@@ -196,7 +190,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
         if (status != .win) {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-        popupMenu.updateItems(viewModel: engine.popupMenuViewModel)
+        let popupMenu = PopupMenu(viewModel: engine.popupMenuViewModel, delegate: self)
         popup.show(withContent: popupMenu)
     }
     
@@ -206,7 +200,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
     
     @objc private func pauseGame() {
         engine.pauseGame()
-        popupMenu.updateItems(viewModel: engine.popupMenuViewModel)
+        let popupMenu = PopupMenu(viewModel: engine.popupMenuViewModel, delegate: self)
         popup.show(withContent: popupMenu)
     }
     

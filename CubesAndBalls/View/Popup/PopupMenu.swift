@@ -10,6 +10,7 @@ import UIKit
 
 class PopupMenu: UIView, PopupContent {
     weak var delegate: PopupContentDelegate?
+    var viewModel: PopupMenuViewModel?
     var titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -61,24 +62,11 @@ class PopupMenu: UIView, PopupContent {
         return stackView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(viewModel: PopupMenuViewModel, delegate: PopupContentDelegate) {
+        self.init(frame: .zero)
+        self.delegate = delegate
+        self.viewModel = viewModel
         setupSubviews()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    func updateItems(viewModel: PopupMenuViewModel) {
-        let items = viewModel.setTitlesForItems(title: titleLabel,
-                                                scoreLabel: scoreLabel,
-                                                restartButton: restartButton,
-                                                quitButton: quitButton,
-                                                resumeButton: resumeButton)
-        
-        itemsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        items.forEach { itemsStackView.addArrangedSubview($0) }
     }
     
     private func setupSubviews() {
@@ -95,6 +83,14 @@ class PopupMenu: UIView, PopupContent {
             itemsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             itemsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
         ])
+        
+        let items = viewModel?.setTitlesForItems(title: titleLabel,
+                                                scoreLabel: scoreLabel,
+                                                restartButton: restartButton,
+                                                quitButton: quitButton,
+                                                resumeButton: resumeButton)
+        
+        items?.forEach { itemsStackView.addArrangedSubview($0) }
     }
     
     @objc func restartGame() {
