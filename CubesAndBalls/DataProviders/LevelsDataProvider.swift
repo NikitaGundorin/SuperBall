@@ -24,11 +24,14 @@ class LevelsDataProvider {
     }
     
     func setLevelsFromFile() throws {
-        guard let levelsCount = try? getAllLevels().count else { throw DataProviderError.coreDataError }
-        guard levelsCount == 0 else { return }
+        guard let levels = try? getAllLevels() else { throw DataProviderError.coreDataError }
         
         guard let path = Bundle.main.path(forResource: "DefaultLevels", ofType: "plist"),
             let dataArray = NSArray(contentsOfFile: path) else { return }
+        
+        guard dataArray.count != levels.count else { return }
+        
+        levels.forEach{ context.delete($0) }
         
         for dictionary in dataArray {
             guard let entity = NSEntityDescription.entity(forEntityName: "Level", in: context),
@@ -48,6 +51,12 @@ class LevelsDataProvider {
             level.number = number
             level.timeLimit = timeLimit
         }
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func setDefaultCurrentLevel() {
@@ -60,8 +69,7 @@ class LevelsDataProvider {
         do {
             let items = try context.fetch(fetchRequest)
             return items
-        }
-        catch {
+        } catch {
             print("CoreData failed: \(error)")
             throw DataProviderError.coreDataError
         }
@@ -73,8 +81,7 @@ class LevelsDataProvider {
         fetchRequest.predicate = NSPredicate(format: "number == \(number)")
         
         do {
-            let result = try context.fetch(fetchRequest).first
-            if let result = result {
+            if let result = try context.fetch(fetchRequest).first {
                 return result
             }
         } catch {

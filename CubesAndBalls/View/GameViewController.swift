@@ -6,11 +6,10 @@
 //  Copyright © 2020 Nikita Gundorin. All rights reserved.
 //
 
-import UIKit
 import SceneKit
 import ARKit
 
-class GameViewController: UIViewController, ARSCNViewDelegate {
+class GameViewController: UIViewController {
     var engine: GameEngine!
     var levelViewModel: LevelViewModel! {
         didSet {
@@ -151,7 +150,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate {
             sceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         
-        sceneView.delegate = self
         sceneView.scene.physicsWorld.contactDelegate = engine
         
         let light = SCNLight()

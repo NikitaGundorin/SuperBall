@@ -27,8 +27,8 @@ class Ball: SCNNode {
         self.physicsBody?.collisionBitMask = CollisionCategory.boxCategory.rawValue
         
         self.position = position
-        
-        let nodeDirection = SCNVector3(direction.x * 15, direction.y * 15, direction.z * 15)
+        let power: Float = 20
+        let nodeDirection = SCNVector3(direction.x * power, direction.y * power, direction.z * power)
         self.physicsBody?.applyForce(nodeDirection, asImpulse: true)
     }
         

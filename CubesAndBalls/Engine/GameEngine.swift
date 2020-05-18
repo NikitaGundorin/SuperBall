@@ -177,17 +177,17 @@ class GameEngine: NSObject {
     }
     
     func getPositionRange(numberOfBoxes: Int16) -> BoxPositionRange {
-        var max = 0.08 * Float(numberOfBoxes) + 1.6
+        var max = 0.04 * Float(numberOfBoxes) + 0.8
         switch max {
-        case ...2:
-            max = 2
-        case 10...:
-            max = 10
+        case ...1:
+            max = 1
+        case 5...:
+            max = 5
         default:
             break
         }
         
-        return BoxPositionRange(x: (-max, max), y: (-max, max), z: (-10, -2))
+        return BoxPositionRange(x: (-max, max), y: (-max, max), z: (-5, -1))
     }
     
     func countScore() {
@@ -224,7 +224,7 @@ extension GameEngine: SCNPhysicsContactDelegate {
             let nodeBColor = contact.nodeB.geometry?.firstMaterial?.diffuse.contents as? UIColor,
             nodeAColor == nodeBColor
             else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
                     if (contact.nodeA.parent != nil && contact.nodeB.parent != nil) {
                         self.endGame(status: .wrongColor)
                         let ball = nodeAPhysicsBody.categoryBitMask == CollisionCategory.ballCategory.rawValue ? contact.nodeA : contact.nodeB
@@ -247,8 +247,10 @@ extension GameEngine: SCNPhysicsContactDelegate {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
         
-        let explosion = SCNParticleSystem(named: "Explode", inDirectory: nil)
-        explosion?.particleColor = nodeAColor
-        contact.nodeB.addParticleSystem(explosion!)
+        if let explosion = SCNParticleSystem(named: "Explode", inDirectory: nil) {
+            let box = nodeAPhysicsBody.categoryBitMask == CollisionCategory.boxCategory.rawValue ? contact.nodeA : contact.nodeB
+            explosion.particleColor = nodeAColor
+            box.addParticleSystem(explosion)
+        }
     }
 }

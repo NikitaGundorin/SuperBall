@@ -12,22 +12,24 @@ import ARKit
 class Box: SCNNode {
     init(color: Color, positionRange: BoxPositionRange) {
         super.init()
-        let size = CGFloat(0.5)
+        let size = CGFloat(0.3)
         let box = SCNBox(width: size, height: size, length: size, chamferRadius: 0)
         box.firstMaterial?.diffuse.contents = color.value
         self.geometry = box
         self.name = "box"
         
-        self.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        self.physicsBody?.isAffectedByGravity = false
+        self.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         
         self.position = SCNVector3(randomFloat(positionRange.x),
                                    randomFloat(positionRange.y),
                                    randomFloat(positionRange.z))
         
-        let action: SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 1.0)
-        let forever = SCNAction.repeatForever(action)
-        self.runAction(forever)
+        let spin = CABasicAnimation(keyPath: "rotation")
+        spin.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
+        spin.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: Float(2 * Double.pi)))
+        spin.duration = 3
+        spin.repeatCount = .infinity
+        addAnimation(spin, forKey: "spin around")
         
         self.physicsBody?.categoryBitMask = CollisionCategory.boxCategory.rawValue
         self.physicsBody?.contactTestBitMask = CollisionCategory.ballCategory.rawValue
@@ -39,7 +41,7 @@ class Box: SCNNode {
     
     private func randomFloat(_ range: (min: Float, max: Float)) -> Float {
         var result: Float = 0
-        while((-1...1).contains(result)) { //cube is not too close to the camera
+        while((-0.3...0.3).contains(result)) { //cube is not too close to the camera
             result = Float.random(in: 0...1.0) * (range.max - range.min) + range.min
         }
         return result
