@@ -22,13 +22,14 @@ class Appearance {
     static let font50 = UIFont(name: fontName, size: 50)
     static let font40 = UIFont(name: fontName, size: 40)
     static let font30 = UIFont(name: fontName, size: 30)
-    static let font25 = UIFont(name: fontName, size: 30)
+    static let font25 = UIFont(name: fontName, size: 25)
     static let fontBold50 = UIFont(name: boldFontName, size: 50)
     static let fontBold40 = UIFont(name: boldFontName, size: 40)
+    static let fontBold30 = UIFont(name: boldFontName, size: 30)
     static let fontBold25 = UIFont(name: boldFontName, size: 25)
     static let fontBold20 = UIFont(name: boldFontName, size: 20)
     
-    static func addDash(toLabel label: UILabel) {
+    static func addDash(toLabel label: UILabel, animated: Bool = false, duration: CFTimeInterval = 1) {
         label.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         
         label.superview?.layoutSubviews()
@@ -57,5 +58,39 @@ class Appearance {
         
         label.layer.addSublayer(topShapeLayer)
         label.layer.addSublayer(bottomShapeLayer)
+        if animated {
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            animation.fromValue = 0
+            animation.duration = duration
+            topShapeLayer.add(animation, forKey: "MyAnimation")
+            bottomShapeLayer.add(animation, forKey: "MyAnimation")
+        }
+    }
+    
+    static func addDashedBorder(to view: UIView, oldBorder: CAShapeLayer? = nil) -> CAShapeLayer {
+        view.superview?.layoutSubviews()
+        oldBorder?.removeFromSuperlayer()
+        
+        let verticalOffset: CGFloat = 15
+        let horizontOffset: CGFloat = 15
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.strokeColor = blue.cgColor
+        shapeLayer.lineWidth = 3
+        shapeLayer.lineDashPattern = [3, 10]
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.fillColor = nil
+        
+        let rect = CGRect(x: -horizontOffset,
+                          y: -verticalOffset,
+                          width: view.bounds.width + horizontOffset * 2,
+                          height: view.bounds.height + verticalOffset * 2)
+        
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 20)
+        
+        shapeLayer.path = path.cgPath
+        view.layer.addSublayer(shapeLayer)
+        
+        return shapeLayer
     }
 }

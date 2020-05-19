@@ -6,7 +6,7 @@
 //  Copyright © 2020 Nikita Gundorin. All rights reserved.
 //
 
-import UIKit
+import ARKit
 import StoreKit
 
 class StartViewController: UIViewController {
@@ -48,6 +48,17 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !UserDefaults.standard.bool(forKey: "walkthroughWasShown")
+            || AVCaptureDevice.authorizationStatus(for: .video) != .authorized {
+            let vc = WalkthroughViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: false)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

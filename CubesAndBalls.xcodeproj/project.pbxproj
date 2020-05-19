@@ -34,6 +34,8 @@
 		72C19586246ACF8700C71541 /* StartLevelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C19585246ACF8700C71541 /* StartLevelMenu.swift */; };
 		72C19588246B0ED900C71541 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C19587246B0ED900C71541 /* GameEngine.swift */; };
 		72C1958B246B145300C71541 /* TimeGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C1958A246B145300C71541 /* TimeGameEngine.swift */; };
+		72DBFCDD2472A0B400A2F4F9 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72DBFCDC2472A0B400A2F4F9 /* GameKit.framework */; };
+		72DBFCDF2472C8C100A2F4F9 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBFCDE2472C8C100A2F4F9 /* WalkthroughViewController.swift */; };
 		72FBE41B2469B8820081608F /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41A2469B8820081608F /* Appearance.swift */; };
 		72FBE41D246ABF3B0081608F /* PopupContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41C246ABF3B0081608F /* PopupContent.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		72C19585246ACF8700C71541 /* StartLevelMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartLevelMenu.swift; sourceTree = "<group>"; };
 		72C19587246B0ED900C71541 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		72C1958A246B145300C71541 /* TimeGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGameEngine.swift; sourceTree = "<group>"; };
+		72DBFCDC2472A0B400A2F4F9 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		72DBFCDE2472C8C100A2F4F9 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		72FBE41A2469B8820081608F /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		72FBE41C246ABF3B0081608F /* PopupContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72DBFCDD2472A0B400A2F4F9 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +93,7 @@
 			children = (
 				7214FA90244F064700E60A42 /* CubesAndBalls */,
 				7214FA8F244F064700E60A42 /* Products */,
+				72DBFCDB2472A0B400A2F4F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,6 +190,7 @@
 			children = (
 				7214FA95244F064700E60A42 /* GameViewController.swift */,
 				728DC8902450B7FA00BC7878 /* StartViewController.swift */,
+				72DBFCDE2472C8C100A2F4F9 /* WalkthroughViewController.swift */,
 				7217573E24588F900032E389 /* Popup */,
 			);
 			path = View;
@@ -198,6 +205,14 @@
 				72BF9DC2246C2950001822E4 /* InfinityGameEngine.swift */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		72DBFCDB2472A0B400A2F4F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				72DBFCDC2472A0B400A2F4F9 /* GameKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +298,7 @@
 				721C6B88246C776A00263903 /* LevelType.swift in Sources */,
 				72C1958B246B145300C71541 /* TimeGameEngine.swift in Sources */,
 				72C19586246ACF8700C71541 /* StartLevelMenu.swift in Sources */,
+				72DBFCDF2472C8C100A2F4F9 /* WalkthroughViewController.swift in Sources */,
 				72175739245878410032E389 /* PopupView.swift in Sources */,
 				728DC87D24503E4700BC7878 /* CollisionCategory.swift in Sources */,
 				7281E1D3245DAF9E004A5167 /* GameStatus.swift in Sources */,
@@ -364,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -418,7 +434,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -435,12 +451,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T6696YN386;
 				INFOPLIST_FILE = CubesAndBalls/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nikitagundorin.CubesAndBalls;
+				PRODUCT_BUNDLE_IDENTIFIER = nikitagundorin.SuperBall;
 				PRODUCT_NAME = SuperBall;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,12 +470,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T6696YN386;
 				INFOPLIST_FILE = CubesAndBalls/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nikitagundorin.CubesAndBalls;
+				PRODUCT_BUNDLE_IDENTIFIER = nikitagundorin.SuperBall;
 				PRODUCT_NAME = SuperBall;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
