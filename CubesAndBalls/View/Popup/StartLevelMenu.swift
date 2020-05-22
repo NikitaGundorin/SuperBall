@@ -38,7 +38,7 @@ class StartLevelMenu: UIView, PopupContent {
     let ballIcon = UIImageView(image: UIImage(named: "ballIcon"))
     let ballsLabel = UILabel()
     
-    var delegate: PopupContentDelegate?
+    weak var delegate: PopupContentDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

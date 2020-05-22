@@ -13,21 +13,13 @@ class LevelViewModel {
     let ballsCount: Int
     let cubesCount: Int
     let timeLimit: Int
-    lazy var levelType: LevelType = {
-        if ballsCount == 0 && cubesCount == 0 && timeLimit == 0 {
-            return .infinityMode
-        }
-        if ballsCount == 0 {
-            return .timeLimit
-        }
-        return .ballsLimit
-    }()
+    let levelType: LevelType
     
     lazy var name: String = {
         switch levelType {
         case .infinityMode:
             return "INFINITY MODE"
-        case .timeLimit, .ballsLimit:
+        case .timeLimit, .ballsLimit, .oneColor:
             return "LEVEL \(number)"
         }
     }()
@@ -40,6 +32,8 @@ class LevelViewModel {
             return TimeGameEngine()
         case .ballsLimit:
             return BallGameEngine()
+        case .oneColor:
+            return OneColorGameEngine()
         }
     }()
     
@@ -48,5 +42,6 @@ class LevelViewModel {
         ballsCount = Int(level.ballsCount)
         cubesCount = Int(level.cubesCount)
         timeLimit = Int(level.timeLimit)
+        levelType = LevelType(rawValue: level.levelType)!
     }
 }

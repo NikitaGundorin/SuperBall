@@ -29,9 +29,9 @@ class GameEngine: NSObject {
     var hasExtra = false
     var colors: [Color] = []
     
-    private var isBallThrown = false {
+    var isBallThrown = false {
         didSet {
-            vc?.ballButton.isEnabled = isBallThrown ? false : true
+            setBallButton(isEnabled: !isBallThrown)
         }
     }
     
@@ -91,10 +91,14 @@ class GameEngine: NSObject {
         isBallThrown = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if ball.parent != nil {
-                ball.removeFromParentNode()
-                self.setBall()
-            }
+            self.checkBallAfterThrow(ball: ball)
+        }
+    }
+    
+    func checkBallAfterThrow(ball: Ball) {
+        if ball.parent != nil {
+            ball.removeFromParentNode()
+            setBall()
         }
     }
     
@@ -133,8 +137,7 @@ class GameEngine: NSObject {
             return
         }
         countBall()
-        let color = getRandomColor()
-        ballColor = color
+        ballColor = getRandomColor()
         
         isBallThrown = false
     }
@@ -188,6 +191,10 @@ class GameEngine: NSObject {
         }
         
         return BoxPositionRange(x: (-max, max), y: (-max, max), z: (-5, -1))
+    }
+    
+    func setBallButton(isEnabled: Bool) {
+        vc?.ballButton.isEnabled = isEnabled
     }
     
     func countScore() {

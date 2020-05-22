@@ -3,10 +3,11 @@
     <entity name="Level" representedClassName="Level" syncable="YES" codeGenerationType="class">
         <attribute name="ballsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="cubesCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="levelType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="number" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeLimit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Level" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Level" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

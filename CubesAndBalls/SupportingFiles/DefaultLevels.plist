@@ -7,6 +7,8 @@
 		<integer>0</integer>
 		<key>cubesCount</key>
 		<integer>0</integer>
+		<key>levelType</key>
+		<integer>0</integer>
 		<key>number</key>
 		<integer>0</integer>
 		<key>timeLimit</key>
@@ -16,7 +18,9 @@
 		<key>ballsCount</key>
 		<integer>0</integer>
 		<key>cubesCount</key>
-		<integer>2</integer>
+		<integer>5</integer>
+        <key>levelType</key>
+        <integer>1</integer>
 		<key>number</key>
 		<integer>1</integer>
 		<key>timeLimit</key>
@@ -24,33 +28,171 @@
 	</dict>
 	<dict>
 		<key>ballsCount</key>
-		<integer>0</integer>
+		<integer>10</integer>
 		<key>cubesCount</key>
-		<integer>5</integer>
+		<integer>10</integer>
+        <key>levelType</key>
+        <integer>2</integer>
 		<key>number</key>
 		<integer>2</integer>
 		<key>timeLimit</key>
-		<integer>30</integer>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ballsCount</key>
-		<integer>5</integer>
+		<integer>0</integer>
 		<key>cubesCount</key>
-		<integer>5</integer>
+		<integer>10</integer>
+        <key>levelType</key>
+        <integer>1</integer>
 		<key>number</key>
 		<integer>3</integer>
 		<key>timeLimit</key>
-		<integer>0</integer>
+		<integer>30</integer>
 	</dict>
 	<dict>
 		<key>ballsCount</key>
 		<integer>0</integer>
 		<key>cubesCount</key>
 		<integer>15</integer>
+        <key>levelType</key>
+        <integer>1</integer>
 		<key>number</key>
 		<integer>4</integer>
 		<key>timeLimit</key>
+		<integer>30</integer>
+	</dict>
+    <dict>
+        <key>ballsCount</key>
+        <integer>0</integer>
+        <key>cubesCount</key>
+        <integer>20</integer>
+        <key>levelType</key>
+        <integer>3</integer>
+        <key>number</key>
+        <integer>5</integer>
+        <key>timeLimit</key>
+        <integer>15</integer>
+    </dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>20</integer>
+		<key>cubesCount</key>
+		<integer>20</integer>
+        <key>levelType</key>
+        <integer>2</integer>
+		<key>number</key>
+		<integer>6</integer>
+		<key>timeLimit</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>0</integer>
+		<key>cubesCount</key>
+		<integer>20</integer>
+        <key>levelType</key>
+        <integer>1</integer>
+		<key>number</key>
+		<integer>7</integer>
+		<key>timeLimit</key>
 		<integer>60</integer>
 	</dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>0</integer>
+		<key>cubesCount</key>
+		<integer>30</integer>
+        <key>levelType</key>
+        <integer>1</integer>
+		<key>number</key>
+		<integer>8</integer>
+		<key>timeLimit</key>
+		<integer>60</integer>
+	</dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>0</integer>
+		<key>cubesCount</key>
+		<integer>35</integer>
+        <key>levelType</key>
+        <integer>1</integer>
+		<key>number</key>
+		<integer>9</integer>
+		<key>timeLimit</key>
+		<integer>60</integer>
+	</dict>
+	<dict>
+		<key>ballsCount</key>
+		<integer>0</integer>
+		<key>cubesCount</key>
+		<integer>20</integer>
+        <key>levelType</key>
+        <integer>3</integer>
+		<key>number</key>
+		<integer>10</integer>
+		<key>timeLimit</key>
+		<integer>10</integer>
+	</dict>
+    <dict>
+        <key>ballsCount</key>
+        <integer>20</integer>
+        <key>cubesCount</key>
+        <integer>20</integer>
+        <key>levelType</key>
+        <integer>2</integer>
+        <key>number</key>
+        <integer>11</integer>
+        <key>timeLimit</key>
+        <integer>0</integer>
+    </dict>
+    <dict>
+        <key>ballsCount</key>
+        <integer>0</integer>
+        <key>cubesCount</key>
+        <integer>12</integer>
+        <key>levelType</key>
+        <integer>1</integer>
+        <key>number</key>
+        <integer>12</integer>
+        <key>timeLimit</key>
+        <integer>25</integer>
+    </dict>
+    <dict>
+        <key>ballsCount</key>
+        <integer>0</integer>
+        <key>cubesCount</key>
+        <integer>13</integer>
+        <key>levelType</key>
+        <integer>1</integer>
+        <key>number</key>
+        <integer>13</integer>
+        <key>timeLimit</key>
+        <integer>13</integer>
+    </dict>
+    <dict>
+        <key>ballsCount</key>
+        <integer>25</integer>
+        <key>cubesCount</key>
+        <integer>25</integer>
+        <key>levelType</key>
+        <integer>2</integer>
+        <key>number</key>
+        <integer>14</integer>
+        <key>timeLimit</key>
+        <integer>0</integer>
+    </dict>
+    <dict>
+        <key>ballsCount</key>
+        <integer>0</integer>
+        <key>cubesCount</key>
+        <integer>40</integer>
+        <key>levelType</key>
+        <integer>3</integer>
+        <key>number</key>
+        <integer>15</integer>
+        <key>timeLimit</key>
+        <integer>20</integer>
+    </dict>
 </array>
 </plist>

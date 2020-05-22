@@ -40,7 +40,8 @@ class LevelsDataProvider {
                 let ballsCount = levelsDict["ballsCount"] as? Int16,
                 let cubesCount = levelsDict["cubesCount"] as? Int16, 
                 let number = levelsDict["number"] as? Int16,
-                let timeLimit = levelsDict["timeLimit"] as? Int16
+                let timeLimit = levelsDict["timeLimit"] as? Int16,
+                let levelType = levelsDict["levelType"] as? Int16
                 else {
                     print("Error while getting entity from DefaultLevels")
                     continue
@@ -50,6 +51,7 @@ class LevelsDataProvider {
             level.cubesCount = cubesCount
             level.number = number
             level.timeLimit = timeLimit
+            level.levelType = levelType
         }
         
         do {

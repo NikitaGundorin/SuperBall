@@ -8,8 +8,9 @@
 
 import Foundation
 
-enum LevelType {
-    case infinityMode
-    case timeLimit
-    case ballsLimit
+enum LevelType: Int16 {
+    case infinityMode = 0
+    case timeLimit = 1
+    case ballsLimit = 2
+    case oneColor = 3
 }
