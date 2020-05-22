@@ -89,6 +89,7 @@ class GameEngine: NSObject {
         let ball = Ball(color: ballColor, direction: direction, position: position)
         vc?.sceneView.scene.rootNode.addChildNode(ball)
         isBallThrown = true
+        countBall()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.checkBallAfterThrow(ball: ball)
@@ -136,7 +137,7 @@ class GameEngine: NSObject {
             isBallThrown = false
             return
         }
-        countBall()
+        checkBallAvailable()
         ballColor = getRandomColor()
         
         isBallThrown = false
@@ -215,6 +216,7 @@ class GameEngine: NSObject {
     func prepareNewGame() {}
     func prepareEndGame() {}
     func countBall() {}
+    func checkBallAvailable() {}
 }
 
 extension GameEngine: SCNPhysicsContactDelegate {

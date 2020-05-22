@@ -21,6 +21,9 @@ class BallGameEngine: GameEngine {
     
     override func countBall() {
         ballsCount -= 1
+    }
+    
+    override func checkBallAvailable() {
         if ballsCount == 0 {
             endGame(status: .ballsOver)
         }
