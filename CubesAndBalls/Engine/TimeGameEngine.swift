@@ -16,13 +16,13 @@ class TimeGameEngine: GameEngine {
         }
     }
     
-    override func prepareNewGame() {
+    override func newGameWillStart() {
         stopTimer()
         seconds = Int(currentLevel.timeLimit)
         runTimer()
     }
     
-    override func prepareEndGame() {
+    override func gameWillEnd() {
         stopTimer()
     }
     

@@ -15,7 +15,7 @@ class BallGameEngine: GameEngine {
         }
     }
     
-    override func prepareNewGame() {
+    override func newGameWillStart() {
         ballsCount = Int(currentLevel.ballsCount)
     }
     

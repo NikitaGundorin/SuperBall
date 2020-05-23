@@ -35,7 +35,7 @@ class GameEngine: NSObject {
         }
     }
     
-    private var ballColor: Color! {
+    var ballColor: Color! {
         didSet {
             vc?.ballButton.backgroundColor = ballColor.value
         }
@@ -108,16 +108,17 @@ class GameEngine: NSObject {
         cubesCount = Int(currentLevel.cubesCount)
         colors = []
         vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
+        newGameWillStart()
         addTargetNodes()
-        prepareNewGame()
         ballColor = getRandomColor()
         status = nil
         hasExtra = false
+        newGameDidStart()
     }
     
     func endGame(status: GameStatus) {
         self.status = status
-        prepareEndGame()
+        gameWillEnd()
         if status == .win {
             LevelsDataProvider.shared.levelUp()
             do {
@@ -131,7 +132,7 @@ class GameEngine: NSObject {
         vc?.endGame(status: self.status ?? status)
     }
     
-    private func setBall() {
+    func setBall() {
         if colors.count == 0 {
             endGame(status: .win)
             isBallThrown = false
@@ -160,7 +161,7 @@ class GameEngine: NSObject {
         }
     }
     
-    private func getRandomColor() -> Color {
+    func getRandomColor() -> Color {
         var color: Color
         repeat {
             color = Color.random()
@@ -213,8 +214,9 @@ class GameEngine: NSObject {
     
     func addExtra() {}
     func resumeGame() {}
-    func prepareNewGame() {}
-    func prepareEndGame() {}
+    func newGameWillStart() {}
+    func newGameDidStart() {}
+    func gameWillEnd() {}
     func countBall() {}
     func checkBallAvailable() {}
 }
