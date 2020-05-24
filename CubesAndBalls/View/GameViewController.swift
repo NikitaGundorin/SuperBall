@@ -8,6 +8,8 @@
 
 import SceneKit
 import ARKit
+import GoogleMobileAds
+import Keys
 
 class GameViewController: UIViewController {
     var engine: GameEngine!
@@ -71,14 +73,18 @@ class GameViewController: UIViewController {
         return startLevelMenu
     }()
     
+    private var rewardedAd: GADRewardedAd?
+    private var reward: GADAdReward?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupScene()
         setupBallButton()
         setupStatusView()
         setupPopup()
         showStartLevelPopup()
+        setupAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -183,13 +189,26 @@ class GameViewController: UIViewController {
         ])
     }
     
+    private func setupAd() {
+        var adUnitID: String
+        #if DEBUG
+        adUnitID = CubesAndBallsKeys().gADRewardedAdUnitIDTest
+        #else
+        adUnitID = CubesAndBallsKeys().gADRewardedAdUnitID
+        #endif
+        
+        rewardedAd = GADRewardedAd(adUnitID: adUnitID)
+        
+        rewardedAd?.load(GADRequest())
+        reward = nil
+    }
+    
     func endGame(status: GameStatus) {
         if popup.isShown { return }
         if (status != .win) {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-        let popupMenu = PopupMenu(viewModel: engine.popupMenuViewModel, delegate: self)
-        popup.show(withContent: popupMenu)
+        showPopupMenu()
     }
     
     @objc private func ballTouched(_ sender: Any) {
@@ -198,8 +217,7 @@ class GameViewController: UIViewController {
     
     @objc private func pauseGame() {
         engine.pauseGame()
-        let popupMenu = PopupMenu(viewModel: engine.popupMenuViewModel, delegate: self)
-        popup.show(withContent: popupMenu)
+        showPopupMenu()
     }
     
     private func showStartLevelPopup() {
@@ -269,17 +287,20 @@ class GameViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: statusView.bottomAnchor, constant: -10)
         ])
     }
+    
+    private func showPopupMenu() {
+        let popupMenu = PopupMenu(viewModel: engine.popupMenuViewModel, delegate: self)
+        popup.show(withContent: popupMenu)
+    }
 }
 
 extension GameViewController: PopupContentDelegate {
     func resumeGame() {
         switch engine.status {
-        case .ballsOver, .timeUp:
-            engine.addExtra()
-            popup.hide()
-        case .wrongColor, .newRecord:
-            engine.addExtraLife()
-            popup.hide()
+        case .ballsOver, .timeUp, .wrongColor, .newRecord:
+            if rewardedAd?.isReady == true {
+                rewardedAd?.present(fromRootViewController: self, delegate: self)
+            }
         case .win:
             levelViewModel = LevelViewModel(level: try! LevelsDataProvider.shared.getCurrentLevel())
             showStartLevelPopup()
@@ -296,5 +317,27 @@ extension GameViewController: PopupContentDelegate {
     
     func quitGame() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension GameViewController: GADRewardedAdDelegate {
+    func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
+        self.reward = reward
+    }
+    
+    func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
+        if reward != nil {
+            switch engine.status {
+            case .ballsOver, .timeUp:
+                engine.addExtra()
+                showPopupMenu()
+            case .wrongColor, .newRecord:
+                engine.addExtraLife()
+                showPopupMenu()
+            default:
+                return
+            }
+        }
+        setupAd()
     }
 }

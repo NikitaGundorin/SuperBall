@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090978EAAA4A28272896672D /* Pods_CubesAndBalls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CF05DF32D81B05A168787A /* Pods_CubesAndBalls.framework */; };
 		7200430C245C15E900E8530D /* CubesAndBalls.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7200430A245C15E900E8530D /* CubesAndBalls.xcdatamodeld */; };
 		72116C41246B1BB80034B402 /* BallGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72116C40246B1BB80034B402 /* BallGameEngine.swift */; };
 		7214FA92244F064700E60A42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214FA91244F064700E60A42 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51CF05DF32D81B05A168787A /* Pods_CubesAndBalls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CubesAndBalls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7200430B245C15E900E8530D /* CubesAndBalls.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CubesAndBalls.xcdatamodel; sourceTree = "<group>"; };
 		72116C40246B1BB80034B402 /* BallGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallGameEngine.swift; sourceTree = "<group>"; };
 		7214FA8E244F064700E60A42 /* SuperBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,8 @@
 		72E66D192476E24600D8BBE8 /* OneColorGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneColorGameEngine.swift; sourceTree = "<group>"; };
 		72FBE41A2469B8820081608F /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		72FBE41C246ABF3B0081608F /* PopupContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupContent.swift; sourceTree = "<group>"; };
+		CCA8902D0A3C0116F780B579 /* Pods-CubesAndBalls.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubesAndBalls.release.xcconfig"; path = "Target Support Files/Pods-CubesAndBalls/Pods-CubesAndBalls.release.xcconfig"; sourceTree = "<group>"; };
+		F5F1C73E07D8C48B6B183E2B /* Pods-CubesAndBalls.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubesAndBalls.debug.xcconfig"; path = "Target Support Files/Pods-CubesAndBalls/Pods-CubesAndBalls.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				090978EAAA4A28272896672D /* Pods_CubesAndBalls.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +97,8 @@
 			children = (
 				7214FA90244F064700E60A42 /* CubesAndBalls */,
 				7214FA8F244F064700E60A42 /* Products */,
+				F4DCF72F230DB8F890113F33 /* Pods */,
+				78DD8071BBD199CD425A9975 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,6 +213,23 @@
 			path = Engine;
 			sourceTree = "<group>";
 		};
+		78DD8071BBD199CD425A9975 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51CF05DF32D81B05A168787A /* Pods_CubesAndBalls.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4DCF72F230DB8F890113F33 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F5F1C73E07D8C48B6B183E2B /* Pods-CubesAndBalls.debug.xcconfig */,
+				CCA8902D0A3C0116F780B579 /* Pods-CubesAndBalls.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,9 +237,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7214FAA2244F064900E60A42 /* Build configuration list for PBXNativeTarget "CubesAndBalls" */;
 			buildPhases = (
+				F34EE2C1943E09D194CAA720 /* [CP] Check Pods Manifest.lock */,
 				7214FA8A244F064700E60A42 /* Sources */,
 				7214FA8B244F064700E60A42 /* Frameworks */,
 				7214FA8C244F064700E60A42 /* Resources */,
+				FDAA8E17FB15C78494D700D7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -274,6 +300,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F34EE2C1943E09D194CAA720 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CubesAndBalls-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDAA8E17FB15C78494D700D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CubesAndBalls/Pods-CubesAndBalls-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CubesAndBalls/Pods-CubesAndBalls-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CubesAndBalls/Pods-CubesAndBalls-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7214FA8A244F064700E60A42 /* Sources */ = {
@@ -438,6 +506,7 @@
 		};
 		7214FAA3244F064900E60A42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5F1C73E07D8C48B6B183E2B /* Pods-CubesAndBalls.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -457,6 +526,7 @@
 		};
 		7214FAA4244F064900E60A42 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCA8902D0A3C0116F780B579 /* Pods-CubesAndBalls.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -60,7 +60,12 @@ class PopupView: UIView {
     }
     
     func show(withContent view: PopupContent) {
-        if isShown { return }
+        if isShown {
+            hide {
+                self.show(withContent: view)
+            }
+            return
+        }
         isShown = true
         
         popup.addSubview(view)

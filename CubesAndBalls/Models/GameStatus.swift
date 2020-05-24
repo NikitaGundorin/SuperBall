@@ -15,6 +15,7 @@ enum GameStatus {
     case ballsOver
     case pause
     case newRecord
+    case extraAdded
     
     var titles: (title: String, button: String) {
         switch self {
@@ -28,6 +29,8 @@ enum GameStatus {
             return ("YOU WON", "NEXT LEVEL")
         case .pause:
             return ("PAUSE", "RESUME")
+        case .extraAdded:
+            return ("READY?", "RESUME")
         case .newRecord:
             return ("NEW RECORD", "EXTRA LIFE")
         }

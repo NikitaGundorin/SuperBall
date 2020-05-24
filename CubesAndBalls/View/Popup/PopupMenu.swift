@@ -52,6 +52,7 @@ class PopupMenu: UIView, PopupContent {
         button.setTitleColor(Appearance.blue, for: .normal)
         button.titleLabel?.font = Appearance.fontBold50
         button.addTarget(self, action: #selector(resumeGame), for: .touchUpInside)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
         return button
     }()
     

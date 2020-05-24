@@ -39,7 +39,7 @@ class TimeGameEngine: GameEngine {
         seconds += 30
         hasExtra = true
         vc?.ballButton.isEnabled = true
-        resumeGame()
+        status = .extraAdded
     }
     
     func runTimer() {

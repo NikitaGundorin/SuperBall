@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = StartViewController()
         window?.makeKeyAndVisible()
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         checkCurrentLevel()
         checkLevelsExist()

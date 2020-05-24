@@ -46,21 +46,22 @@ class GameEngine: NSObject {
                            scoreLabelText: scoreLabelText,
                            quitButtonTitle: quitButtonTitle,
                            restartButtonTitle: restartButtonTitle,
-                           resumeButtonTitle: resumeButtonTitle)
+                           resumeButtonTitle: resumeButtonTitle,
+                           resumeButtonAdditionalTitle: resumeButtonAdditionalTitle)
     }
     
     private var titleLabelText: String? {
         status?.titles.title
     }
     private var quitButtonTitle: String? {
-        if status == .win {
+        if status == .win || status == .extraAdded {
             return nil
         }
         return "QUIT"
     }
     var scoreLabelText: String? { return nil }
     private var restartButtonTitle: String? {
-        if status == .win {
+        if status == .win || status == .extraAdded {
             return nil
         }
         if status == .pause {
@@ -69,7 +70,7 @@ class GameEngine: NSObject {
         return "PLAY AGAIN"
     }
     private var resumeButtonTitle: String? {
-        if status == .pause {
+        if status == .pause || status == .extraAdded {
             return "RESUME"
         }
         
@@ -82,6 +83,15 @@ class GameEngine: NSObject {
         }
         
         return status?.titles.button
+    }
+    
+    private var resumeButtonAdditionalTitle: String? {
+        switch status {
+        case .wrongColor, .ballsOver, .newRecord, .timeUp:
+            return "WATCH AD AND GET\n"
+        default:
+            return nil
+        }
     }
     
     func throwBall() {
@@ -205,7 +215,7 @@ class GameEngine: NSObject {
     
     func addExtraLife() {
         hasExtra = true
-        resumeGame()
+        status = .extraAdded
     }
     
     func pauseGame() {
