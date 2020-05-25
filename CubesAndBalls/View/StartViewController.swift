@@ -76,16 +76,17 @@ class StartViewController: UIViewController {
         NSLayoutConstraint.activate([
             superBallLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             superBallLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            playButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -50),
             playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 95),
-            playButton.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -95),
+            playButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 70),
+            playButton.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -70),
             playButton.widthAnchor.constraint(equalTo: playButton.heightAnchor),
             infinityModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             infinityModeButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 30),
+            infinityModeButton.heightAnchor.constraint(equalTo: playButton.heightAnchor, multiplier: 0.65),
             infinityModeButton.widthAnchor.constraint(equalTo: infinityModeButton.heightAnchor),
             rateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            rateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35)
+            rateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         
         Appearance.addDash(toLabel: superBallLabel)

@@ -61,6 +61,30 @@ class GameViewController: UIViewController {
         return button
     }()
     
+    let aimView = UIView()
+    
+    lazy var aimLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.fillColor = nil
+        layer.strokeColor = Appearance.red.cgColor
+        layer.lineWidth = 8
+        
+        let width = aimView.bounds.width
+        let height = aimView.bounds.height
+        let lenght = height / 4
+        
+        let path = CGMutablePath()
+        path.addEllipse(in: aimView.bounds)
+        path.addLines(between: [CGPoint(x: width / 2, y: 0), CGPoint(x: width / 2, y: -lenght)])
+        path.addLines(between: [CGPoint(x: width / 2, y: height), CGPoint(x: width / 2, y: height + lenght)])
+        path.addLines(between: [CGPoint(x: 0, y: height / 2), CGPoint(x: -lenght, y: height / 2)])
+        path.addLines(between: [CGPoint(x: width, y: height / 2), CGPoint(x: width + lenght, y: height / 2)])
+        
+        layer.path = path
+        
+        return layer
+    }()
+    
     private var regularConstraints: [NSLayoutConstraint] = []
     private var compactConstraints: [NSLayoutConstraint] = []
     
@@ -164,17 +188,20 @@ class GameViewController: UIViewController {
         lightNode.light = light
         sceneView.pointOfView?.addChildNode(lightNode)
         
-        let aim = UIImageView(image: UIImage(named: "aim"))
-        view.addSubview(aim)
-        aim.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(aimView)
+        aimView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            aim.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            aim.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            aim.heightAnchor.constraint(equalTo: aim.widthAnchor),
-            aim.heightAnchor.constraint(lessThanOrEqualToConstant: CGFloat(200)),
-            aim.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 120),
-            aim.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -120)
+            aimView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            aimView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            aimView.heightAnchor.constraint(equalTo: aimView.widthAnchor),
+            aimView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            aimView.heightAnchor.constraint(lessThanOrEqualToConstant: 200),
+            aimView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 120),
+            aimView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -120)
         ])
+        
+        view.layoutIfNeeded()
+        aimView.layer.addSublayer(aimLayer)
     }
     
     private func setupPopup() {

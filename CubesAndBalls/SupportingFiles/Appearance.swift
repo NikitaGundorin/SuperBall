@@ -72,7 +72,7 @@ class Appearance {
         view.superview?.layoutSubviews()
         oldBorder?.removeFromSuperlayer()
         
-        let verticalOffset: CGFloat = 15
+        let verticalOffset: CGFloat = 10
         let horizontOffset: CGFloat = 15
         
         let shapeLayer = CAShapeLayer()

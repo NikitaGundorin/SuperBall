@@ -32,6 +32,7 @@ class BallGameEngine: GameEngine {
     override func addExtraLife() {
         ballsCount += 1
         hasExtra = true
+        status = .extraAdded
     }
     
     override func addExtra() {

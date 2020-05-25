@@ -16,6 +16,8 @@ class PopupMenu: UIView, PopupContent {
         label.text = ""
         label.textColor = Appearance.red
         label.font = Appearance.fontBold40
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
         return label
     }()
     
@@ -80,6 +82,8 @@ class PopupMenu: UIView, PopupContent {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
             itemsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             itemsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             itemsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)

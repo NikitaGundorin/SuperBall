@@ -38,6 +38,7 @@ class GameEngine: NSObject {
     var ballColor: Color! {
         didSet {
             vc?.ballButton.backgroundColor = ballColor.value
+            vc?.aimLayer.strokeColor = ballColor.value.cgColor
         }
     }
     
