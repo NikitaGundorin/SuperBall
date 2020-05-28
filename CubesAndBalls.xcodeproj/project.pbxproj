@@ -21,6 +21,7 @@
 		72175739245878410032E389 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72175738245878410032E389 /* PopupView.swift */; };
 		721757422458937B0032E389 /* PopupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721757412458937B0032E389 /* PopupMenu.swift */; };
 		721C6B88246C776A00263903 /* LevelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C6B87246C776A00263903 /* LevelType.swift */; };
+		7257B302247D249A008D3887 /* RemoveAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257B301247D249A008D3887 /* RemoveAdsViewController.swift */; };
 		727A5E3D245C7BCE0060E758 /* LevelsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727A5E3C245C7BCE0060E758 /* LevelsDataProvider.swift */; };
 		727A5E3F245C82CC0060E758 /* DataProviderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727A5E3E245C82CC0060E758 /* DataProviderError.swift */; };
 		727A5E41245C8D020060E758 /* DefaultLevels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 727A5E40245C8D020060E758 /* DefaultLevels.plist */; };
@@ -37,6 +38,9 @@
 		72C1958B246B145300C71541 /* TimeGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C1958A246B145300C71541 /* TimeGameEngine.swift */; };
 		72DBFCDF2472C8C100A2F4F9 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBFCDE2472C8C100A2F4F9 /* WalkthroughViewController.swift */; };
 		72E66D1A2476E24600D8BBE8 /* OneColorGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E66D192476E24600D8BBE8 /* OneColorGameEngine.swift */; };
+		72EE32CA247E9D1900AD2E48 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EE32C9247E9D1900AD2E48 /* IAPManager.swift */; };
+		72EE32CC247EC97E00AD2E48 /* ErrorPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EE32CB247EC97E00AD2E48 /* ErrorPopup.swift */; };
+		72EE32CE247EE0A300AD2E48 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EE32CD247EE0A300AD2E48 /* ActivityIndicator.swift */; };
 		72FBE41B2469B8820081608F /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41A2469B8820081608F /* Appearance.swift */; };
 		72FBE41D246ABF3B0081608F /* PopupContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBE41C246ABF3B0081608F /* PopupContent.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +62,7 @@
 		72175738245878410032E389 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		721757412458937B0032E389 /* PopupMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMenu.swift; sourceTree = "<group>"; };
 		721C6B87246C776A00263903 /* LevelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelType.swift; sourceTree = "<group>"; };
+		7257B301247D249A008D3887 /* RemoveAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsViewController.swift; sourceTree = "<group>"; };
 		727A5E3C245C7BCE0060E758 /* LevelsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsDataProvider.swift; sourceTree = "<group>"; };
 		727A5E3E245C82CC0060E758 /* DataProviderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderError.swift; sourceTree = "<group>"; };
 		727A5E40245C8D020060E758 /* DefaultLevels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultLevels.plist; sourceTree = "<group>"; };
@@ -74,6 +79,9 @@
 		72C1958A246B145300C71541 /* TimeGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGameEngine.swift; sourceTree = "<group>"; };
 		72DBFCDE2472C8C100A2F4F9 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		72E66D192476E24600D8BBE8 /* OneColorGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneColorGameEngine.swift; sourceTree = "<group>"; };
+		72EE32C9247E9D1900AD2E48 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		72EE32CB247EC97E00AD2E48 /* ErrorPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPopup.swift; sourceTree = "<group>"; };
+		72EE32CD247EE0A300AD2E48 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		72FBE41A2469B8820081608F /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		72FBE41C246ABF3B0081608F /* PopupContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupContent.swift; sourceTree = "<group>"; };
 		CCA8902D0A3C0116F780B579 /* Pods-CubesAndBalls.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubesAndBalls.release.xcconfig"; path = "Target Support Files/Pods-CubesAndBalls/Pods-CubesAndBalls.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,13 +121,14 @@
 		7214FA90244F064700E60A42 /* CubesAndBalls */ = {
 			isa = PBXGroup;
 			children = (
-				72C19589246B133800C71541 /* Engine */,
 				727A5E3B245C7BC00060E758 /* DataProviders */,
+				72C19589246B133800C71541 /* Engine */,
+				72EE32C8247E9CE300AD2E48 /* Managers */,
+				728DC8892450AD5000BC7878 /* Models */,
 				728DC88C2450ADAF00BC7878 /* View */,
 				721C6B86246C76BA00263903 /* ViewModels */,
-				728DC88B2450AD7200BC7878 /* SupportingFiles */,
-				728DC8892450AD5000BC7878 /* Models */,
 				728DC88424506DD900BC7878 /* Particles */,
+				728DC88B2450AD7200BC7878 /* SupportingFiles */,
 				7214FA93244F064700E60A42 /* art.scnassets */,
 				7214FA9A244F064900E60A42 /* Assets.xcassets */,
 			);
@@ -133,6 +142,7 @@
 				721757412458937B0032E389 /* PopupMenu.swift */,
 				72FBE41C246ABF3B0081608F /* PopupContent.swift */,
 				72C19585246ACF8700C71541 /* StartLevelMenu.swift */,
+				72EE32CB247EC97E00AD2E48 /* ErrorPopup.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -194,9 +204,11 @@
 			isa = PBXGroup;
 			children = (
 				7214FA95244F064700E60A42 /* GameViewController.swift */,
+				7257B301247D249A008D3887 /* RemoveAdsViewController.swift */,
 				728DC8902450B7FA00BC7878 /* StartViewController.swift */,
 				72DBFCDE2472C8C100A2F4F9 /* WalkthroughViewController.swift */,
 				7217573E24588F900032E389 /* Popup */,
+				72EE32CD247EE0A300AD2E48 /* ActivityIndicator.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,6 +223,14 @@
 				72E66D192476E24600D8BBE8 /* OneColorGameEngine.swift */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		72EE32C8247E9CE300AD2E48 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				72EE32C9247E9D1900AD2E48 /* IAPManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		78DD8071BBD199CD425A9975 /* Frameworks */ = {
@@ -365,12 +385,16 @@
 				72C19588246B0ED900C71541 /* GameEngine.swift in Sources */,
 				72BF9DC7246C65E6001822E4 /* PopupMenuViewModel.swift in Sources */,
 				7200430C245C15E900E8530D /* CubesAndBalls.xcdatamodeld in Sources */,
+				7257B302247D249A008D3887 /* RemoveAdsViewController.swift in Sources */,
+				72EE32CA247E9D1900AD2E48 /* IAPManager.swift in Sources */,
 				721757422458937B0032E389 /* PopupMenu.swift in Sources */,
 				72FBE41B2469B8820081608F /* Appearance.swift in Sources */,
+				72EE32CC247EC97E00AD2E48 /* ErrorPopup.swift in Sources */,
 				7214FAA6244F226400E60A42 /* Color.swift in Sources */,
 				727A5E3F245C82CC0060E758 /* DataProviderError.swift in Sources */,
 				7214FA92244F064700E60A42 /* AppDelegate.swift in Sources */,
 				72BF9DC5246C5C92001822E4 /* LevelViewModel.swift in Sources */,
+				72EE32CE247EE0A300AD2E48 /* ActivityIndicator.swift in Sources */,
 				72116C41246B1BB80034B402 /* BallGameEngine.swift in Sources */,
 				728DC8912450B7FA00BC7878 /* StartViewController.swift in Sources */,
 			);

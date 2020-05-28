@@ -23,6 +23,7 @@ class Appearance {
     static let font40 = UIFont(name: fontName, size: 40)
     static let font30 = UIFont(name: fontName, size: 30)
     static let font25 = UIFont(name: fontName, size: 25)
+    static let font20 = UIFont(name: fontName, size: 20)
     static let font15 = UIFont(name: fontName, size: 15)
     static let fontBold50 = UIFont(name: boldFontName, size: 50)
     static let fontBold40 = UIFont(name: boldFontName, size: 40)

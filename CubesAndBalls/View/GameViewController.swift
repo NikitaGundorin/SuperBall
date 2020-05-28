@@ -217,6 +217,9 @@ class GameViewController: UIViewController {
     }
     
     private func setupAd() {
+        if UserDefaults.standard.bool(forKey: IAPManager.productNotificationIdentifier) {
+            return
+        }
         var adUnitID: String
         #if DEBUG
         adUnitID = CubesAndBallsKeys().gADRewardedAdUnitIDTest
@@ -319,12 +322,29 @@ class GameViewController: UIViewController {
         let popupMenu = PopupMenu(viewModel: engine.popupMenuViewModel, delegate: self)
         popup.show(withContent: popupMenu)
     }
+    
+    private func addExtra() {
+        switch engine.status {
+        case .ballsOver, .timeUp:
+            engine.addExtra()
+            showPopupMenu()
+        case .wrongColor, .newRecord:
+            engine.addExtraLife()
+            showPopupMenu()
+        default:
+            return
+        }
+    }
 }
 
 extension GameViewController: PopupContentDelegate {
     func resumeGame() {
         switch engine.status {
         case .ballsOver, .timeUp, .wrongColor, .newRecord:
+            if UserDefaults.standard.bool(forKey: IAPManager.removeAdProductIdentifier) {
+                addExtra()
+                return
+            }
             if rewardedAd?.isReady == true {
                 rewardedAd?.present(fromRootViewController: self, delegate: self)
             }
@@ -354,16 +374,7 @@ extension GameViewController: GADRewardedAdDelegate {
     
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
         if reward != nil {
-            switch engine.status {
-            case .ballsOver, .timeUp:
-                engine.addExtra()
-                showPopupMenu()
-            case .wrongColor, .newRecord:
-                engine.addExtraLife()
-                showPopupMenu()
-            default:
-                return
-            }
+            addExtra()
         }
         setupAd()
     }

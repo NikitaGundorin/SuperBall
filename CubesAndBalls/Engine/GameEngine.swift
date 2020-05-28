@@ -87,6 +87,9 @@ class GameEngine: NSObject {
     }
     
     private var resumeButtonAdditionalTitle: String? {
+        if UserDefaults.standard.bool(forKey: IAPManager.removeAdProductIdentifier) {
+            return nil
+        }
         switch status {
         case .wrongColor, .ballsOver, .newRecord, .timeUp:
             return "WATCH AD AND GET\n"

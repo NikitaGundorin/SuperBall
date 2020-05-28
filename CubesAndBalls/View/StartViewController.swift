@@ -28,11 +28,11 @@ class StartViewController: UIViewController {
     }()
     
     private let infinityModeButton: UIButton = {
-       let button = UIButton()
-       button.setImage(UIImage(named: "infinityMode"), for: .normal)
-       button.addTarget(self, action: #selector(startInfinityMode), for: .touchUpInside)
-       
-       return button
+        let button = UIButton()
+        button.setImage(UIImage(named: "infinityMode"), for: .normal)
+        button.addTarget(self, action: #selector(startInfinityMode), for: .touchUpInside)
+        
+        return button
     }()
     
     private let rateButton: UIButton = {
@@ -44,6 +44,19 @@ class StartViewController: UIViewController {
         
         return button
     }()
+    
+    private let removeAdsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("REMOVE ADS", for: .normal)
+        button.titleLabel?.font = Appearance.fontBold20
+        button.setTitleColor(Appearance.red, for: .normal)
+        button.addTarget(self, action: #selector(removeAds), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private let activityIndicator = ActivityIndicator()
+    private let iapManager = IAPManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,14 +74,23 @@ class StartViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UserDefaults.standard.bool(forKey: IAPManager.removeAdProductIdentifier) {
+            removeAdsButton.removeFromSuperview()
+        }
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
     
     private func setupLayout() {
         view.backgroundColor = UIColor.black
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideActivityIndicator)))
         
-        for subview in [superBallLabel, playButton, infinityModeButton, rateButton] {
+        for subview in [superBallLabel, playButton, infinityModeButton, removeAdsButton, rateButton, activityIndicator] {
             view.addSubview(subview)
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -85,8 +107,15 @@ class StartViewController: UIViewController {
             infinityModeButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 30),
             infinityModeButton.heightAnchor.constraint(equalTo: playButton.heightAnchor, multiplier: 0.65),
             infinityModeButton.widthAnchor.constraint(equalTo: infinityModeButton.heightAnchor),
+            removeAdsButton.topAnchor.constraint(greaterThanOrEqualTo: infinityModeButton.bottomAnchor, constant: 20),
+            removeAdsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            removeAdsButton.bottomAnchor.constraint(equalTo: rateButton.topAnchor, constant: -6),
             rateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            rateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            rateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            activityIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicator.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         Appearance.addDash(toLabel: superBallLabel)
@@ -108,5 +137,43 @@ class StartViewController: UIViewController {
     
     @objc private func rateApp() {
         SKStoreReviewController.requestReview()
+    }
+    
+    @objc private func removeAds() {
+        activityIndicator.show()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentRemoveAds),
+                                               name: NSNotification.Name(IAPManager.productNotificationIdentifier),
+                                               object: nil)
+        iapManager.setupPurchases { success in
+            if success {
+                IAPManager.shared.getProducts()
+            } else {
+                self.activityIndicator.hide()
+            }
+        }
+    }
+    
+    @objc private func hideActivityIndicator() {
+        activityIndicator.hide()
+    }
+    
+    @objc private func presentRemoveAds() {
+        NotificationCenter.default.removeObserver(self)
+        DispatchQueue.main.async {
+            let vc = RemoveAdsViewController()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true) {
+                self.activityIndicator.hide()
+            }
+        }
+    }
+}
+
+extension StartViewController: RemoveAdsDelegate {
+    func adRemoved() {
+        removeAdsButton.removeFromSuperview()
     }
 }
