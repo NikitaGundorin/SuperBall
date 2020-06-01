@@ -25,13 +25,15 @@ class ErrorPopup: UIView, PopupContent {
         label.textAlignment = .center
         label.textColor = Appearance.red
         label.font = Appearance.font20
+        label.numberOfLines = 2
         
         return label
     }()
     
     private let okButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("OK", for: .normal)
+        let title = NSLocalizedString("OK", comment: "Ok button title")
+        button.setTitle(title, for: .normal)
         button.setTitleColor(Appearance.red, for: .normal)
         button.titleLabel?.font = Appearance.fontBold25
         button.addTarget(self, action: #selector(okButtonPressed), for: .touchUpInside)

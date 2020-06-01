@@ -18,9 +18,10 @@ class LevelViewModel {
     lazy var name: String = {
         switch levelType {
         case .infinityMode:
-            return "INFINITY MODE"
+            return NSLocalizedString("INFINITY MODE", comment: "Infinity mode popup title")
         case .timeLimit, .ballsLimit, .oneColor:
-            return "LEVEL \(number)"
+            let text = NSLocalizedString("LEVEL", comment: "Level popup title")
+            return "\(text) \(number)"
         }
     }()
     

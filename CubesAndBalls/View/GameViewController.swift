@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
     var sceneView: ARSCNView = ARSCNView(frame: UIScreen.main.bounds)
     var ballButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("BALL", for: .normal)
+        button.setTitle(NSLocalizedString("BALL", comment: "Ball button title"), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .disabled)
         button.titleLabel?.font = Appearance.fontBold25

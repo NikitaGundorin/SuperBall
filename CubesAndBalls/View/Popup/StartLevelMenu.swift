@@ -19,12 +19,16 @@ class StartLevelMenu: UIView, PopupContent {
         label.textColor = Appearance.red
         label.font = Appearance.fontBold50
         label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 2
+        label.textAlignment = .center
         return label
     }()
     
     var restartButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("PLAY", for: .normal)
+        let title = NSLocalizedString("PLAY", comment: "Play button title")
+        button.setTitle(title, for: .normal)
         button.setTitleColor(Appearance.blue, for: .normal)
         button.titleLabel?.font = Appearance.fontBold50
         button.addTarget(self, action: #selector(startGame), for: .touchUpInside)

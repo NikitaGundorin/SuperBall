@@ -76,6 +76,10 @@ class PopupView: UIView {
             view.bottomAnchor.constraint(equalTo: popup.bottomAnchor),
             view.leadingAnchor.constraint(equalTo: popup.leadingAnchor)
         ])
+        view.titleLabel.adjustFontSizeToWidth(minimumFontSize: 20)
+        if let popupMenu = view as? PopupMenu {
+            popupMenu.updateResumeButton()
+        }
         Appearance.addDash(toLabel: view.titleLabel)
         content = view
         alpha = 1

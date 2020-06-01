@@ -20,19 +20,33 @@ enum GameStatus {
     var titles: (title: String, button: String) {
         switch self {
         case .wrongColor:
-            return ("WRONG COLOR", "EXTRA LIFE")
+            let title = NSLocalizedString("WRONG COLOR", comment: "Wrong color itle in popup")
+            let button = NSLocalizedString("EXTRA LIFE", comment: "Extra life button in popup")
+            return (title, button)
         case .timeUp:
-            return ("TIME'S UP", "+30 SECS")
+            let title = NSLocalizedString("TIME'S UP", comment: "Time's up title in popup")
+            let button = NSLocalizedString("+30 SECS", comment: "Extra secs button in popup")
+            return (title, button)
         case .ballsOver:
-            return ("BALLS'RE OVER", "+10 BALLS")
+            let title = NSLocalizedString("BALLS'RE OVER", comment: "Balls're over title in popup")
+            let button = NSLocalizedString("+10 BALLS", comment: "Extra balls button in popup")
+            return (title, button)
         case .win:
-            return ("YOU WON", "NEXT LEVEL")
+            let title = NSLocalizedString("YOU WON", comment: "Win title in popup")
+            let button = NSLocalizedString("NEXT LEVEL", comment: "Next level button in popup")
+            return (title, button)
         case .pause:
-            return ("PAUSE", "RESUME")
+            let title = NSLocalizedString("PAUSE", comment: "Pause title in popup")
+            let button = NSLocalizedString("RESUME", comment: "Resume button in popup")
+            return (title, button)
         case .extraAdded:
-            return ("READY?", "RESUME")
+            let title = NSLocalizedString("READY?", comment: "Ready title in popup")
+            let button = NSLocalizedString("RESUME", comment: "Resume button in popup")
+            return (title, button)
         case .newRecord:
-            return ("NEW RECORD", "EXTRA LIFE")
+            let title = NSLocalizedString("NEW RECORD", comment: "New record title in popup")
+            let button = NSLocalizedString("EXTRA LIFE", comment: "Extra life button in popup")
+            return (title, button)
         }
     }
 }

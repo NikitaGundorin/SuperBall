@@ -58,7 +58,7 @@ class GameEngine: NSObject {
         if status == .win || status == .extraAdded {
             return nil
         }
-        return "QUIT"
+        return NSLocalizedString("QUIT", comment: "Quit button in popup")
     }
     var scoreLabelText: String? { return nil }
     private var restartButtonTitle: String? {
@@ -66,13 +66,13 @@ class GameEngine: NSObject {
             return nil
         }
         if status == .pause {
-            return "RESTART"
+            return NSLocalizedString("RESTART", comment: "Restart button in popup")
         }
-        return "PLAY AGAIN"
+        return NSLocalizedString("PLAY AGAIN", comment: "Play again button in popup")
     }
     private var resumeButtonTitle: String? {
         if status == .pause || status == .extraAdded {
-            return "RESUME"
+            return NSLocalizedString("RESUME", comment: "Resume button in popup")
         }
         
         if status == .win {
@@ -92,7 +92,7 @@ class GameEngine: NSObject {
         }
         switch status {
         case .wrongColor, .ballsOver, .newRecord, .timeUp:
-            return "WATCH AD AND GET\n"
+            return NSLocalizedString("WATCH AD AND GET\n", comment: "Ads button in popup")
         default:
             return nil
         }

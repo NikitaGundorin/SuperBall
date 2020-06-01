@@ -43,25 +43,48 @@ struct PopupMenuViewModel {
         }
         
         if let resumeText = resumeButtonTitle {
-            if let resumeAdditionalText = resumeButtonAdditionalTitle {
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.alignment = .center
-                let line1 = NSMutableAttributedString(string: resumeAdditionalText,
-                                                      attributes: [.font: Appearance.fontBold25 ?? UIFont.systemFont(ofSize: 25),
-                                                                   .foregroundColor: Appearance.blue,
-                                                                   .paragraphStyle: paragraphStyle])
-                let line2 = NSAttributedString(string: resumeText,
-                                               attributes: [.font: Appearance.fontBold50 ?? UIFont.systemFont(ofSize: 50),
-                                                            .foregroundColor: Appearance.blue,
-                                                            .paragraphStyle: paragraphStyle])
-                line1.append(line2)
-                resumeButton.setAttributedTitle(line1, for: .normal)
-            } else {
-                resumeButton.setTitle(resumeText, for: .normal)
-            }
+            resumeButton.setTitle(resumeText, for: .normal)
             items.append(resumeButton)
         }
         
         return items
+    }
+    
+    func setup(resumeButton: UIButton) {
+        if let resumeText = resumeButtonTitle,
+            let resumeAdditionalText = resumeButtonAdditionalTitle {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+
+            let line1Font = calc(font: Appearance.fontBold25!, for: resumeAdditionalText, button: resumeButton)
+            
+            let line2Font = calc(font: Appearance.fontBold50!, for: resumeText, button: resumeButton)
+
+            let line1 = NSMutableAttributedString(string: resumeAdditionalText,
+                                                  attributes: [.font: line1Font,
+                                                               .foregroundColor: Appearance.blue,
+                                                               .paragraphStyle: paragraphStyle])
+            let line2 = NSAttributedString(string: resumeText,
+                                           attributes: [.font: line2Font,
+                                                        .foregroundColor: Appearance.blue,
+                                                        .paragraphStyle: paragraphStyle])
+            line1.append(line2)
+            resumeButton.setAttributedTitle(line1, for: .normal)
+        } else {
+            resumeButton.titleLabel?.adjustFontSizeToWidth(minimumFontSize: 20)
+        }
+    }
+    
+    private func calc(font: UIFont, for text: String, button: UIButton) -> UIFont {
+        let width = button.bounds.width
+        var line1width = (text as NSString).size(withAttributes: [NSAttributedString.Key.font: font]).width
+        var font = font
+        
+        while line1width > width {
+            font = font.withSize(font.pointSize - 1)
+            line1width = (text as NSString).size(withAttributes: [NSAttributedString.Key.font: font]).width
+        }
+        
+        return font
     }
 }

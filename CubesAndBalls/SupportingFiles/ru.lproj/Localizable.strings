@@ -1,0 +1,103 @@
+/* Extra balls button in popup */
+"+10 BALLS" = "+10 ШАРОВ";
+
+/* Extra secs button in popup */
+"+30 SECS" = "+30 СЕКУНД";
+
+/* Allow camera access message */
+"Allow access to the camera to start the game!" = "Разрешите доступ к камере, чтобы начать игру!";
+
+/* Ball button title */
+"BALL" = "ШАР";
+
+/* Balls're over title in popup */
+"BALLS'RE OVER" = "ШАРЫ ЗАКОНЧИЛИСЬ";
+
+/* Extra life button in popup */
+"EXTRA LIFE" = "+1 ЖИЗНЬ";
+
+/* Good light message */
+"For better AR performance play in good light!" = "Для лучшей работы технологии AR играйте при хорошем освещении!";
+
+/* Remove ads screen description label title */
+"GET EXTRA LIVES WITHOUT WATCHING ADS" = "ПОЛУЧАЙТЕ ДОПОЛНИТЕЛЬНЫЕ ЖИЗНИ БЕЗ ПРОСМОТРА РЕКЛАМЫ";
+
+/* Infinity mode popup title */
+"INFINITY MODE" = "БЕСКОНЕЧНЫЙ РЕЖИМ";
+
+/* Level popup title */
+"LEVEL" = "УРОВЕНЬ";
+
+/* Remove ads screen later button title */
+"MAYBE LATER" = "ПОЗЖЕ";
+
+/* New record title in popup */
+"NEW RECORD" = "НОВЫЙ РЕКОРД";
+
+/* Next level button in popup */
+"NEXT LEVEL" = "ПРОДОЛЖИТЬ";
+
+/* Ok button title */
+"OK" = "ОК";
+
+/* Pause title in popup */
+"PAUSE" = "ПАУЗА";
+
+/* Play button title */
+"PLAY" = "НАЧАТЬ";
+
+/* Play again button in popup */
+"PLAY AGAIN" = "ИГРАТЬ СНОВА";
+
+/* Purchase failed error popup message */
+"Please try again later" = "Пожалуйста, попробуйте позже";
+
+/* Purchase failed error popup title */
+"PURCHASE FAILED" = "ОШИБКА ПЛАТЕЖА";
+
+/* Quit button in popup */
+"QUIT" = "ВЫХОД";
+
+/* Rate app button title */
+"RATE APP" = "ОЦЕНИТЬ ПРИЛОЖЕНИЕ";
+
+/* Ready title in popup */
+"READY?" = "ГОТОВЫ?";
+
+/* Remove ads button title
+   Remove ads screen title */
+"REMOVE ADS" = "ОТКЛЮЧИТЬ РЕКЛАМУ";
+
+/* Remove ads screen purchase button title */
+"REMOVE ADS FOR" = "ОТКЛЮЧИТЬ РЕКЛАМУ ЗА";
+
+/* Restart button in popup */
+"RESTART" = "НАЧАТЬ ЗАНОВО";
+
+/* Remove ads screen restore purchase button title */
+"RESTORE PURCHASE" = "ВОССТАНОВИТЬ ПОКУПКУ";
+
+/* Resume button in popup */
+"RESUME" = "ПРОДОЛЖИТЬ";
+
+/* Score label text */
+"SCORE" = "СЧЕТ";
+
+/* Time's up title in popup */
+"TIME'S UP" = "ВРЕМЯ ВЫШЛО";
+
+/* Ads button in popup */
+"WATCH AD AND GET\n" = "СМОТРЕТЬ РЕКЛАМУ\n";
+
+/* Welcome label title */
+"WELCOME TO" = "ДОБРО ПОЖАЛОВАТЬ";
+
+/* Wrong color itle in popup */
+"WRONG COLOR" = "НЕВЕРНЫЙ ЦВЕТ";
+
+/* Camera acess denied message */
+"You didn't allow access to the Camera :(\nGo to Setings -> Privacy -> Camera and tap the toggle next to SuperBall app" = "Вы не разрешили доступ к Камере :(\nПройдите в Настройки -> Конфеденциальность -> Камера и переключите тумблер рядом с приложением SuperBall";
+
+/* Win title in popup */
+"YOU WON" = "ПОБЕДА";
+

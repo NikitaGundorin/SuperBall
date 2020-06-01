@@ -20,7 +20,8 @@ class InfinityGameEngine: GameEngine {
     
     override var scoreLabelText: String? {
         guard status != .pause else { return nil }
-        return "SCORE: \(cubesCount)"
+        let scoreText = NSLocalizedString("SCORE", comment: "Score label text")
+        return "\(scoreText): \(cubesCount)"
     }
     
     override init() {

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="CubesAndBalls/SupportingFiles/en.lproj/InfoPlist.strings" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.5" build-num="11E608c"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>SuperBall</source>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>We need your camera to start playing!</source>
+        <target>Необходим доступ к камере, чтобы начать игру!</target>
+        <note>Privacy - Camera Usage Description</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="CubesAndBalls/SupportingFiles/en.lproj/Localizable.strings" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.5" build-num="11E608c"/>
+    </header>
+    <body>
+      <trans-unit id="+10 BALLS" xml:space="preserve">
+        <source>+10 BALLS</source>
+        <target>+10 ШАРОВ</target>
+        <note>Extra balls button in popup</note>
+      </trans-unit>
+      <trans-unit id="+30 SECS" xml:space="preserve">
+        <source>+30 SECS</source>
+        <target>+30 СЕКУНД</target>
+        <note>Extra secs button in popup</note>
+      </trans-unit>
+      <trans-unit id="Allow access to the camera to start the game!" xml:space="preserve">
+        <source>Allow access to the camera to start the game!</source>
+        <target>Разрешите доступ к камере, чтобы начать игру!</target>
+        <note>Allow camera access message</note>
+      </trans-unit>
+      <trans-unit id="BALL" xml:space="preserve">
+        <source>BALL</source>
+        <target>ШАР</target>
+        <note>Ball button title</note>
+      </trans-unit>
+      <trans-unit id="BALLS'RE OVER" xml:space="preserve">
+        <source>BALLS'RE OVER</source>
+        <target>ШАРЫ ЗАКОНЧИЛИСЬ</target>
+        <note>Balls're over title in popup</note>
+      </trans-unit>
+      <trans-unit id="EXTRA LIFE" xml:space="preserve">
+        <source>EXTRA LIFE</source>
+        <target>ДОБАВИТЬ ЖИЗНЬ</target>
+        <note>Extra life button in popup</note>
+      </trans-unit>
+      <trans-unit id="For better AR performance play in good light!" xml:space="preserve">
+        <source>For better AR performance play in good light!</source>
+        <target>Для лучшей работы технологии AR играйте при хорошем освещении!</target>
+        <note>Good light message</note>
+      </trans-unit>
+      <trans-unit id="GET EXTRA LIVES WITHOUT WATCHING ADS" xml:space="preserve">
+        <source>GET EXTRA LIVES WITHOUT WATCHING ADS</source>
+        <target>ПОЛУЧАЙТЕ ДОПОЛНИТЕЛЬНЫЕ ЖИЗНИ БЕЗ ПРОСМОТРА РЕКЛАМЫ</target>
+        <note>Remove ads screen description label title</note>
+      </trans-unit>
+      <trans-unit id="INFINITY MODE" xml:space="preserve">
+        <source>INFINITY MODE</source>
+        <target>БЕСКОНЕЧНОСТЬ</target>
+        <note>Infinity mode popup title</note>
+      </trans-unit>
+      <trans-unit id="LEVEL" xml:space="preserve">
+        <source>LEVEL</source>
+        <target>УРОВЕНЬ</target>
+        <note>Level popup title</note>
+      </trans-unit>
+      <trans-unit id="MAYBE LATER" xml:space="preserve">
+        <source>MAYBE LATER</source>
+        <target>ПОЗЖЕ</target>
+        <note>Remove ads screen later button title</note>
+      </trans-unit>
+      <trans-unit id="NEW RECORD" xml:space="preserve">
+        <source>NEW RECORD</source>
+        <target>НОВЫЙ РЕКОРД</target>
+        <note>New record title in popup</note>
+      </trans-unit>
+      <trans-unit id="NEXT LEVEL" xml:space="preserve">
+        <source>NEXT LEVEL</source>
+        <target>СЛЕДУЮЩИЙ УРОВЕНЬ</target>
+        <note>Next level button in popup</note>
+      </trans-unit>
+      <trans-unit id="OK" xml:space="preserve">
+        <source>OK</source>
+        <target>ОК</target>
+        <note>Ok button title</note>
+      </trans-unit>
+      <trans-unit id="PAUSE" xml:space="preserve">
+        <source>PAUSE</source>
+        <target>ПАУЗА</target>
+        <note>Pause title in popup</note>
+      </trans-unit>
+      <trans-unit id="PLAY" xml:space="preserve">
+        <source>PLAY</source>
+        <target>НАЧАТЬ</target>
+        <note>Play button title</note>
+      </trans-unit>
+      <trans-unit id="PLAY AGAIN" xml:space="preserve">
+        <source>PLAY AGAIN</source>
+        <target>ИГРАТЬ СНОВА</target>
+        <note>Play again button in popup</note>
+      </trans-unit>
+      <trans-unit id="PURCHASE FAILED" xml:space="preserve">
+        <source>PURCHASE FAILED</source>
+        <target>ОШИБКА ПЛАТЕЖА</target>
+        <note>Purchase failed error popup title</note>
+      </trans-unit>
+      <trans-unit id="Please try again later" xml:space="preserve">
+        <source>Please try again later</source>
+        <target>Пожалуйста, попробуйте позже</target>
+        <note>Purchase failed error popup message</note>
+      </trans-unit>
+      <trans-unit id="QUIT" xml:space="preserve">
+        <source>QUIT</source>
+        <target>ВЫХОД</target>
+        <note>Quit button in popup</note>
+      </trans-unit>
+      <trans-unit id="RATE APP" xml:space="preserve">
+        <source>RATE APP</source>
+        <target>ОЦЕНИТЬ ПРИЛОЖЕНИЕ</target>
+        <note>Rate app button title</note>
+      </trans-unit>
+      <trans-unit id="READY?" xml:space="preserve">
+        <source>READY?</source>
+        <target>ГОТОВЫ?</target>
+        <note>Ready title in popup</note>
+      </trans-unit>
+      <trans-unit id="REMOVE ADS" xml:space="preserve">
+        <source>REMOVE ADS</source>
+        <target>ОТКЛЮЧИТЬ РЕКЛАМУ</target>
+        <note>Remove ads button title
+   Remove ads screen title</note>
+      </trans-unit>
+      <trans-unit id="REMOVE ADS FOR" xml:space="preserve">
+        <source>REMOVE ADS FOR</source>
+        <target>ОТКЛЮЧИТЬ РЕКЛАМУ ЗА</target>
+        <note>Remove ads screen purchase button title</note>
+      </trans-unit>
+      <trans-unit id="RESTART" xml:space="preserve">
+        <source>RESTART</source>
+        <target>НАЧАТЬ ЗАНОВО</target>
+        <note>Restart button in popup</note>
+      </trans-unit>
+      <trans-unit id="RESTORE PURCHASE" xml:space="preserve">
+        <source>RESTORE PURCHASE</source>
+        <target>ВОССТАНОВИТЬ ПОКУПКУ</target>
+        <note>Remove ads screen restore purchase button title</note>
+      </trans-unit>
+      <trans-unit id="RESUME" xml:space="preserve">
+        <source>RESUME</source>
+        <target>ПРОДОЛЖИТЬ</target>
+        <note>Resume button in popup</note>
+      </trans-unit>
+      <trans-unit id="SCORE" xml:space="preserve">
+        <source>SCORE</source>
+        <target>СЧЕТ</target>
+        <note>Score label text</note>
+      </trans-unit>
+      <trans-unit id="TIME'S UP" xml:space="preserve">
+        <source>TIME'S UP</source>
+        <target>ВРЕМЯ ВЫШЛО</target>
+        <note>Time's up title in popup</note>
+      </trans-unit>
+      <trans-unit id="WATCH AD AND GET&#10;" xml:space="preserve">
+        <source>WATCH AD AND GET
+</source>
+        <target>ПОСМОТРЕТЬ РЕКЛАМУ И ПОЛУЧИТЬ
+</target>
+        <note>Ads button in popup</note>
+      </trans-unit>
+      <trans-unit id="WELCOME TO" xml:space="preserve">
+        <source>WELCOME TO</source>
+        <target>ДОБРО ПОЖАЛОВАТЬ</target>
+        <note>Welcome label title</note>
+      </trans-unit>
+      <trans-unit id="WRONG COLOR" xml:space="preserve">
+        <source>WRONG COLOR</source>
+        <target>НЕВЕРНЫЙ ЦВЕТ</target>
+        <note>Wrong color itle in popup</note>
+      </trans-unit>
+      <trans-unit id="YOU WON" xml:space="preserve">
+        <source>YOU WON</source>
+        <target>ПОБЕДА</target>
+        <note>Win title in popup</note>
+      </trans-unit>
+      <trans-unit id="You didn't allow access to the Camera :(&#10;Go to Setings -&gt; Privacy -&gt; Camera and tap the toggle next to SuperBall app" xml:space="preserve">
+        <source>You didn't allow access to the Camera :(
+Go to Setings -&gt; Privacy -&gt; Camera and tap the toggle next to SuperBall app</source>
+        <target>Вы не разрешили доступ к Камере :(
+Пройдите в Настройки -&gt; Конфеденциальность -&gt; Камера и переключите тумблер рядом с приложением SuperBall</target>
+        <note>Camera acess denied message</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

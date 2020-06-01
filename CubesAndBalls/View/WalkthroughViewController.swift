@@ -12,7 +12,7 @@ import ARKit
 class WalkthroughViewController: UIViewController {
     private let welcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "WELCOME TO"
+        label.text = NSLocalizedString("WELCOME TO", comment: "Welcome label title")
         label.textAlignment = .center
         label.font = Appearance.fontBold20
         label.textColor = Appearance.red
@@ -32,22 +32,25 @@ class WalkthroughViewController: UIViewController {
     
     private let messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Allow access to the camera to start the game!"
+        label.text = NSLocalizedString("Allow access to the camera to start the game!",
+                                       comment: "Allow camera access message")
         label.textAlignment = .center
         label.numberOfLines = 5
-        label.font = Appearance.font25
+        label.font = Appearance.font20
         label.textColor = Appearance.red
         label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         
         return label
     }()
     
     private let okButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("OK", for: .normal)
+        let title = NSLocalizedString("OK", comment: "Ok button title")
+        btn.setTitle(title, for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.setTitleColor(Appearance.red, for: .normal)
-        btn.titleLabel?.font = Appearance.fontBold30
+        btn.titleLabel?.font = Appearance.fontBold25
         btn.addTarget(self, action: #selector(okTapped), for: .touchUpInside)
         
         return btn
@@ -62,7 +65,7 @@ class WalkthroughViewController: UIViewController {
     
     private lazy var messageStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [messageLabel, okButton])
-        stackView.spacing = 25
+        stackView.spacing = 20
         stackView.axis = .vertical
         return stackView
     }()
@@ -205,7 +208,7 @@ class WalkthroughViewController: UIViewController {
     
     private func cameraMessageError() {
         UINotificationFeedbackGenerator().notificationOccurred(.error)
-        self.messageLabel.text = "You didn't allow access to the Camera :(\nGo to Setings -> Privacy -> Camera and tap the toggle next to SuperBall app"
+        self.messageLabel.text = NSLocalizedString("You didn't allow access to the Camera :(\nGo to Setings -> Privacy -> Camera and tap the toggle next to SuperBall app", comment: "Camera acess denied message")
         self.messageBorderShapeLayer = Appearance.addDashedBorder(to: self.messageStackView,
         oldBorder: messageBorderShapeLayer)
         
@@ -226,7 +229,8 @@ class WalkthroughViewController: UIViewController {
         }
         
         dismissMessage { _ in
-            self.messageLabel.text = "For better AR performance play in good light!"
+            self.messageLabel.text = NSLocalizedString("For better AR performance play in good light!",
+                                                       comment: "Good light message")
             self.showMessage { _ in self.lightMessageWasShown = true }
         }
     }

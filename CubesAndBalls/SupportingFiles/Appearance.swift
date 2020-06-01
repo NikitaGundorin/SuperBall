@@ -21,20 +21,27 @@ class Appearance {
     static let font100 = UIFont(name: lightFontName, size: 100)
     static let font50 = UIFont(name: fontName, size: 50)
     static let font40 = UIFont(name: fontName, size: 40)
+    static let font35 = UIFont(name: fontName, size: 35)
     static let font30 = UIFont(name: fontName, size: 30)
     static let font25 = UIFont(name: fontName, size: 25)
     static let font20 = UIFont(name: fontName, size: 20)
     static let font15 = UIFont(name: fontName, size: 15)
     static let fontBold50 = UIFont(name: boldFontName, size: 50)
+    static let fontBold45 = UIFont(name: boldFontName, size: 45)
     static let fontBold40 = UIFont(name: boldFontName, size: 40)
     static let fontBold30 = UIFont(name: boldFontName, size: 30)
     static let fontBold25 = UIFont(name: boldFontName, size: 25)
     static let fontBold20 = UIFont(name: boldFontName, size: 20)
+    static let fontBold18 = UIFont(name: boldFontName, size: 18)
+
+    static func custom(size: CGFloat) -> UIFont? {
+        return UIFont(name: fontName, size: size)
+    }
     
     static func addDash(toLabel label: UILabel, animated: Bool = false, duration: CFTimeInterval = 1) {
         label.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         
-        label.superview?.layoutSubviews()
+        label.superview?.layoutIfNeeded()
         
         let topShapeLayer = CAShapeLayer()
         topShapeLayer.strokeColor = blue.cgColor

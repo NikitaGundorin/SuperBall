@@ -12,11 +12,12 @@ class RemoveAdsViewController: UIViewController {
     weak var delegate: RemoveAdsDelegate?
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "REMOVE ADS"
+        label.text = NSLocalizedString("REMOVE ADS", comment: "Remove ads screen title")
         label.font = Appearance.fontBold40
         label.numberOfLines = 2
         label.textColor = Appearance.red
         label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.textAlignment = .center
         
         return label
@@ -24,7 +25,8 @@ class RemoveAdsViewController: UIViewController {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "GET EXTRA LIVES WITHOUT WATCHING ADS"
+        label.text = NSLocalizedString("GET EXTRA LIVES WITHOUT WATCHING ADS",
+                                       comment: "Remove ads screen description label title")
         label.font = Appearance.font20
         label.textColor = Appearance.red
         label.adjustsFontSizeToFitWidth = true
@@ -37,11 +39,13 @@ class RemoveAdsViewController: UIViewController {
     private let purchaseButton: UIButton = {
         let button = UIButton(type: .system)
         let price = IAPManager.shared.priceStringFor(productWith: IAPManager.removeAdProductIdentifier)
-        let buttonTitle = "REMOVE ADS FOR \(price)"
-        button.setTitle(buttonTitle, for: .normal)
+        let text = NSLocalizedString("REMOVE ADS FOR", comment: "Remove ads screen purchase button title")
+        let title = "\(text) \(price)"
+        button.setTitle(title, for: .normal)
         button.setTitleColor(Appearance.blue, for: .normal)
-        button.titleLabel?.font = Appearance.fontBold25
+        button.titleLabel?.font = Appearance.fontBold20
         button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
         button.addTarget(self, action: #selector(purchase), for: .touchUpInside)
         
         return button
@@ -49,9 +53,11 @@ class RemoveAdsViewController: UIViewController {
     
     private let restoreButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("RESTORE PURCHASE", for: .normal)
+        let title = NSLocalizedString("RESTORE PURCHASE",
+                                      comment: "Remove ads screen restore purchase button title")
+        button.setTitle(title, for: .normal)
         button.setTitleColor(Appearance.red, for: .normal)
-        button.titleLabel?.font = Appearance.font20
+        button.titleLabel?.font = Appearance.fontBold18
         button.addTarget(self, action: #selector(restorePurchase), for: .touchUpInside)
         
         return button
@@ -59,9 +65,11 @@ class RemoveAdsViewController: UIViewController {
     
     private let laterButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("MAYBE LATER", for: .normal)
+        let title = NSLocalizedString("MAYBE LATER",
+                                      comment: "Remove ads screen later button title")
+        button.setTitle(title, for: .normal)
         button.setTitleColor(Appearance.red, for: .normal)
-        button.titleLabel?.font = Appearance.font20
+        button.titleLabel?.font = Appearance.fontBold18
         button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         
         return button
@@ -117,11 +125,11 @@ class RemoveAdsViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 40),
-            stackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -40),
+            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 27),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -27),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             restoreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            restoreButton.bottomAnchor.constraint(equalTo: laterButton.topAnchor, constant: -20),
+            restoreButton.bottomAnchor.constraint(equalTo: laterButton.topAnchor, constant: -15),
             laterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             laterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             popup.topAnchor.constraint(equalTo: view.topAnchor),
@@ -137,16 +145,17 @@ class RemoveAdsViewController: UIViewController {
         view.layoutIfNeeded()
         Appearance.addDash(toLabel: titleLabel)
         
+        guard let label = purchaseButton.titleLabel else { return }
         let borderLayer = CAShapeLayer()
         borderLayer.fillColor = nil
         borderLayer.lineWidth = 1
         borderLayer.strokeColor = Appearance.blue.cgColor
         borderLayer.path = CGPath(rect: CGRect(x: -15,
                                                y: -15,
-                                               width: purchaseButton.titleLabel!.bounds.width + 30,
-                                               height: purchaseButton.titleLabel!.bounds.height + 30),
+                                               width: label.bounds.width + 30,
+                                               height: label.bounds.height + 30),
                                   transform: nil)
-        purchaseButton.titleLabel?.layer.addSublayer(borderLayer)
+        label.layer.addSublayer(borderLayer)
     }
     
     @objc private func purchase() {
@@ -172,7 +181,9 @@ class RemoveAdsViewController: UIViewController {
     
     @objc private func error() {
         activityIndicator.hide()
-        let errorPopup = ErrorPopup(title: "PURCHASE FAILED", message: "Please try again later")
+        let title = NSLocalizedString("PURCHASE FAILED", comment: "Purchase failed error popup title")
+        let message = NSLocalizedString("Please try again later", comment: "Purchase failed error popup message")
+        let errorPopup = ErrorPopup(title: title, message: message)
         errorPopup.delegate = self
         
         popup.show(withContent: errorPopup)

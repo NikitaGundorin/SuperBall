@@ -13,19 +13,17 @@ class PopupMenu: UIView, PopupContent {
     var viewModel: PopupMenuViewModel?
     var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
         label.textColor = Appearance.red
         label.font = Appearance.fontBold40
-        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
     
     var scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
         label.textColor = Appearance.red
-        label.font = Appearance.font40
+        label.font = Appearance.font30
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -35,16 +33,19 @@ class PopupMenu: UIView, PopupContent {
     var restartButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(Appearance.red, for: .normal)
-        button.titleLabel?.font = Appearance.font40
+        button.titleLabel?.font = Appearance.font30
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
         button.addTarget(self, action: #selector(restartGame), for: .touchUpInside)
         return button
     }()
     
     var quitButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("QUIT", for: .normal)
         button.setTitleColor(Appearance.red, for: .normal)
-        button.titleLabel?.font = Appearance.font40
+        button.titleLabel?.font = Appearance.font30
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
         button.addTarget(self, action: #selector(quitGame), for: .touchUpInside)
         return button
     }()
@@ -52,9 +53,9 @@ class PopupMenu: UIView, PopupContent {
     var resumeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(Appearance.blue, for: .normal)
-        button.titleLabel?.font = Appearance.fontBold50
-        button.addTarget(self, action: #selector(resumeGame), for: .touchUpInside)
+        button.titleLabel?.font = Appearance.fontBold40
         button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.addTarget(self, action: #selector(resumeGame), for: .touchUpInside)
         return button
     }()
     
@@ -82,20 +83,26 @@ class PopupMenu: UIView, PopupContent {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -10),
             itemsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             itemsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            itemsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25)
+            itemsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25),
+            itemsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            itemsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
         
         let items = viewModel?.setTitlesForItems(title: titleLabel,
-                                                scoreLabel: scoreLabel,
-                                                restartButton: restartButton,
-                                                quitButton: quitButton,
-                                                resumeButton: resumeButton)
+                                                 scoreLabel: scoreLabel,
+                                                 restartButton: restartButton,
+                                                 quitButton: quitButton,
+                                                 resumeButton: resumeButton)
         
         items?.forEach { itemsStackView.addArrangedSubview($0) }
+    }
+    
+    func updateResumeButton() {
+        viewModel?.setup(resumeButton: resumeButton)
     }
     
     @objc func restartGame() {

@@ -37,8 +37,9 @@ class StartViewController: UIViewController {
     
     private let rateButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("RATE APP", for: .normal)
-        button.titleLabel?.font = Appearance.fontBold20
+        let title = NSLocalizedString("RATE APP", comment: "Rate app button title")
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = Appearance.fontBold18
         button.setTitleColor(Appearance.red, for: .normal)
         button.addTarget(self, action: #selector(rateApp), for: .touchUpInside)
         
@@ -47,8 +48,9 @@ class StartViewController: UIViewController {
     
     private let removeAdsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("REMOVE ADS", for: .normal)
-        button.titleLabel?.font = Appearance.fontBold20
+        let title = NSLocalizedString("REMOVE ADS", comment: "Remove ads button title")
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = Appearance.fontBold18
         button.setTitleColor(Appearance.red, for: .normal)
         button.addTarget(self, action: #selector(removeAds), for: .touchUpInside)
         
@@ -109,7 +111,7 @@ class StartViewController: UIViewController {
             infinityModeButton.widthAnchor.constraint(equalTo: infinityModeButton.heightAnchor),
             removeAdsButton.topAnchor.constraint(greaterThanOrEqualTo: infinityModeButton.bottomAnchor, constant: 20),
             removeAdsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            removeAdsButton.bottomAnchor.constraint(equalTo: rateButton.topAnchor, constant: -6),
+            removeAdsButton.bottomAnchor.constraint(equalTo: rateButton.topAnchor, constant: -4),
             rateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             rateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             activityIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
