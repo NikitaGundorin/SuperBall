@@ -16,6 +16,12 @@ class TimeGameEngine: GameEngine {
         }
     }
     
+    override func setBall() {
+        if status != .timeUp {
+            super.setBall()
+        }
+    }
+    
     override func newGameWillStart() {
         stopTimer()
         seconds = Int(currentLevel.timeLimit)

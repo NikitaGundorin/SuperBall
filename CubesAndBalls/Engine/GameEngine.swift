@@ -119,6 +119,7 @@ class GameEngine: NSObject {
     
     func startGame() {
         guard let vc = vc else { return }
+        if !vc.ballButton.isEnabled { vc.ballButton.isEnabled = true }
         cubesCount = Int(currentLevel.cubesCount)
         colors = []
         vc.sceneView.scene.rootNode.childNodes.filter{$0.name == "box"}.forEach{$0.removeFromParentNode()}
@@ -131,6 +132,7 @@ class GameEngine: NSObject {
     }
     
     func endGame(status: GameStatus) {
+        vc?.sceneView.scene.rootNode.childNodes.filter{$0.name == "ball"}.forEach{$0.removeFromParentNode()}
         self.status = status
         gameWillEnd()
         if status == .win {
