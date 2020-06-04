@@ -170,6 +170,7 @@ class GameViewController: UIViewController {
     
     private func setupScene() {
         view.addSubview(sceneView)
+        sceneView.session.delegate = self
         
         sceneView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -202,6 +203,9 @@ class GameViewController: UIViewController {
         
         view.layoutIfNeeded()
         aimView.layer.addSublayer(aimLayer)
+        
+        let notificationCenter = NotificationCenter.default
+           notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     private func setupPopup() {
@@ -248,6 +252,10 @@ class GameViewController: UIViewController {
     @objc private func pauseGame() {
         engine.pauseGame()
         showPopupMenu()
+    }
+    
+    @objc private func appMovedToBackground() {
+        pauseGame()
     }
     
     private func showStartLevelPopup() {
@@ -378,4 +386,10 @@ extension GameViewController: GADRewardedAdDelegate {
         }
         setupAd()
     }
+}
+
+extension GameViewController: ARSessionDelegate {
+    func sessionWasInterrupted(_ session: ARSession) {
+        pauseGame()
+       }
 }
