@@ -77,7 +77,7 @@ class Appearance {
     }
     
     static func addDashedBorder(to view: UIView, oldBorder: CAShapeLayer? = nil) -> CAShapeLayer {
-        view.superview?.layoutSubviews()
+        view.superview?.layoutIfNeeded()
         oldBorder?.removeFromSuperlayer()
         
         let verticalOffset: CGFloat = 10

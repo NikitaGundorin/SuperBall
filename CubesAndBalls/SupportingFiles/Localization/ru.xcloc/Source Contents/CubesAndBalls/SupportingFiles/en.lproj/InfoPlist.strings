@@ -1,4 +1,4 @@
 /* Bundle name */
 "CFBundleName" = "SuperBall";
 /* Privacy - Camera Usage Description */
-"NSCameraUsageDescription" = "We need your camera to start playing!";
+"NSCameraUsageDescription" = "App needs the Camera for Augmented Reality.";

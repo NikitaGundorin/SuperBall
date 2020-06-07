@@ -10,8 +10,8 @@
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
-        <source>We need your camera to start playing!</source>
-        <target>Необходим доступ к камере, чтобы начать игру!</target>
+        <source>App needs the Camera for Augmented Reality.</source>
+        <target>Приложение использует камеру для дополненной реальности.</target>
         <note>Privacy - Camera Usage Description</note>
       </trans-unit>
     </body>
@@ -48,7 +48,7 @@
       </trans-unit>
       <trans-unit id="EXTRA LIFE" xml:space="preserve">
         <source>EXTRA LIFE</source>
-        <target>ДОБАВИТЬ ЖИЗНЬ</target>
+        <target>+1 ЖИЗНЬ</target>
         <note>Extra life button in popup</note>
       </trans-unit>
       <trans-unit id="For better AR performance play in good light!" xml:space="preserve">
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="INFINITY MODE" xml:space="preserve">
         <source>INFINITY MODE</source>
-        <target>БЕСКОНЕЧНОСТЬ</target>
+        <target>БЕСКОНЕЧНЫЙ РЕЖИМ</target>
         <note>Infinity mode popup title</note>
       </trans-unit>
       <trans-unit id="LEVEL" xml:space="preserve">
@@ -83,7 +83,7 @@
       </trans-unit>
       <trans-unit id="NEXT LEVEL" xml:space="preserve">
         <source>NEXT LEVEL</source>
-        <target>СЛЕДУЮЩИЙ УРОВЕНЬ</target>
+        <target>ПРОДОЛЖИТЬ</target>
         <note>Next level button in popup</note>
       </trans-unit>
       <trans-unit id="OK" xml:space="preserve">
@@ -170,7 +170,7 @@
       <trans-unit id="WATCH AD AND GET&#10;" xml:space="preserve">
         <source>WATCH AD AND GET
 </source>
-        <target>ПОСМОТРЕТЬ РЕКЛАМУ И ПОЛУЧИТЬ
+        <target>СМОТРЕТЬ РЕКЛАМУ
 </target>
         <note>Ads button in popup</note>
       </trans-unit>
