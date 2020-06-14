@@ -255,7 +255,9 @@ class GameViewController: UIViewController {
     }
     
     @objc private func appMovedToBackground() {
-        pauseGame()
+        if !popup.isShown {
+            pauseGame()
+        }
     }
     
     private func showStartLevelPopup() {
@@ -390,6 +392,8 @@ extension GameViewController: GADRewardedAdDelegate {
 
 extension GameViewController: ARSessionDelegate {
     func sessionWasInterrupted(_ session: ARSession) {
-        pauseGame()
-       }
+        if !popup.isShown {
+            pauseGame()
+        }
+    }
 }
