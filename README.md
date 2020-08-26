@@ -1,6 +1,6 @@
 # SuperBall: AR Game
 ##### Play in Augmented Reality
-##### [Download on the AppStore](apple.co/3d9RTL2)
+##### [Download on the AppStore](https://apple.co/3d9RTL2)
 
 ## Features
 SuperBall - fascinating game in Augmented Reality!
